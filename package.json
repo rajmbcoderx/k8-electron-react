@@ -1,0 +1,44 @@
+{
+  "name": "desktopapp-electron-gatsby",
+  "version": "0.1.0",
+  "description": "POC project to create a desktop application using Electron and Gatsby",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --config webpack.ui.config.js --config webpack.electron.config.js",
+    "build:watch": "npm run build -- --watch",
+    "build-server": "dotnet publish ./src/server/ --output ../../out/server",
+    "start": "electron ./out/electron/index.js",
+    "dist": "npm run build && electron-builder build -mwl -c.extraMetadata.main=out/electron/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/filetrust/k8-electron-react.git"
+  },
+  "private": true,
+  "author": "Glasswall",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/filetrust/k8-electron-react/issues"
+  },
+  "devDependencies": {
+    "@types/react": "^16.9.49",
+    "@types/react-dom": "^16.9.8",
+    "@types/react-router-dom": "^5.1.5",
+    "electron": "^10.1.1",
+    "electron-builder": "^22.8.0",
+    "electron-reload": "^1.5.0",
+    "html-webpack-plugin": "^4.4.1",
+    "ts-loader": "^8.0.3",
+    "typescript": "^4.0.2",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12"
+  },
+  "dependencies": {
+    "@material-ui/core": "^4.11.0",
+    "@material-ui/icons": "^4.9.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-router-dom": "^5.2.0"
+  }
+}
