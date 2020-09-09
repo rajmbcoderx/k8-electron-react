@@ -1,16 +1,16 @@
 # k8-electron-react
 This project is based on Electron, TypeScript and React( Will change it to Gatsby in next version). 
 
-#Setup
-1. Clone the repo 
-2. Run "npm install". This will install required packages for this project 
+<h2> How to setup</h2> 
+<li>Clone the repo</li>
+<li> Run<i>npm install</i>. This will install required packages for this project </li>
 
-#Run 
-1. npm run build //build is requried to compile typescript 
-2. npm run start 
+<h2> How to run</h2> 
+<li> <i>npm run build</i> //build is requried to compile typescript</li> 
+<li> <i>npm run start </i></li>
 
-#distribution packages
-1. npm run dist //build binaries/exe to Mac, Windows, Linux platforms in the dist folder. 
+<h2> How to create distribution packages</h2> 
+<li> <i>npm run dist</i> // build binaries/exe to Mac, Windows, Linux platforms in the dist folder. </li>
 
 
 
