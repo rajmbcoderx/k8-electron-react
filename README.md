@@ -3,7 +3,7 @@ This project is based on Electron, TypeScript and React( Will change it to Gatsb
 
 <h2> How to setup</h2> 
 <li>Clone the repo</li>
-<li> Run<i>npm install</i>. This will install required packages for this project </li>
+<li> Run<i> npm install</i>. This will install required packages for this project </li>
 
 <h2> How to run</h2> 
 <li> <i>npm run build</i> //build is requried to compile typescript</li> 
