@@ -12,7 +12,7 @@ require('electron-reload')(__dirname + '../ui/index.html', {
 */
 
 app.on('ready', () => {
-  const window = new BrowserWindow({ width: 800, height: 600 });
+  const window = new BrowserWindow({ width: 1200, height: 700 });
 
   window.setMenuBarVisibility(null);
 

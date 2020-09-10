@@ -26,6 +26,12 @@ module.exports = {
         test: /\.tsx?$/,
         loader: 'ts-loader',
       },
+      {
+        test: /\.(jpg|png)$/,
+        use: {
+          loader: 'url-loader',
+        },
+      },
     ],
   },
   resolve: {
