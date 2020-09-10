@@ -1,6 +1,6 @@
 import * as React               from 'react';
 import { makeStyles }           from '@material-ui/core/styles';
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import ArrowBackIcon            from '@material-ui/icons/ArrowBack';
 import { Link}                  from 'react-router-dom'
 import  Logo                    from '../assets/images/logo.png'  
 
@@ -40,16 +40,20 @@ const useStyles = makeStyles((theme) => ({
     }
   }));
 
-function Header (){
+type headerOptions = {
+    showBack: boolean
+}
+
+function Header({showBack}:headerOptions){
     const classes = useStyles(); 
     return(        
-        <div                    className={classes.header}      >
-            <Link to="/"                                        >
-                <ArrowBackIcon  className={classes.anchBtn}     />
-            </Link>
-            <img                src={Logo}    
-                                className={classes.logo}        >
-            </img>                
+        <div  className={classes.header} >
+            {
+                showBack && <Link to="/"><ArrowBackIcon  className={classes.anchBtn}/></Link>}
+                <div>
+                    <img  src={Logo}  className={classes.logo}></img> 
+                </div> 
+            
         </div>
         
     )

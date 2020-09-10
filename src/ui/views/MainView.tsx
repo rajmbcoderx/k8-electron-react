@@ -7,7 +7,7 @@ import gitIcon                      from '../assets/images/git.jpg'
 import desktopApp               from '../assets/images/desktop.png'
 import FileDropIcon             from '../assets/images/fileDrop.jpg'
 import Slack                    from '../assets/images/slack.png'
-
+import      Header                from '../components/Header'
 /** Main view of the application to display all the targeted use cases */
 const useStyles = makeStyles((theme) => ({
     root:       {
@@ -79,7 +79,8 @@ const useStyles = makeStyles((theme) => ({
 function MainLayout (){
     const classes = useStyles(); 
     return(
-        <div>                 
+        <div>     
+            <Header showBack={false} ></Header>            
             <Container>
                 <Grid container spacing={2} className={classes.gridContainer}>
                     <Grid item xs={5}  className={classes.gridItem}>
