@@ -4,7 +4,7 @@ import Iframe                   from 'react-iframe'
 
 /* TBD*/
 
-function GitRepo(){
+function FileDropWebUi(){
     return(
         <div>             
             <Container>
@@ -23,4 +23,4 @@ function GitRepo(){
     )
 }
 
-export default GitRepo;
+export default FileDropWebUi;

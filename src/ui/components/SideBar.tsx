@@ -2,10 +2,11 @@ import * as React               from 'react';
 import {Paper , MenuItem }      from '@material-ui/core';
 import { makeStyles }           from '@material-ui/core/styles';
 import { NavLink}               from 'react-router-dom'
-import gitIcon                  from '../../assets/images/git.jpg'
-import desktopApp               from '../../assets/images/desktop.png'
-import FileDropIcon             from '../../assets/images/fileDrop.jpg'
-import Slack                    from '../../assets/images/slack.png'
+import gitIcon                  from '../assets/images/git.jpg'
+import desktopApp               from '../assets/images/desktop.png'
+import FileDropIcon             from '../assets/images/fileDrop.jpg'
+import Slack                    from '../assets/images/slack.png'
+
 /** Main view of the application to display all the targeted use cases */
 const useStyles = makeStyles((theme) => ({
     root:       {
@@ -61,6 +62,8 @@ const useStyles = makeStyles((theme) => ({
   }));
   
 
+
+
 function MainLayout (){
     const classes = useStyles(); 
     return(
@@ -92,7 +95,7 @@ function MainLayout (){
                 </NavLink>
             </MenuItem>
             <MenuItem className={classes.menuItem}>
-                <NavLink to="/home1" activeClassName={classes.active}>
+                <NavLink to="/dashboardK8" activeClassName={classes.active}>
                 <div className={classes.menuName}> 
                     <div className={classes.leftImg}>                                
                     <img src={desktopApp} className={classes.icons}></img>
@@ -105,7 +108,7 @@ function MainLayout (){
                 </NavLink>
             </MenuItem>
             <MenuItem className={classes.menuItem}>
-                <NavLink to="/home2" activeClassName={classes.active}>
+                <NavLink to="/slackBot" activeClassName={classes.active}>
                 <div className={classes.menuName}>
                     <div className={classes.leftImg}>     
                         <img src={Slack} className={classes.icons}></img>

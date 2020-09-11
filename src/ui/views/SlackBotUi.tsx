@@ -3,7 +3,6 @@ import { Container, Grid }      from '@material-ui/core';
 import { makeStyles }           from '@material-ui/core/styles';
 import      Header              from '../components/Header'
 import      Sidebar             from '../components/SideBar'
-import FileDropWebUi            from '../components/FileDropWebUi'
 
 /** Main view of the application to display all the targeted use cases */
 const useStyles = makeStyles((theme) => ({
@@ -25,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     }
   }));
 
-function FileDrop (){
+function SlackBotUi (){
     const classes = useStyles(); 
     return(
         <div>     
@@ -36,7 +35,7 @@ function FileDrop (){
                         <Sidebar></Sidebar>
                     </Grid>
                     <Grid item xs={9} className={classes.gridItemRight}>
-                        <FileDropWebUi/>
+                        <h2>TBD</h2>
                     </Grid>
                 </Grid>
 
@@ -45,4 +44,4 @@ function FileDrop (){
     )
 }
 
-export default FileDrop;
+export default SlackBotUi;

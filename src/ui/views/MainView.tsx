@@ -2,8 +2,8 @@ import * as React                   from 'react';
 import { Container, Grid }          from '@material-ui/core';
 import { makeStyles }               from '@material-ui/core/styles';
 import      Header                  from '../components/Header'
-import      Sidebar                 from '../components/sidebar/SideBar'
-import      GitBrowser              from './GitBrowser'
+import      Sidebar                 from '../components/SideBar'
+import      GitRepos              from '../components/GitRepos'
 
 /** Main view of the application to display all the targeted use cases */
 const useStyles = makeStyles((theme) => ({
@@ -38,7 +38,7 @@ function MainLayout (){
                         <Sidebar></Sidebar>
                     </Grid>
                     <Grid item xs={9} className={classes.gridItemRight}>
-                        <GitBrowser></GitBrowser>
+                        <GitRepos></GitRepos>
                     </Grid>
                 </Grid>
             </Container>
