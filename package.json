@@ -39,6 +39,7 @@
     "@material-ui/icons": "^4.9.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-iframe": "^1.8.0",
     "react-router-dom": "^5.2.0",
     "url-loader": "^4.1.0"
   }

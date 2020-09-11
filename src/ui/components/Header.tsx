@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
         gridGap:        theme.spacing(2),
     },
     gridItem:   {
-      border:       '   1px solid lightblue',
+      border:           '1px solid lightblue',
       padding:          theme.spacing(2),
       boxShadow:        '1px 1px 2px #ccc',
       margin:           '20px 4%',
@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
         background:     '#0c3451',
         width:          '100%',
         float:          'left',
-        marginBottom:   '50px'    
+        marginBottom:   '10px'    
     },
     logo:{
         height:         '60px',

@@ -2,7 +2,6 @@ import * as React                       from 'react';
 import { Container, List, ListItem }    from '@material-ui/core';
 import { makeStyles }                   from '@material-ui/core/styles';
 import ArrowRightIcon                   from '@material-ui/icons/ArrowRight';
-import Header                           from '../components/Header';
 
 const useStyles = makeStyles((theme) => ({
     listContainer:{
@@ -21,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
         
     },
     heading:{
-        margin:         '20px 0',
+        margin:         '0px 0 20px 0',
         float:          'left',
         width:          '100%'
     },
@@ -37,7 +36,7 @@ function GitRepos(){
     const classes = useStyles();
     return(
         <div>
-             <Header showBack={true} ></Header>
+             {/* <Header showBack={true} ></Header> */}
             <Container>            
                 <h2 className={classes.heading}>Here are the Open Source projects we are funding via Upwork</h2>
                 <p>Select the repo you want to visit</p>
