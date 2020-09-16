@@ -118,13 +118,13 @@ function MainLayout (){
                 </NavLink>
             </MenuItem>
             <MenuItem className={classes.menuItem}>
-                <NavLink to="/forensicWorkbench" activeClassName={classes.active}>
+                <NavLink to="/fw" activeClassName={classes.active}>
                 <div className={classes.menuName}>
                     <div className={classes.leftImg}>     
                         <img src={GWLogo} className={classes.icons}></img>
                     </div>
                     <div className={classes.rightGrid}>
-                        <h3 className={classes.heading}>forensic-workbench</h3>
+                        <h3 className={classes.heading}>Forensic Workbench</h3>
                     </div>
                 </div>
                 </NavLink>

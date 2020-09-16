@@ -17,7 +17,7 @@ const App = () => (
         <Route path="/fileDrop"               exact component={ FileDrop  } />
         <Route path="/dashboardK8"            exact component={ DashboardK8    } />
         <Route path="/slackBot"               exact component={ SlackBotUi    } />
-        <Route path="/forensicWorkbench"      exact component={ ForensicWorkbench    } />
+        <Route path="/fw"                     exact component={ ForensicWorkbench    } />
       </div>
     </HashRouter>
 );
