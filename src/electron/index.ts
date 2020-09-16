@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, WebContents, Certificate } = require('electron');
 
 /*
 TO sync changes
@@ -23,3 +23,15 @@ app.on('ready', () => {
   //window.webContents.openDevTools();
 
 });
+
+app.on('certificate-error', (event:Event, webContents:WebContents, url:URL, error: string, certificate:Certificate, callback:Function) => {
+ 
+  if (url === 'https://forensic-workbench.com/') {
+    // Verification logic.
+    event.preventDefault()
+    callback(true)
+  } else {
+    callback(false)
+  }
+})
+

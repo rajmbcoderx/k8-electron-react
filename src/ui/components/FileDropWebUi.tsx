@@ -1,21 +1,35 @@
 import * as React               from 'react';
 import { Container, Grid }      from '@material-ui/core';
 import Iframe                   from 'react-iframe'
+import { makeStyles }           from '@material-ui/core/styles';
 
 /* TBD*/
+const useStyles = makeStyles((theme) => ({
+    root:       {
+        flexGrow:       1, 
+    },
+    iframe:{
+        border:         '1px solid #ccc',
+        float:          'left'
+    }
+}));
 
-function FileDropWebUi(){
+type appLink = {
+    iframeUrl: string
+}
+
+function FileDropWebUi({iframeUrl}:appLink){
+    const classes = useStyles(); 
     return(
         <div>             
             <Container>
                 <Grid>
                     <Iframe
-                        url="https://file-drop.co.uk/"
+                        url= {iframeUrl}
                         width="100%"
                         height="600"
-                        id="myId"
-                        className="iframe"
-                    ></Iframe>
+                        className={classes.iframe}
+                    ></Iframe>                                                              
                 </Grid>
             </Container>
         </div>

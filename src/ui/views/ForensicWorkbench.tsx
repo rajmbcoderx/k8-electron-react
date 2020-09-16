@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
     }
   }));
 
-function FileDrop (){
+function ForensicWorkbench (){
     const classes = useStyles(); 
     return(
         <div>     
@@ -36,10 +36,9 @@ function FileDrop (){
                         <Sidebar></Sidebar>
                     </Grid>
                     <Grid item xs={9} className={classes.gridItemRight}>
-                        <FileDropWebUi
-                            iframeUrl = "https://file-drop.co.uk/"
+                        <FileDropWebUi 
+                            iframeUrl = "https://forensic-workbench.com/"
                         />
-                        
                     </Grid>
                 </Grid>
 
@@ -48,4 +47,4 @@ function FileDrop (){
     )
 }
 
-export default FileDrop;
+export default ForensicWorkbench;
