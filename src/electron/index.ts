@@ -17,7 +17,7 @@ function createMenu(){
             {
                 label:'Report an issue',
                 click() { 
-                    shell.openExternal('http://coinmarketcap.com')
+                    shell.openExternal('https://github.com/k8-proxy/k8-proxy-desktop/issues/new')
                 } ,
                 accelerator: 'CmdOrCtrl+Shift+I'
             },
@@ -112,7 +112,7 @@ function createWindow () {
 
 }
 
-app.setName("Anish");
+app.setName("Test");
 app.commandLine.appendSwitch('ignore-certificate-errors', 'true');
 app.commandLine.appendSwitch('allow-insecure-localhost', 'true');
 app.on('ready', () => {
