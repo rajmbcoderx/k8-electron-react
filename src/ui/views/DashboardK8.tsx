@@ -18,10 +18,8 @@ const useStyles = makeStyles((theme) => ({
         gridGap:        theme.spacing(2),
     },
    gridItemRight:{
-
    },
    gridItemLeft:{
-
    }
  }));
 

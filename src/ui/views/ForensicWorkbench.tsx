@@ -4,9 +4,7 @@ import { makeStyles }           from '@material-ui/core/styles';
 import      Header              from '../components/Header'
 import      Sidebar             from '../components/SideBar'
 import WebIFrameView            from '../components/WebIFrameView'
-import { useState, useEffect }  from 'react';
 import Loader                   from '../components/Loader';
-
 
 const useStyles = makeStyles((theme) => ({
      root:       {
@@ -20,18 +18,21 @@ const useStyles = makeStyles((theme) => ({
          gridGap:        theme.spacing(2),
      },
     gridItemRight:{
+        position:       'relative'
     },
     gridItemLeft:{
+
     }
   }));
-
-function FileDrop (){
-    const classes = useStyles();
-    
+const { useState, useEffect } = React;
+function ForensicWorkbench (){
+    const classes = useStyles(); 
     const [showLoader, setShowLoader] = useState(true);
   
     useEffect(() => {
-      setTimeout(() => { setShowLoader(false);},500);
+      setTimeout(() => {
+        setShowLoader(false);
+      },3000);
     }, []); 
 
     return(
@@ -43,8 +44,8 @@ function FileDrop (){
                         <Sidebar></Sidebar>
                     </Grid>
                     <Grid item xs={9} className={classes.gridItemRight}>
-                    {showLoader  && <Loader/> }  
-                     <WebIFrameView url = "https://file-drop.co.uk/" />
+                        {showLoader  && <Loader/> }   
+                        <WebIFrameView url = "https://forensic-workbench.com/" />
                     </Grid>
                 </Grid>
 
@@ -53,4 +54,4 @@ function FileDrop (){
     )
 }
 
-export default FileDrop;
+export default ForensicWorkbench;

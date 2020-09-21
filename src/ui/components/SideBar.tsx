@@ -2,10 +2,11 @@ import * as React               from 'react';
 import {Paper , MenuItem }      from '@material-ui/core';
 import { makeStyles }           from '@material-ui/core/styles';
 import { NavLink}               from 'react-router-dom'
-import gitIcon                  from '../assets/images/git.jpg'
+import gitIcon                  from '../assets/images/git.png'
 import desktopApp               from '../assets/images/desktop.png'
-import FileDropIcon             from '../assets/images/fileDrop.jpg'
+import FileDropIcon             from '../assets/images/fileDrop.png'
 import Slack                    from '../assets/images/slack.png'
+import GWLogo                   from '../assets/images/GWLogo.png'
 
 /** Main view of the application to display all the targeted use cases */
 const useStyles = makeStyles((theme) => ({
@@ -76,7 +77,6 @@ function MainLayout (){
                         </div>
                         <div className={classes.rightGrid}>
                             <h3 className={classes.heading}> Git Browser</h3>
-                            {/* <p className={classes.paraContnet}>Browse the Open Source multiple repos</p>                                */}
                         </div>
                     </div>
                 </NavLink>
@@ -89,7 +89,6 @@ function MainLayout (){
                         </div>
                         <div className={classes.rightGrid}>
                             <h3 className={classes.heading}>  File-drop</h3>
-                            {/* <p className={classes.paraContnet}>Run a locally hosted version of https://file-drop.co.uk</p> */}
                         </div>
                     </div>
                 </NavLink>
@@ -102,7 +101,6 @@ function MainLayout (){
                     </div>
                     <div className={classes.rightGrid}>
                         <h3 className={classes.heading}>Dashboard Kubernetes pods</h3>
-                        {/* <p className={classes.paraContnet}>Open k8-* project UIsop level UI for the multiple UIs that we will have running inside Kubernetes pods </p>                                 */}
                     </div>
                 </div>
                 </NavLink>
@@ -115,7 +113,18 @@ function MainLayout (){
                     </div>
                     <div className={classes.rightGrid}>
                         <h3 className={classes.heading}>Slack UI for bots</h3>
-                        {/* <p className={classes.paraContnet}>replicate the Slack UI for bots (with the ability to scroll to previous commands)</p>                               */}
+                    </div>
+                </div>
+                </NavLink>
+            </MenuItem>
+            <MenuItem className={classes.menuItem}>
+                <NavLink to="/fw" activeClassName={classes.active}>
+                <div className={classes.menuName}>
+                    <div className={classes.leftImg}>     
+                        <img src={GWLogo} className={classes.icons}></img>
+                    </div>
+                    <div className={classes.rightGrid}>
+                        <h3 className={classes.heading}>Forensic Workbench</h3>
                     </div>
                 </div>
                 </NavLink>

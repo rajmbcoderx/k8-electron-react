@@ -36,7 +36,6 @@ function GitRepos(){
     const classes = useStyles();
     return(
         <div>
-             {/* <Header showBack={true} ></Header> */}
             <Container>            
                 <h2 className={classes.heading}>Here are the Open Source projects we are funding via Upwork</h2>
                 <p>Select the repo you want to visit</p>

@@ -1,5 +1,6 @@
 {
-  "name": "desktopapp-electron-gatsby",
+  "name": "k8-proxy-desktop",
+  "productName":"k8-proxy-desktop",
   "version": "0.1.0",
   "description": "POC project to create a desktop application using Electron and Gatsby",
   "main": "./out/electron/index.js",
@@ -22,7 +23,7 @@
   "author": "Glasswall",
   "license": "UNLICENSED",
   "bugs": {
-    "url": "https://github.com/filetrust/k8-electron-react/issues"
+    "url": "https://github.com/filetrust/k8-proxy-desktop/issues"
   },
   "devDependencies": {
     "@types/react": "^16.9.49",
