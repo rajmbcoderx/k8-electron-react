@@ -1,6 +1,7 @@
 
 node_modules/*
-out/*
+out/electron/*
+out/ui/*
 dist/*
 src/*/.DS_Store
 .DS_Store

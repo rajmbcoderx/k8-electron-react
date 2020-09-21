@@ -53,7 +53,6 @@ function Header({showBack}:headerOptions){
                 <div>
                     <img  src={Logo}  className={classes.logo}></img> 
                 </div> 
-            
         </div>
         
     )

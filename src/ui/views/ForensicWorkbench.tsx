@@ -3,10 +3,9 @@ import { Container, Grid }      from '@material-ui/core';
 import { makeStyles }           from '@material-ui/core/styles';
 import      Header              from '../components/Header'
 import      Sidebar             from '../components/SideBar'
-import FileDropWebUi            from '../components/FileDropWebUi'
+import WebIFrameView            from '../components/WebIFrameView'
 import Loader                   from '../components/Loader';
 
-/** Main view of the application to display all the targeted use cases */
 const useStyles = makeStyles((theme) => ({
      root:       {
          flexGrow:       1, 
@@ -33,7 +32,7 @@ function ForensicWorkbench (){
     useEffect(() => {
       setTimeout(() => {
         setShowLoader(false);
-      },5000);
+      },3000);
     }, []); 
 
     return(
@@ -45,11 +44,8 @@ function ForensicWorkbench (){
                         <Sidebar></Sidebar>
                     </Grid>
                     <Grid item xs={9} className={classes.gridItemRight}>
-                        
                         {showLoader  && <Loader/> }   
-                        <FileDropWebUi 
-                            iframeUrl = "https://forensic-workbench.com/"
-                        />
+                        <WebIFrameView url = "https://forensic-workbench.com/" />
                     </Grid>
                 </Grid>
 
