@@ -5,7 +5,8 @@ If you are working on this project via Upwork, see also our [Upwork Rules of Eng
 If you are newcomer, then please check [Glasswall newcomers checklist ](https://github.com/filetrust/Open-Source )
 
 ## Project Brief
-<p>Project to develop a desktop based applications that provides a single entry point to all K8 projects. Build with electron, react, it is aimed at providing a single window integration with GW git resources, file-drop, forensic-workbench, jupyter notebooks, and K8-* services.</p>
+<p>k8-proxy-desktop is a desktop based applications that provides a single entry point to all K8 projects. Build with 
+<a href="https://github.com/electron/electron"> Electron</a> , react, it is aimed at providing a single window integration with GW git resources, file-drop, forensic-workbench, jupyter notebooks, and K8-* services.</p>
 
 <h2> How to setup</h2> 
 <li>Clone the repo</li>
