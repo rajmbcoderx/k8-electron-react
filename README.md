@@ -10,7 +10,7 @@ Objective: Create PoC of Desktop app using Electron and Gatsby” https://twitte
 
 This project is based on Electron, TypeScript and React( Will change it to Gatsby in next version). 
 
-<h2> How to setup</h2> 
+<h2> How to setup </h2> 
 <li>Clone the repo</li>
 <li> Run<i> npm install</i>. This will install required packages for this project </li>
 
