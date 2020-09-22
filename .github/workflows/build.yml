@@ -1,0 +1,34 @@
+name: build-release
+
+on: pull_request
+
+jobs:
+  release:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [macos-latest, ubuntu-latest, windows-latest]
+
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v1
+
+      - name: Install Node.js, NPM and Yarn
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+
+      - name: Build-release Proxy Desktop app
+        uses: samuelmeuli/action-electron-builder@v1
+        with:
+          github_token: ${{ secrets.github_token }}
+
+
+      - name: Uploads Build
+        uses: actions/upload-artifact@v2
+        if: success()
+        with:
+          name: k8-proxy-desktop-release
+          path: |
+            dist/*
