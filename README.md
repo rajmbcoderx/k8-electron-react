@@ -45,7 +45,15 @@ TBD: will automatically update when a new release is available.
 k8-proxy-desktop is only available for 64-bit Linux systems.
 Download the latest [k8-proxy-desktop relase](https://github.com/k8-proxy/k8-proxy-desktop/suites/1223620215/artifacts/18333471).
 
+### Installing from source
+
+1. Clone the repo
+2. Run `npm  install`
+3. `npm run build`
+4. `npm run start`
+
 ## Building
+
 
 ## Discussion
 
