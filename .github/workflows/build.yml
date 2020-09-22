@@ -1,6 +1,6 @@
 name: build-release
 
-on: pull_request
+on: push
 
 jobs:
   release:
