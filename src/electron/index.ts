@@ -64,9 +64,33 @@ function createMenu(){
                         detail: ` K8 Proxy desktop  applications that provides a single entry point to all K8 projects. Build with electron and react, it is aimed at providing a single window integration with GW git resources, file-drop, forensic-workbench, jupyter notebooks, and K8-* services.`,
                         buttons: [ `Ok`],
                         defaultId: 1,
-                        type: `question`,
+                        type: `info`,
                         })
                     },
+                },
+                {
+                    label:'View License',
+                    click() { 
+                        shell.openExternal('https://github.com/k8-proxy/k8-proxy-desktop/blob/master/LICENSE')
+                    } 
+                },
+                {
+                    label:'Check For Update',
+                    click: async (): Promise<void> => {
+                        const { response } = await dialog.showMessageBox({
+                        message: `Check For Update`,
+                        detail: `Soon will rollout this feature`,
+                        buttons: [ `Ok`],
+                        defaultId: 1,
+                        type: `info`,
+                        })
+                    },
+                },
+                {
+                    label:'Version 1.0'
+                },
+                {
+                    type:'separator'
                 },
                 {
                     label:'Report an issue',
@@ -138,7 +162,7 @@ function makeWindow(): typeof BrowserWindow {
     })
    
     //to add chrome dev tools 
-    //window.webContents.openDevTools();
+    window.webContents.openDevTools();
     return window;
 }
 
