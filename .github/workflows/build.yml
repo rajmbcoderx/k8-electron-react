@@ -1,6 +1,6 @@
 name: build-release
 
-on: push
+on: pull_request
 
 jobs:
   release:
@@ -19,7 +19,7 @@ jobs:
         with:
           node-version: '12.x'
 
-      - name: Builds build-release
+      - name: Build-release Proxy Desktop app
         uses: samuelmeuli/action-electron-builder@v1
         with:
           github_token: ${{ secrets.github_token }}
