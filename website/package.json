@@ -2,7 +2,7 @@
   "name": "k8-proxy-desktop-website",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://hunnain.github.io/p-poc-electron-gatsby-website/",
+  "homepage": "https://rajmbcoderx.github.io/k8-proxy-desktop-website/",
   "devDependencies": {
     "webpack": "4.42.0",
     "@testing-library/jest-dom": "^4.2.4",
@@ -20,7 +20,8 @@
     "start": "react-scripts start",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "predeploy": "react-scripts build",
+    "build": "react-scripts build",
+    "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
