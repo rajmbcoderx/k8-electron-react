@@ -6,7 +6,7 @@ export default function Nav() {
     <nav className="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
       <a className="navbar-brand" href="index.html">
         <img src={lensLogo} alt="alternative" />
-        <span> Desktop IDE</span>
+        <span> K8 sProxy Desktop Application</span>
       </a>
 
       <button
@@ -42,7 +42,7 @@ export default function Nav() {
           <li className="nav-item">
             <a
               className="nav-link"
-              href="https://github.com/lensapp/lens/releases/latest"
+              href="https://github.com/rajmbcoderx/k8-electron-react/actions/runs/268853474"
             >
               DOWNLOAD
             </a>
@@ -50,19 +50,19 @@ export default function Nav() {
         </ul>
         <span className="nav-item social-icons">
           <span className="fa-stack">
-            <a href="https://github.com/lensapp/lens">
+            <a href="">
               <i className="fas fa-circle fa-stack-2x"></i>
               <i className="fab fa-github fa-stack-1x"></i>
             </a>
           </span>
           <span className="fa-stack">
-            <a href="http://k8slens.slack.com/">
+            <a href="">
               <i className="fas fa-circle fa-stack-2x"></i>
               <i className="fab fa-slack fa-stack-1x"></i>
             </a>
           </span>
           <span className="fa-stack">
-            <a href="https://twitter.com/k8slens">
+            <a href="">
               <i className="fas fa-circle fa-stack-2x"></i>
               <i className="fab fa-twitter fa-stack-1x"></i>
             </a>

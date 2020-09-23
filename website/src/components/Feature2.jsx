@@ -9,7 +9,7 @@ export default function Feature2() {
           <div className="row">
             <div className="col-lg-6">
               <div className="text-container">
-                <h3>Multi Cluster Management</h3>
+                <h3>Git Browser</h3>
                 <p>
                   Access and work with your clusters with a confidence from a
                   single unified IDE. Lens works with any number of Kubernetes

@@ -10,26 +10,32 @@ export default function Loader() {
             <div className="col-lg-12">
               <div className="text-container">
                 <h1>
-                  Glasswall Desktop File Security <br />
+                  K8 Proxy Desktop Application <br />
                   FOR{" "}
                   <span id="js-rotating">
-                    DEVELOPMENT, OPERATIONS, MONITORING, DEBUGGING, DEVOPS
+                    GIT BROWSER, FILE DROP, K8 PODS DASHBOARD, SLACK UI FOR BOTS, FORENSIC WORKBENCH
                   </span>
                 </h1>
                 <p className="p-large">
-                  Lens is the only IDE you’ll ever need to take control of your
-                  Kubernetes clusters. It's open source and free. Download it
+                 k8-proxy-desktop is a desktop based applications that provides a single entry point to all K8 projects It's open source. Download it
                   today!
                 </p>
                 <a
-                  className="btn-solid-lg"
-                  href="https://github.com/lensapp/lens/releases/latest"
-                >
-                  <i className="fas fa-download"></i> Download
+                    className = "btn-solid-lg"
+                    href      ="https://github.com/rajmbcoderx/k8-electron-react/suites/1234020498/artifacts/18606424">
+                  <i  className="fas fa-download"></i> 
+                  Download
                 </a>
-                <i className="supported-os-icon fab fa-apple"></i>
-                <i className="supported-os-icon fab fa-windows"></i>
-                <i className="supported-os-icon fab fa-linux"></i>
+
+                <a  href ="https://github.com/rajmbcoderx/k8-electron-react/suites/1234020498/artifacts/18606424">
+                      <i className  ="supported-os-icon fab fa-apple"></i>
+                </a>
+                <a  href ="https://github.com/rajmbcoderx/k8-electron-react/suites/1234020498/artifacts/18606425">
+                      <i className ="supported-os-icon fab fa-windows"> </i>
+                </a>
+                <a  href ="https://github.com/rajmbcoderx/k8-electron-react/suites/1234020498/artifacts/18606426" >
+                      <i className ="supported-os-icon fab fa-linux"></i>
+                </a>
               </div>
             </div>
           </div>

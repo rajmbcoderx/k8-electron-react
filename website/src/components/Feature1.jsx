@@ -15,16 +15,11 @@ export default function Feature1() {
           </div>
           <div className="col-lg-6">
             <div className="text-container">
-              <h3>The Kubernetes IDE</h3>
+              <h3>The K8 Proxy Desktop</h3>
               <p>
-                Lens is the most powerful IDE for people who need to deal with
-                Kubernetes clusters on a daily basis. It is a standalone
-                application for MacOS, Windows and Linux operating systems.
-                Ensure your clusters are properly setup and configured. Enjoy
-                increased visibility, real time statistics, log streams and
-                hands-on troubleshooting capabilities. With Lens, you can work
-                with your clusters more easily and fast, radically improving
-                productivity and the speed of business.
+              k8-proxy-desktop is a desktop based applications that provides a single entry point to all K8 projects.
+               Build with Electron , react, it is aimed at providing a single window integration with GW git resources,
+                file-drop, forensic-workbench, jupyter notebooks, and K8-* services. 
               </p>
             </div>
           </div>

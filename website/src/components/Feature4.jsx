@@ -9,7 +9,7 @@ export default function Feature4() {
           <div className="row">
             <div className="col-lg-6">
               <div className="text-container">
-                <h3>Built-In Prometheus Stats</h3>
+                <h3>Dahboard Kubernetes Pods</h3>
                 <p>
                   See all relevant graphs and resource utilization charts
                   integrated as part of the dashboard. Lens comes with a

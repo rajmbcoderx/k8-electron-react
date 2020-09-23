@@ -7,11 +7,9 @@ export default function Footer() {
         <div className="row">
           <div className="col-md-4">
             <div className="footer-col">
-              <h4>About Lens</h4>
+              <h4>About K8 Proxy Desktop</h4>
               <p>
-                Lens was originally developed by Kontena, Inc. Today, all IPR is
-                owned by Mirantis, Inc. – the fastest way to modern apps,
-                providing containers-as-a-service at enterprise scale.
+              K8 Proxy Desktop was originally developed by ____ Inc. .
               </p>
             </div>
           </div>

@@ -7,9 +7,9 @@ export default function Demo() {
       <div className="container">
         <div className="row">
           <div className="col-lg-12">
-            <h2>DEMO</h2>
+            <h2>How it Works</h2>
             <div className="p-heading p-large">
-              Lights, Camera, Action! The live demo of Lens features.
+              The live demo of Proxy Desktop features.
             </div>
           </div>
         </div>

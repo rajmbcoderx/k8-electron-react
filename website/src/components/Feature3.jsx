@@ -16,7 +16,7 @@ export default function Feature3() {
             </div>
             <div className="col-lg-6">
               <div className="text-container">
-                <h3>Multiple Workspaces</h3>
+                <h3>File Drop</h3>
                 <p>
                   Organize clusters into logical groups. Workspaces are used to
                   organize a number of clusters into logical groups. They are

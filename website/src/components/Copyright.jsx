@@ -7,8 +7,7 @@ export default function Copyright() {
         <div className="row">
           <div className="col-lg-12">
             <p className="p-small">
-              Copyright © 2020 <a href="https://mirantis.com">Mirantis, Inc.</a>{" "}
-              - All rights reserved.
+              Copyright © Copyright 2020 - Glasswall Solutions Ltd. All Rights Reserved.
             </p>
           </div>
         </div>

@@ -16,7 +16,7 @@ export default function Feature5() {
             </div>
             <div className="col-lg-6">
               <div className="text-container">
-                <h3>Context Aware Terminal</h3>
+                <h3>Slack UI for Bots</h3>
                 <p>
                   The built-in terminal comes with kubectl that is always API
                   compatible with your cluster and in the right context. Lens
