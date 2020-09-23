@@ -42,7 +42,7 @@ export default function Nav() {
           <li className="nav-item">
             <a
               className="nav-link"
-              href="https://github.com/rajmbcoderx/k8-electron-react/actions/runs/268853474"
+              href="https://github.com/rajmbcoderx/k8-electron-react/actions/runs/269242041"
             >
               DOWNLOAD
             </a>

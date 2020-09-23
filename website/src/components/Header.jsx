@@ -22,18 +22,19 @@ export default function Loader() {
                 </p>
                 <a
                     className = "btn-solid-lg"
-                    href      ="https://github.com/rajmbcoderx/k8-electron-react/suites/1234020498/artifacts/18606424">
+                    href      ="https://github.com/rajmbcoderx/k8-electron-react/suites/1235384736/artifacts/18639102">
                   <i  className="fas fa-download"></i> 
                   Download
                 </a>
 
-                <a  href ="https://github.com/rajmbcoderx/k8-electron-react/suites/1234020498/artifacts/18606424">
+                <a  href ="https://github.com/rajmbcoderx/k8-electron-react/suites/1235384736/artifacts/18639102">
                       <i className  ="supported-os-icon fab fa-apple"></i>
                 </a>
-                <a  href ="https://github.com/rajmbcoderx/k8-electron-react/suites/1234020498/artifacts/18606425">
+
+                <a  href ="https://github.com/rajmbcoderx/k8-electron-react/suites/1235384736/artifacts/18639103">
                       <i className ="supported-os-icon fab fa-windows"> </i>
                 </a>
-                <a  href ="https://github.com/rajmbcoderx/k8-electron-react/suites/1234020498/artifacts/18606426" >
+                <a  href ="https://github.com/rajmbcoderx/k8-electron-react/suites/1235384736/artifacts/18639104" >
                       <i className ="supported-os-icon fab fa-linux"></i>
                 </a>
               </div>
