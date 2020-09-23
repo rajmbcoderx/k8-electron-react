@@ -29,21 +29,21 @@ If you are newcomer, then please check [Glasswall newcomers checklist ](https:/
 
 ### macOS
 
-Download the latest [k8-proxy-desktop release](https://github.com/k8-proxy/k8-proxy-desktop/suites/1223620215/artifacts/18333471).
+Download the latest [k8-proxy-desktop release](https://github.com/rajmbcoderx/k8-electron-react/suites/1232624864/artifacts/18572413).
 
 TBD: Will automatically update when a new release is available.
 
 ### Windows
 
-Download the latest [k8-proxy-desktop relase](https://github.com/k8-proxy/k8-proxy-desktop/suites/1223620215/artifacts/18333471).
+Download the latest [k8-proxy-desktop relase](https://github.com/rajmbcoderx/k8-electron-react/suites/1232624864/artifacts/18572414).
 
 TBD: will automatically update when a new release is available.
 
 
-### Linux
+### Linux Snap
 
 k8-proxy-desktop is only available for 64-bit Linux systems.
-Download the latest [k8-proxy-desktop relase](https://github.com/k8-proxy/k8-proxy-desktop/suites/1223620215/artifacts/18333471).
+Download the latest [k8-proxy-desktop relase](https://github.com/rajmbcoderx/k8-electron-react/suites/1232624864/artifacts/18572414).
 
 ### Installing from source
 
