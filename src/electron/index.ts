@@ -8,7 +8,7 @@ const {
 const path          = require('path')
 const shell         = require('electron').shell
 const { dialog }    = require('electron')
-const dir           =  path.resolve(__dirname, `..`)
+const dir           = path.resolve(__dirname, `..`)
 
 
 // function makeTray(){
@@ -130,12 +130,10 @@ function createMenu(){
                     shell.openExternal(' https://github.com/k8-proxy/k8-proxy-desktop')
                 } ,
                 accelerator: 'CmdOrCtrl+Shift+L'
-                
             }
         ]
         }
     ]
-
     const menu = Menu.buildFromTemplate(template)
     Menu.setApplicationMenu(menu)
 
@@ -162,7 +160,7 @@ function makeWindow(): typeof BrowserWindow {
     })
    
     //to add chrome dev tools 
-    window.webContents.openDevTools();
+    //window.webContents.openDevTools();
     return window;
 }
 
