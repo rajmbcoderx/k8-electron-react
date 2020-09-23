@@ -1,5 +1,5 @@
-import React from "react";
-import builtInPrometheusStats from '../images/built-in-prometheus-stats.svg';
+import React                      from "react";
+import builtInPrometheusStats     from '../images/built-in-prometheus-stats.svg';
 
 export default function Feature4() {
   return (

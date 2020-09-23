@@ -1,5 +1,5 @@
-import React from "react";
-import headerLens from '../images/header-lens.png';
+import React        from "react";
+import headerLens   from '../images/header-lens.png';
 
 export default function Download() {
   return (

@@ -1,5 +1,5 @@
-import React from "react";
-import lensLogo from "../images/logo.svg";
+import React        from "react";
+import lensLogo     from "../images/logo.svg";
 
 export default function Nav() {
   return (

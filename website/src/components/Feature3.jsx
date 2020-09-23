@@ -1,5 +1,5 @@
-import React from "react";
-import workspaces from '../images/workspaces.svg';
+import React            from "react";
+import workspaces       from '../images/workspaces.svg';
 
 export default function Feature3() {
   return (

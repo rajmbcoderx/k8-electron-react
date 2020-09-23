@@ -1,5 +1,5 @@
-import React from "react";
-import betterKubernetes from '../images/better-kubernetes.svg';
+import React              from "react";
+import betterKubernetes   from '../images/better-kubernetes.svg';
 
 export default function Feature1() {
   return (

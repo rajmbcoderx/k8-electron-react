@@ -1,5 +1,5 @@
-import React from "react";
-import contextAwareTerminal from '../images/context-aware-terminal.svg';
+import React                    from "react";
+import contextAwareTerminal     from '../images/context-aware-terminal.svg';
 
 export default function Feature5() {
   return (

@@ -1,5 +1,5 @@
-import React from "react";
-import multiClusterManagement from '../images/multi-cluster-management.svg';
+import React                      from "react";
+import multiClusterManagement     from '../images/multi-cluster-management.svg';
 
 export default function Feature2() {
   return (
