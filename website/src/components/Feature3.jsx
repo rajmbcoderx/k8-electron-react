@@ -9,9 +9,9 @@ export default function Feature3() {
           <div className="row">
             <div className="col-lg-6">
               <img
-                className="img-fluid"
-                src={workspaces}
-                alt="alternative"
+                className = "img-fluid"
+                src       = {workspaces}
+                alt       = "alternative"
               />
             </div>
             <div className="col-lg-6">

@@ -26,9 +26,9 @@ export default function Feature2() {
             </div>
             <div className="col-lg-6">
               <img
-                className="img-fluid"
-                src={multiClusterManagement}
-                alt="alternative"
+                className ="img-fluid"
+                src       ={multiClusterManagement}
+                alt       ="alternative"
               />
             </div>
           </div>

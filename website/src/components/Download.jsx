@@ -31,9 +31,9 @@ export default function Download() {
           <div className="col-lg-6 col-xl-7">
             <div className="image-container">
               <img
-                className="img-fluid"
-                src={headerLens}
-                alt="alternative"
+                className = "img-fluid"
+                src       = {headerLens}
+                alt       = "alternative"
               />
             </div>
           </div>

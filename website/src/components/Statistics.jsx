@@ -1,4 +1,4 @@
-import React          from "react";
+import React  from "react";
 
 export default function Statistics() {
   return (
@@ -10,9 +10,9 @@ export default function Statistics() {
             <div id="counter">
               <div className="cell">
                 <div
-                  id="happy-users-count"
-                  className="counter-value number-count"
-                  data-count="23275"
+                  id          ="happy-users-count"
+                  className   ="counter-value number-count"
+                  data-count  ="23275"
                 >
                   1
                 </div>
@@ -20,9 +20,9 @@ export default function Statistics() {
               </div>
               <div className="cell">
                 <div
-                  id="stargazers-count"
-                  className="counter-value number-count"
-                  data-count="4537"
+                  id          ="stargazers-count"
+                  className   ="counter-value number-count"
+                  data-count  ="4537"
                 >
                   1
                 </div>
@@ -32,9 +32,9 @@ export default function Statistics() {
               </div>
               <div className="cell">
                 <div
-                  id="forks-count"
-                  className="counter-value number-count"
-                  data-count="189"
+                  id          ="forks-count"
+                  className   ="counter-value number-count"
+                  data-count  ="189"
                 >
                   1
                 </div>

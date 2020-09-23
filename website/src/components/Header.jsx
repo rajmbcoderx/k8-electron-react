@@ -37,9 +37,9 @@ export default function Loader() {
             <div className="col-lg-12">
               <div className="image-container">
                 <img
-                  className="img-fluid"
-                  src={headerLens}
-                  alt="alternative"
+                  className ="img-fluid"
+                  src       ={headerLens}
+                  alt       ="alternative"
                 />
               </div>
             </div>

@@ -18,14 +18,14 @@ export default function Demo() {
             <div className="image-container">
               <div className="video-wrapper">
                 <a
-                  className="popup-youtube"
-                  href="https://www.youtube.com/watch?v=04v2ODsmtIs"
-                  data-effect="fadeIn"
+                  className   ="popup-youtube"
+                  href        ="https://www.youtube.com/watch?v=04v2ODsmtIs"
+                  data-effect ="fadeIn"
                 >
                   <img
-                    className="img-fluid"
-                    src={headerLens}
-                    alt="alternative"
+                    className ="img-fluid"
+                    src       ={headerLens}
+                    alt       ="alternative"
                   />
                   <span className="video-play-button">
                     <span></span>

@@ -10,13 +10,13 @@ export default function Nav() {
       </a>
 
       <button
-        className="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarsExampleDefault"
-        aria-controls="navbarsExampleDefault"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
+        className       ="navbar-toggler"
+        type            ="button"
+        data-toggle     ="collapse"
+        data-target     ="#navbarsExampleDefault"
+        aria-controls   ="navbarsExampleDefault"
+        aria-expanded   ="false"
+        aria-label      ="Toggle navigation"
       >
         <span className="navbar-toggler-awesome fas fa-bars"></span>
         <span className="navbar-toggler-awesome fas fa-times"></span>

@@ -8,9 +8,9 @@ export default function Feature1() {
         <div className="row">
           <div className="col-lg-6">
             <img
-              className="img-fluid"
-              src={betterKubernetes}
-              alt="alternative"
+              className ="img-fluid"
+              src       ={betterKubernetes}
+              alt       ="alternative"
             />
           </div>
           <div className="col-lg-6">
