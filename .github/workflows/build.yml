@@ -44,18 +44,3 @@ jobs:
         with:
           name: "k8-proxy-desktop.snap"
           path: dist/*.snap
-
-      - name: Upload artifact - Linux Debian
-        if: startsWith(matrix.os, 'Ubuntu')
-        uses: actions/upload-artifact@v2
-        with:
-          name: "k8-proxy-desktop.deb"
-          path: dist/*.deb
-
-      - name: Uploads artifact - All
-        uses: actions/upload-artifact@v2
-        if: success()
-        with:
-          name: k8-proxy-desktop-release
-          path: |
-            dist/*
