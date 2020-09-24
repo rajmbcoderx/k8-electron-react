@@ -27,9 +27,27 @@ If you are newcomer, then please check [Glasswall newcomers checklist ](https:/
 
 ## Installing
 
+Warning: This software is under active development. Use at your own risk.
+
 ### macOS
 
 Download the latest [k8-proxy-desktop release](https://github.com/rajmbcoderx/k8-electron-react/suites/1235384736/artifacts/18639102).
+
+Mac users will need to follow the below steps on the app when you first launch it, until we have [code signing](https://www.electron.build/code-signing) set up
+
+<p>Step 1</p>
+  
+![k8-proxy-desktop Screenshot](https://raw.githubusercontent.com/rajmbcoderx/k8-electron-react/master/permission1.png)
+
+
+<p>Step 2</p>
+
+![k8-proxy-desktop Screenshot](https://raw.githubusercontent.com/rajmbcoderx/k8-electron-react/master/permission2.png)
+
+
+<p>Step 3</p>
+
+![k8-proxy-desktop Screenshot](https://raw.githubusercontent.com/rajmbcoderx/k8-electron-react/master/permission3.png)
 
 TBD: Will automatically update when a new release is available.
 
