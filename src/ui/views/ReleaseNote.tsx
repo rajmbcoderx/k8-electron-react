@@ -86,29 +86,65 @@ function ReleaseNote(){
     return(
         <div>    
             <Grid container>   
-                <a className={classes.webAnchor} href="https://rajmbcoderx.github.io/k8-electron-react/" title="k8-proxy-desktop">k8-proxy-desktop</a>
+                <a className={classes.webAnchor} href="https://rajmbcoderx.github.io/k8-electron-react/" title="k8-proxy-desktop">K8 Proxy Desktop</a>
                 <h3 className={classes.releaseHeading}>Realease Note</h3>
                  <Grid className={classes.releaseNoteContainer}>                    
                     <div className={classes.releaseGrid}>
                         <div className={classes.releaseList}>                            
-                            <div className={classes.releaseVersion}>1.0.0</div>
-                            <h4 className={classes.releaseDate}>September 24th 2020 </h4>
+                            <div className={classes.releaseVersion}>0.0.2</div>
+                            <h4 className={classes.releaseDate}>September 21th 2020 </h4>
                         </div>
                         <div className={classes.releaseContent}>
                             <span className={classes.releaseStatusFixed}>Fixed</span>
-                            <p className={classes.releaseText}>k8-proxy-desktop is a desktop based </p>
+                            <p className={classes.releaseText}>Website should be linked to the right platform file/s which the users can download #54 </p>
                         </div>
                     </div>
                 </Grid>
                 <Grid className={classes.releaseNoteContainer}>                    
                     <div className={classes.releaseGrid}>
                         <div className={classes.releaseList}>                            
-                            <div className={classes.releaseVersion}>1.0.0</div>
+                            <div className={classes.releaseVersion}>0.0.2</div>
+                            <h4 className={classes.releaseDate}>September 22th 2020 </h4>
+                        </div>
+                        <div className={classes.releaseContent}>
+                            <span className={classes.releaseStatusFixed}>Fixed</span>
+                            <p className={classes.releaseText}>Use-case : As a user I should be able to add new suggestion or bug on the gitlab issue #44 </p>
+                        </div>
+                    </div>
+                </Grid>
+                <Grid className={classes.releaseNoteContainer}>                    
+                    <div className={classes.releaseGrid}>
+                        <div className={classes.releaseList}>                            
+                            <div className={classes.releaseVersion}>0.0.2</div>
+                            <h4 className={classes.releaseDate}>September 23th 2020 </h4>
+                        </div>
+                        <div className={classes.releaseContent}>
+                            <span className={classes.releaseStatusFixed}>Fixed</span>
+                            <p className={classes.releaseText}>Use-case : As a user on home page for list of new features in the current version (Issues notes / Bugs ) #43</p>
+                        </div>
+                    </div>
+                </Grid>
+                <Grid className={classes.releaseNoteContainer}>                    
+                    <div className={classes.releaseGrid}>
+                        <div className={classes.releaseList}>                            
+                            <div className={classes.releaseVersion}>0.0.2</div>
                             <h4 className={classes.releaseDate}>September 24th 2020 </h4>
                         </div>
                         <div className={classes.releaseContent}>
                             <span className={classes.releaseStatusFixed}>Fixed</span>
-                            <p className={classes.releaseText}>k8-proxy-desktop is a desktop based </p>
+                            <p className={classes.releaseText}> As a user I should be able to add new suggestion or bug on the gitlab issue #40</p>
+                        </div>
+                    </div>
+                </Grid>
+                <Grid className={classes.releaseNoteContainer}>                    
+                    <div className={classes.releaseGrid}>
+                        <div className={classes.releaseList}>                            
+                            <div className={classes.releaseVersion}>0.0.2</div>
+                            <h4 className={classes.releaseDate}>September 24th 2020 </h4>
+                        </div>
+                        <div className={classes.releaseContent}>
+                            <span className={classes.releaseStatusFixed}>Fixed</span>
+                            <p className={classes.releaseText}>Update to have all the points on Readme to install #38 </p>
                         </div>
                     </div>
                 </Grid>
@@ -116,6 +152,7 @@ function ReleaseNote(){
         </div>
         
     )
+    
 }
 
 export default ReleaseNote;

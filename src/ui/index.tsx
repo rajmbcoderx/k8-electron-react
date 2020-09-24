@@ -14,7 +14,6 @@ const App = () => (
     <HashRouter>      
       <div>
         <Route path="/"                       exact component=  { WelcomePage         } />
-        {/* <Route path="/"                   exact component=  { Mainview            } /> */}
         <Route path="/home"                   exact component=  { Mainview            } />
         <Route path="/fileDrop"               exact component=  { FileDrop            } />
         <Route path="/dashboardK8"            exact component=  { DashboardK8         } />

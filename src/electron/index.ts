@@ -50,7 +50,7 @@ function createMenu(){
             label: 'K8-Proxy-Desktop',
             submenu: [
                 {
-                    label: 'Show Gatsby Desktop',
+                    label: 'Show Home',
                     click: openMainWindow,
                 },
                 {
@@ -87,7 +87,7 @@ function createMenu(){
                     },
                 },
                 {
-                    label:'Version 1.0'
+                    label:'Version 0.0.2'
                 },
                 {
                     type:'separator'
@@ -105,7 +105,7 @@ function createMenu(){
                 {
                     label:'Quit',
                     click: async (): Promise<void> => {
-                        openMainWindow()
+                        //openMainWindow()
                         const { response } = await dialog.showMessageBox({
                         message: `Quit K8 Proxy Desktop?`,
                         detail: `This will stop all running sites`,
@@ -115,7 +115,7 @@ function createMenu(){
                         })
                 
                         if (response === 1) {
-                        app.quit()
+                            app.quit()
                         }
                     },
                 }
