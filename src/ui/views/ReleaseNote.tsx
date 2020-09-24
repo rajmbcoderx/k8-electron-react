@@ -87,7 +87,7 @@ function ReleaseNote(){
         <div>    
             <Grid container>   
                 <a className={classes.webAnchor} href="https://rajmbcoderx.github.io/k8-electron-react/" title="k8-proxy-desktop">K8 Proxy Desktop</a>
-                <h3 className={classes.releaseHeading}>Realease Note</h3>
+                <h3 className={classes.releaseHeading}> <a className={classes.webAnchor} href="https://github.com/rajmbcoderx/k8-electron-react/releases/tag/0.2.0"> Realease Note</a></h3>
                  <Grid className={classes.releaseNoteContainer}>                    
                     <div className={classes.releaseGrid}>
                         <div className={classes.releaseList}>                            

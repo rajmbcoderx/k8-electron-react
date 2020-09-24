@@ -1,7 +1,7 @@
 
-export const  MAC_BUILD = "https://github.com/rajmbcoderx/k8-electron-react/suites/1235384736/artifacts/18639102"
-export const  WINDOWS_BUILD = "https://github.com/rajmbcoderx/k8-electron-react/suites/1235384736/artifacts/18639103"
-export const  LINUX_BUILD ="https://github.com/rajmbcoderx/k8-electron-react/suites/1235384736/artifacts/18639104"
+export const  MAC_BUILD = "https://github.com/rajmbcoderx/k8-electron-react/releases/download/0.2.0/k8-proxy-desktop.dmg.zip"
+export const  WINDOWS_BUILD = "https://github.com/rajmbcoderx/k8-electron-react/releases/download/0.2.0/k8-proxy-desktop.exe.zip"
+export const  LINUX_BUILD ="https://github.com/rajmbcoderx/k8-electron-react/releases/download/0.2.0/k8-proxy-desktop.snap.zip"
 
 export let getOS = () =>{
     var userAgent = window.navigator.userAgent,

@@ -87,7 +87,7 @@ function createMenu(){
                     },
                 },
                 {
-                    label:'Version 0.0.2'
+                    label:'Version 0.2.0'
                 },
                 {
                     type:'separator'
