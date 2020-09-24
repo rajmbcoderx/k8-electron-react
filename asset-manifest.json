@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/k8-electron-react/static/css/main.a1d912dc.chunk.css",
-    "main.js": "/k8-electron-react/static/js/main.3bd91de8.chunk.js",
-    "main.js.map": "/k8-electron-react/static/js/main.3bd91de8.chunk.js.map",
+    "main.js": "/k8-electron-react/static/js/main.27a30264.chunk.js",
+    "main.js.map": "/k8-electron-react/static/js/main.27a30264.chunk.js.map",
     "runtime-main.js": "/k8-electron-react/static/js/runtime-main.b8161c4b.js",
     "runtime-main.js.map": "/k8-electron-react/static/js/runtime-main.b8161c4b.js.map",
     "static/js/2.5865fc53.chunk.js": "/k8-electron-react/static/js/2.5865fc53.chunk.js",
     "static/js/2.5865fc53.chunk.js.map": "/k8-electron-react/static/js/2.5865fc53.chunk.js.map",
     "index.html": "/k8-electron-react/index.html",
-    "precache-manifest.6da6c94c4bf862788c9b70bd6cdedfc6.js": "/k8-electron-react/precache-manifest.6da6c94c4bf862788c9b70bd6cdedfc6.js",
+    "precache-manifest.d83566239f5ab1052da41f633fad804a.js": "/k8-electron-react/precache-manifest.d83566239f5ab1052da41f633fad804a.js",
     "service-worker.js": "/k8-electron-react/service-worker.js",
     "static/css/main.a1d912dc.chunk.css.map": "/k8-electron-react/static/css/main.a1d912dc.chunk.css.map",
     "static/js/2.5865fc53.chunk.js.LICENSE.txt": "/k8-electron-react/static/js/2.5865fc53.chunk.js.LICENSE.txt",
@@ -25,6 +25,6 @@
     "static/js/runtime-main.b8161c4b.js",
     "static/js/2.5865fc53.chunk.js",
     "static/css/main.a1d912dc.chunk.css",
-    "static/js/main.3bd91de8.chunk.js"
+    "static/js/main.27a30264.chunk.js"
   ]
 }

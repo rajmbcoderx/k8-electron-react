@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "6c7dfcbe7eb7acceb75c6a15353b07a3",
+    "revision": "a6bbd46c9ba1cbe3e10c15619e8a44a6",
     "url": "/k8-electron-react/index.html"
   },
   {
-    "revision": "5b8a3470d05df8a607b4",
+    "revision": "7185661aec2514c8ae3c",
     "url": "/k8-electron-react/static/css/main.a1d912dc.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/k8-electron-react/static/js/2.5865fc53.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "5b8a3470d05df8a607b4",
-    "url": "/k8-electron-react/static/js/main.3bd91de8.chunk.js"
+    "revision": "7185661aec2514c8ae3c",
+    "url": "/k8-electron-react/static/js/main.27a30264.chunk.js"
   },
   {
     "revision": "16e6ed8aa7d3517f524f",
