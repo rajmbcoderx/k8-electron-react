@@ -1,5 +1,6 @@
 import React          from "react";
 import headerLens     from '../images/header-lens.png';
+import * as Utils     from '../utils/utils'
 
 export default function Loader() {
   return (
@@ -22,19 +23,19 @@ export default function Loader() {
                 </p>
                 <a
                     className = "btn-solid-lg"
-                    href      ="https://github.com/rajmbcoderx/k8-electron-react/suites/1235384736/artifacts/18639102">
+                    href      = {Utils.downloadUrl()}>
                   <i  className="fas fa-download"></i> 
                   Download
                 </a>
 
-                <a  href ="https://github.com/rajmbcoderx/k8-electron-react/suites/1235384736/artifacts/18639102">
+                <a  href = {Utils.MAC_BUILD}>
                       <i className  ="supported-os-icon fab fa-apple"></i>
                 </a>
 
-                <a  href ="https://github.com/rajmbcoderx/k8-electron-react/suites/1235384736/artifacts/18639103">
+                <a  href = {Utils.WINDOWS_BUILD}>
                       <i className ="supported-os-icon fab fa-windows"> </i>
                 </a>
-                <a  href ="https://github.com/rajmbcoderx/k8-electron-react/suites/1235384736/artifacts/18639104" >
+                <a  href = {Utils.LINUX_BUILD}>
                       <i className ="supported-os-icon fab fa-linux"></i>
                 </a>
               </div>
