@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "a6bbd46c9ba1cbe3e10c15619e8a44a6",
+    "revision": "19a82a5ab224bce3f1503636ebae1e41",
     "url": "/k8-electron-react/index.html"
   },
   {
-    "revision": "7185661aec2514c8ae3c",
-    "url": "/k8-electron-react/static/css/main.a1d912dc.chunk.css"
+    "revision": "14afeec69f24b13a86cd",
+    "url": "/k8-electron-react/static/css/main.7893394e.chunk.css"
   },
   {
     "revision": "7855a47a64ca4abb6a7f",
@@ -16,7 +16,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/k8-electron-react/static/js/2.5865fc53.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "7185661aec2514c8ae3c",
+    "revision": "14afeec69f24b13a86cd",
     "url": "/k8-electron-react/static/js/main.27a30264.chunk.js"
   },
   {
@@ -26,6 +26,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "082eac9fb472ace9d322cbed0b84130a",
     "url": "/k8-electron-react/static/media/better-kubernetes.082eac9f.svg"
+  },
+  {
+    "revision": "0ef6f5ba2d592952f3a36b034c5553d5",
+    "url": "/k8-electron-react/static/media/body-background.0ef6f5ba.png"
   },
   {
     "revision": "484e83278cdc8716cbbf1d2042a0aa65",

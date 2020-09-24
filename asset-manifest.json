@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/k8-electron-react/static/css/main.a1d912dc.chunk.css",
+    "main.css": "/k8-electron-react/static/css/main.7893394e.chunk.css",
     "main.js": "/k8-electron-react/static/js/main.27a30264.chunk.js",
     "main.js.map": "/k8-electron-react/static/js/main.27a30264.chunk.js.map",
     "runtime-main.js": "/k8-electron-react/static/js/runtime-main.b8161c4b.js",
@@ -8,14 +8,14 @@
     "static/js/2.5865fc53.chunk.js": "/k8-electron-react/static/js/2.5865fc53.chunk.js",
     "static/js/2.5865fc53.chunk.js.map": "/k8-electron-react/static/js/2.5865fc53.chunk.js.map",
     "index.html": "/k8-electron-react/index.html",
-    "precache-manifest.d83566239f5ab1052da41f633fad804a.js": "/k8-electron-react/precache-manifest.d83566239f5ab1052da41f633fad804a.js",
+    "precache-manifest.059a5f38b6bc905120e430143964d260.js": "/k8-electron-react/precache-manifest.059a5f38b6bc905120e430143964d260.js",
     "service-worker.js": "/k8-electron-react/service-worker.js",
-    "static/css/main.a1d912dc.chunk.css.map": "/k8-electron-react/static/css/main.a1d912dc.chunk.css.map",
+    "static/css/main.7893394e.chunk.css.map": "/k8-electron-react/static/css/main.7893394e.chunk.css.map",
     "static/js/2.5865fc53.chunk.js.LICENSE.txt": "/k8-electron-react/static/js/2.5865fc53.chunk.js.LICENSE.txt",
     "static/media/better-kubernetes.svg": "/k8-electron-react/static/media/better-kubernetes.082eac9f.svg",
+    "static/media/styles.css": "/k8-electron-react/static/media/header-background.82f026e2.png",
     "static/media/built-in-prometheus-stats.svg": "/k8-electron-react/static/media/built-in-prometheus-stats.484e8327.svg",
     "static/media/context-aware-terminal.svg": "/k8-electron-react/static/media/context-aware-terminal.a0037930.svg",
-    "static/media/styles.css": "/k8-electron-react/static/media/header-background.82f026e2.png",
     "static/media/header-lens.png": "/k8-electron-react/static/media/header-lens.de896b96.png",
     "static/media/logo.svg": "/k8-electron-react/static/media/logo.4d89dba8.svg",
     "static/media/multi-cluster-management.svg": "/k8-electron-react/static/media/multi-cluster-management.c39025de.svg",
@@ -24,7 +24,7 @@
   "entrypoints": [
     "static/js/runtime-main.b8161c4b.js",
     "static/js/2.5865fc53.chunk.js",
-    "static/css/main.a1d912dc.chunk.css",
+    "static/css/main.7893394e.chunk.css",
     "static/js/main.27a30264.chunk.js"
   ]
 }

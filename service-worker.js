@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/k8-electron-react/precache-manifest.d83566239f5ab1052da41f633fad804a.js"
+  "/k8-electron-react/precache-manifest.059a5f38b6bc905120e430143964d260.js"
 );
 
 self.addEventListener('message', (event) => {
