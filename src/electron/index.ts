@@ -146,7 +146,7 @@ function makeWindow(): typeof BrowserWindow {
     let window = new BrowserWindow({
         title: `k8 Proxy Desktop`,
         width: 1200,
-        height: 700,
+        height: 800,
         fullscreenable: false,
         icon:tray,
         trafficLightPosition: { x: 8, y: 18 },
