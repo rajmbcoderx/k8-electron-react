@@ -5,6 +5,7 @@ import      Header              from '../components/Header'
 import      Sidebar             from '../components/SideBar'
 import WebIFrameView            from '../components/WebIFrameView'
 import Loader                   from '../components/Loader';
+import Footer                   from '../components/Footer';
 
 const useStyles = makeStyles((theme) => ({
      root:       {
@@ -51,8 +52,8 @@ function ForensicWorkbench (){
                         <WebIFrameView url = "https://forensic-workbench.com/" />
                     </Grid>
                 </Grid>
-
             </Container>
+            <Footer/>
         </div>
     )
 }

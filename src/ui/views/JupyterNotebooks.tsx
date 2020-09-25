@@ -1,31 +1,32 @@
 import * as React               from 'react';
 import { Container, Grid }      from '@material-ui/core';
 import { makeStyles }           from '@material-ui/core/styles';
-import      Header              from '../components/Header'
-import      Sidebar             from '../components/SideBar'
-import      Footer              from '../components/Footer';
+import Header                   from '../components/Header';
+import Sidebar                  from '../components/SideBar'
+import Footer                   from '../components/Footer';
+
 
 /** Main view of the application to display all the targeted use cases */
 const useStyles = makeStyles((theme) => ({
-     root:       {
-         flexGrow:       1, 
-     },
-     fullWidth:{
-         maxWidth:       '100%'
-     },
-     container:  {
-         display:        'grid',
-         gridGap:        theme.spacing(2),
-     },
+    root:       {
+        flexGrow:       1, 
+    },
+    fullWidth:{
+        maxWidth:       '100%'
+    },
+    container:  {
+        display:        'grid',
+        gridGap:        theme.spacing(2),
+    },
     gridItemRight:{
         minHeight:      '86vh'
     },
-    gridItemLeft:{
+   gridItemLeft:{
+   }
+ }));
 
-    }
-  }));
 
-function MainLayout (){
+function JupyterNotebooks(){
     const classes = useStyles(); 
     return(
         <div>     
@@ -42,7 +43,8 @@ function MainLayout (){
         </Container>
         <Footer/>
     </div>
+        
     )
 }
 
-export default MainLayout;
+export default JupyterNotebooks;

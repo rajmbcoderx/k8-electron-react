@@ -6,6 +6,7 @@ import      Sidebar             from '../components/SideBar'
 import WebIFrameView            from '../components/WebIFrameView'
 import { useState, useEffect }  from 'react';
 import Loader                   from '../components/Loader';
+import Footer                   from '../components/Footer';
 
 /** Main view of the application to display all the targeted use cases */
 const useStyles = makeStyles((theme) => ({
@@ -47,8 +48,8 @@ function FileDrop (){
                      <WebIFrameView url = "https://file-drop.co.uk/" />
                     </Grid>
                 </Grid>
-
             </Container>
+            <Footer/>
         </div>
     )
 }

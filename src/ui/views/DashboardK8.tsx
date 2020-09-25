@@ -3,6 +3,7 @@ import { Container, Grid }      from '@material-ui/core';
 import { makeStyles }           from '@material-ui/core/styles';
 import Header                   from '../components/Header';
 import Sidebar                  from '../components/SideBar'
+import Footer                   from '../components/Footer';
 
 
 /** Main view of the application to display all the targeted use cases */
@@ -17,8 +18,9 @@ const useStyles = makeStyles((theme) => ({
         display:        'grid',
         gridGap:        theme.spacing(2),
     },
-   gridItemRight:{
-   },
+    gridItemRight:{
+        minHeight:      '86vh'
+    },
    gridItemLeft:{
    }
  }));
@@ -38,8 +40,8 @@ function DashboardK8(){
                     <h2>TBD</h2>
                 </Grid>
             </Grid>
-
         </Container>
+        <Footer/>
     </div>
         
     )

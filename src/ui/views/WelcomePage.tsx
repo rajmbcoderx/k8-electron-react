@@ -10,7 +10,8 @@ const useStyles = makeStyles((theme) => ({
         flexGrow:       1, 
     },
     fullWidth:{
-        maxWidth:       '100%'
+        maxWidth:       '100%',
+        paddingBottom:   '50px'
     },
     container:  {
         display:        'grid',
@@ -23,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
    },
    gridItemLeft:{
         textAlign:       'center',
-        padding:         '15px!important'
+        padding:         '50px 15px 15px 15px!important'
    },
    welcomeTxt:{
         color:           '#0c3350',
@@ -63,31 +64,9 @@ const useStyles = makeStyles((theme) => ({
         borderRadius:    '3px',
         cursor:          'pointer',
         display:         'inline-block',
-        textDecoration:  'none'
-   },
-   dwWindowBtn:{
-        fontFamily:      'Nunito Sans',
-        border:          '2px solid #47848f',
-        padding:         '8px 20px',
-        borderRadius:    '1px',
-        color:           '#47848f',
-        minWidth:        '225px',
-        margin:          '20px 0',
-        cursor:          'pointer',
-        display:         'inline-block',
-        textDecoration:  'none'
-   },
-   dwMacBtn:{
-        fontFamily:      'Nunito Sans',
-        fontWeight:      'bold',        
-        border:          'none',
-        color:           '#6a6a6a',
-        marginBottom:    '20px',
-        fontSize:        '17px',
-        cursor:          'pointer',
-        display:         'inline-block',
-        textDecoration:  'none'
-   },
+        textDecoration:  'none',
+        margin:          '20px 0'
+   },   
    termsCondition:{
         fontFamily:      'Nunito Sans',
         fontSize:        '14px',
@@ -122,9 +101,7 @@ function WelcomePage(){
                          <p className={classes.abtContent}>k8-proxy-desktop is a desktop based applications that provides a single entry point to all K8 projects. Build with Electron , react, it is aimed at providing a single window integration with GW git resources, file-drop, forensic-workbench, jupyter notebooks, and K8-* services. It is a standalone application for MacOS, Windows and Linux operating systems.</p>
                     </div>
                     <div className={classes.btnGroup}>
-                        <div> </div><Link to="/home" className={classes.getStartBtn}>Get Started</Link>
-                        <a href="https://github.com/rajmbcoderx/k8-electron-react/releases/download/0.2.0/k8-proxy-desktop.exe.zip" className={classes.dwWindowBtn}>Download for windows</a>
-                        <a href="https://github.com/rajmbcoderx/k8-electron-react/releases/download/0.2.0/k8-proxy-desktop.dmg.zip" className={classes.dwMacBtn}>Download for <span className={classes.colorGreen}>MacOS</span></a>
+                        <Link to="/home" className={classes.getStartBtn}>Get Started</Link>                        
                     </div>
                     <footer>
                         <p className={classes.termsCondition}>By Downloading, you agree to the <a href="https://github.com/rajmbcoderx/k8-electron-react/blob/master/LICENSE" className={classes.colorGreen}>Terms and Conditions.</a></p>

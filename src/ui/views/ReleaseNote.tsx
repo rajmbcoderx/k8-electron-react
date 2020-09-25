@@ -21,9 +21,7 @@ const useStyles = makeStyles((theme) => ({
         paddingBottom:      '10px',
         marginBottom:       '15px',
     },
-    releaseHeading:{
-        color:              '#3c6c90',        
-        fontFamily:         'Nunito Sans',
+    releaseHeading:{        
         borderBottom:       '1px solid #a3a3a3',
         paddingBottom:      '5px',
         margin:             '20px 0 15px 0',
@@ -77,6 +75,11 @@ const useStyles = makeStyles((theme) => ({
         float:              'left',
         margin:             '0 0 0 5px',
         lineHeight:         '18px'
+    },
+    webHeading:{
+        color:              '#3c6c90',        
+        fontFamily:         'Nunito Sans',
+        textDecoration:     'none'
     }
  }));
 
@@ -87,7 +90,7 @@ function ReleaseNote(){
         <div>    
             <Grid container>   
                 <a className={classes.webAnchor} href="https://rajmbcoderx.github.io/k8-electron-react/" title="k8-proxy-desktop">K8 Proxy Desktop</a>
-                <h3 className={classes.releaseHeading}> <a className={classes.webAnchor} href="https://github.com/rajmbcoderx/k8-electron-react/releases/tag/0.2.0"> Realease Note</a></h3>
+                <h3 className={classes.releaseHeading}> <a className={classes.webHeading} href="https://github.com/rajmbcoderx/k8-electron-react/releases/tag/0.2.0"> Realease Note</a></h3>
                  <Grid className={classes.releaseNoteContainer}>                    
                     <div className={classes.releaseGrid}>
                         <div className={classes.releaseList}>                            
