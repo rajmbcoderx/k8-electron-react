@@ -68,12 +68,6 @@ function createMenu(){
                         })
                     },
                 },
-                // {
-                //     label:'View License',
-                //     click() { 
-                //         shell.openExternal('https://github.com/k8-proxy/k8-proxy-desktop/blob/master/LICENSE')
-                //     } 
-                // },
                 {
                     label:'Check For Update',
                     click: async (): Promise<void> => {
@@ -86,19 +80,9 @@ function createMenu(){
                         })
                     },
                 },
-                // {
-                //     label:'Version 0.2.0'
-                // },
                 {
                     type:'separator'
                 },
-                // {
-                //     label:'Report an issue',
-                //     click() { 
-                //         shell.openExternal('https://github.com/k8-proxy/k8-proxy-desktop/issues/new')
-                //     } ,
-                //     accelerator: 'CmdOrCtrl+Shift+I'
-                // },
                 {
                     type:'separator'
                 }, 
@@ -160,7 +144,7 @@ function makeWindow(): typeof BrowserWindow {
     })
    
     //to add chrome dev tools 
-    window.webContents.openDevTools();
+    //window.webContents.openDevTools();
     return window;
 }
 
