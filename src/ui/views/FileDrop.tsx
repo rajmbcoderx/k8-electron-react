@@ -7,6 +7,7 @@ import WebIFrameView            from '../components/WebIFrameView'
 import { useState, useEffect }  from 'react';
 import Loader                   from '../components/Loader';
 import Footer                   from '../components/Footer';
+import FileDropSampleFiles      from './FileDropSampleFiles';
 
 /** Main view of the application to display all the targeted use cases */
 const useStyles = makeStyles((theme) => ({
@@ -21,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
          gridGap:        theme.spacing(2),
      },
     gridItemRight:{
+        position:        'relative'
     },
     gridItemLeft:{
     }
@@ -44,6 +46,7 @@ function FileDrop (){
                         <Sidebar></Sidebar>
                     </Grid>
                     <Grid item xs={9} className={classes.gridItemRight}>
+                        <FileDropSampleFiles/>
                     {showLoader  && <Loader/> }  
                      <WebIFrameView url = "https://file-drop.co.uk/" />
                     </Grid>
