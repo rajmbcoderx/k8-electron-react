@@ -4,6 +4,7 @@ import { makeStyles }           from '@material-ui/core/styles';
 import logo                     from '../assets/images/GWWelcomeLogo.jpg'
 import ReleaseNote              from './ReleaseNote'
 import { Link}                  from 'react-router-dom'
+import                          '../assets/style/style.css'
 
 const useStyles = makeStyles((theme) => ({
     root:       {
