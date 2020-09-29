@@ -1,6 +1,7 @@
 import * as React               from 'react';
 import { makeStyles }           from '@material-ui/core/styles';
-
+import                          '../assets/style/style.css'
+import * as Utils               from '../utils/utils'
 
 const useStyles = makeStyles((theme) => ({
     root:       {
@@ -79,7 +80,7 @@ function Footer(){
     <div className={classes.footerNav}>                
         <ul>
             <li className={classes.footerNavItem}> 
-                <a className={classes.navBtn} href="https://github.com/k8-proxy/k8-proxy-desktop/blob/master/LICENSE"> View License</a>
+                <a className={classes.navBtn} href={Utils.LICENSE_URL}> View License</a>
             </li>
             <li className={classes.footerNavItem}> 
                 <span className={classes.version}> Version 0.2.0</span>

@@ -5,6 +5,7 @@ import logo                     from '../assets/images/GWWelcomeLogo.jpg'
 import ReleaseNote              from './ReleaseNote'
 import { Link}                  from 'react-router-dom'
 import                          '../assets/style/style.css'
+import * as Utils               from '../utils/utils'
 
 const useStyles = makeStyles((theme) => ({
     root:       {
@@ -115,7 +116,7 @@ function WelcomePage(){
                         <Link to="/home" className={classes.getStartBtn}>Get Started</Link>                        
                     </div>
                     <footer>
-                        <p className={classes.termsCondition}>By Downloading, you agree to the <a href="https://github.com/rajmbcoderx/k8-electron-react/blob/master/LICENSE" className={classes.colorGreen}>Terms and Conditions.</a></p>
+                        <p className={classes.termsCondition}>Agree to the <a href={Utils.LICENSE_URL} className={classes.colorGreen}>Terms and Conditions.</a></p>
                     </footer>
                 </Grid>
                 <Grid item xs={3} className={classes.gridItemRight}>
