@@ -58,7 +58,18 @@ const useStyles = makeStyles((theme) => ({
     }, 
     version:{
         fontSize:           '12px'
+    },
+    copyrightText:{
+        padding:            '10px',
+        width:              '100%',
+        textAlign:          'center',
+        fontSize:           '11px',
+        background:         '#0c3451',
+        float:              'left',
+        boxSizing:          'border-box',
+        color:              '#fff',
     }
+    
  }));
  
 
@@ -74,6 +85,7 @@ function Footer(){
                 <span className={classes.version}> Version 0.2.0</span>
             </li>   
         </ul>
+        <span className={classes.copyrightText}>© Copyright 2020 - Glasswall Solutions Ltd. All Rights Reserved</span>
     </div>
         
     )

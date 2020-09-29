@@ -17,6 +17,7 @@ const useStyles = makeStyles((theme) => ({
         float:                  'left',    
         fontSize:               '15px',
         borderRadius:           '3px',
+        fontFamily:             'Roboto',
         padding:                '10px 10px',
         textDecoration:         'none',
             '&:focus':{

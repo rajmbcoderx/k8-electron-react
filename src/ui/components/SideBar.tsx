@@ -63,7 +63,8 @@ const useStyles = makeStyles((theme) => ({
     },
     navLink:{
         float:          'left',
-        width:          '100%'
+        width:          '100%',
+        paddingLeft:    '10px'
     }
   }));
   

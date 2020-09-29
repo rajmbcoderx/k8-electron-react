@@ -44,7 +44,7 @@ export default function Nav() {
               className="nav-link"
               href="https://github.com/rajmbcoderx/k8-electron-react/releases/tag/0.2.0"
             >
-              RELEASE
+              REPOSITORIES 
             </a>
           </li>
         </ul>

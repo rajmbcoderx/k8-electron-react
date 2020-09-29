@@ -79,7 +79,17 @@ const useStyles = makeStyles((theme) => ({
    colorGreen:{
         color:           '#47848f',
         textDecoration:  'none'
-   }
+   },
+   copyrightText:{
+        padding:         '10px',
+        width:           '100%',
+        textAlign:       'center',
+        fontSize:        '11px',
+        background:      '#0c3451',
+        float:           'left',
+        boxSizing:       'border-box',
+        color:           '#fff',
+    }
  }));
  
 
@@ -112,8 +122,8 @@ function WelcomePage(){
                     <ReleaseNote/>
                 </Grid>
             </Grid>
-
         </Container>
+        <span className={classes.copyrightText}>© Copyright 2020 - Glasswall Solutions Ltd. All Rights Reserved</span>
     </div>
         
     )
