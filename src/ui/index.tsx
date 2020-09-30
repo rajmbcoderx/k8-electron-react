@@ -9,6 +9,7 @@ import      JupyterNotebook       from './views/JupyterNotebooks'
 import      SlackBotUi            from './views/SlackBotUi'
 import      ForensicWorkbench     from './views/ForensicWorkbench'
 import      WelcomePage           from './views/WelcomePage'
+import      RebuildFiles          from './views/RebuildFiles'
 
 const App = () => (
 
@@ -21,6 +22,7 @@ const App = () => (
         <Route path="/jupyterNotebook"        exact component=  { JupyterNotebook     } />
         <Route path="/slackBot"               exact component=  { SlackBotUi          } />
         <Route path="/fw"                     exact component=  { ForensicWorkbench   } />
+        <Route path="/rebuildFiles"           exact component=  { RebuildFiles        } />
       </div>
     </HashRouter>
 );

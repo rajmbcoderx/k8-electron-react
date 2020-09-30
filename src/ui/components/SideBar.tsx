@@ -8,6 +8,7 @@ import FileDropIcon             from '../assets/images/fileDrop.png'
 import Slack                    from '../assets/images/slack.png'
 import GWLogo                   from '../assets/images/GWLogo.png'
 import jupyter                  from '../assets/images/jupyter.png'
+import RebuildIcon              from '../assets/images/rebuild.png'
 
 /** Main view of the application to display all the targeted use cases */
 const useStyles = makeStyles((theme) => ({
@@ -143,6 +144,18 @@ function MainLayout (){
                     </div>
                     <div className={classes.rightGrid}>
                         <h3 className={classes.heading}>Jupyter Notebooks</h3>
+                    </div>
+                </div>
+                </NavLink>
+            </MenuItem>
+            <MenuItem className={classes.menuItem}>
+                <NavLink to="/rebuildFiles" activeClassName={classes.active} className={classes.navLink}>
+                <div className={classes.menuName}>
+                    <div className={classes.leftImg}>     
+                        <img src={RebuildIcon} className={classes.icons}></img>
+                    </div>
+                    <div className={classes.rightGrid}>
+                        <h3 className={classes.heading}>Rebuild Files</h3>
                     </div>
                 </div>
                 </NavLink>

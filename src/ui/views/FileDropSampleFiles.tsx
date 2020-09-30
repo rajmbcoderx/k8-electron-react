@@ -8,13 +8,14 @@ const useStyles = makeStyles((theme) => ({
         flexGrow:           1, 
     },
     sampleFileSection:{
-        padding:                    '0 20px',
+        padding:                    '0 0 0 20px',
         marginBottom:               '20px',
 
         '& h3':{
             color:                  '#0c3451',
             borderBottom:           '1px solid #ccc',
-            paddingBottom:          '5px'
+            paddingBottom:          '5px',
+            margin:                 '0 0 10px 0'
         },
     },
     sampleFileLists:{
@@ -28,9 +29,8 @@ const useStyles = makeStyles((theme) => ({
 
             '& li':{
                 float:              'left',
-                width:              '32%',
-                marginBottom:       '15px',
-                marginRight:        '1%',
+                width:              '25%',
+                marginBottom:       '10px',
             }
         },
         '& a':{
@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
             color:                  '#276c86',
             textDecoration:         'none',
             fontWeight:             '600',
-            fontSize:               '14px',
+            fontSize:               '12px',
 
             '&:hover':{
                 textDecoration:     'underline'
@@ -47,8 +47,8 @@ const useStyles = makeStyles((theme) => ({
     },
     icons:{
             float:                  'left',
-            fontSize:               '15px',
-            margin:                 '2px 3px 0 0',
+            fontSize:               '13px',
+            margin:                 '3px 2px 0 0',
             color:                  '#666'
     }
  }));

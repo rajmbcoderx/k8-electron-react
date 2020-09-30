@@ -24,7 +24,8 @@
   "license": "UNLICENSED",
   "bugs": {
     "url": "https://github.com/rajmbcoderx/k8-electron-react/issues"
-  },"keywords": [
+  },
+  "keywords": [
     "actions",
     "upload",
     "release",
@@ -53,6 +54,7 @@
     "@material-ui/icons": "^4.9.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-dropzone": "^11.2.0",
     "react-router-dom": "^5.2.0",
     "url-loader": "^4.1.0"
   }
