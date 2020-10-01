@@ -8,49 +8,8 @@ const getPayload = (data: any) => {
     console.log("File Size (MB) : " + size_of_file);
     var json = {
             fileSize : size_of_file,
-            Base64 : data.content,
-            ContentManagementFlags :{
-                PdfContentManagement: {
-                    Metadata: 0,
-                    InternalHyperlinks: 0,
-                    ExternalHyperlinks: 0,
-                    EmbeddedFiles: 0,
-                    EmbeddedImages: 0,
-                    Javascript: 0,
-                    Acroform: 0,
-                    ActionsAll: 0
-                },
-                ExcelContentManagement: {
-                    Metadata: 0,
-                    InternalHyperlinks: 0,
-                    ExternalHyperlinks: 0,
-                    EmbeddedFiles: 0,
-                    EmbeddedImages: 0,
-                    DynamicDataExchange: 0,
-                    Macros: 0,
-                    ReviewComments: 0
-                },
-                PowerPointContentManagement: {
-                    Metadata: 0,
-                    InternalHyperlinks: 0,
-                    ExternalHyperlinks: 0,
-                    EmbeddedFiles: 0,
-                    EmbeddedImages: 0,
-                    Macros: 0,
-                    ReviewComments: 0
-
-                },
-                WordContentManagement: {
-                    Metadata: 0,
-                    InternalHyperlinks: 0,
-                    ExternalHyperlinks: 0,
-                    EmbeddedFiles: 0,
-                    EmbeddedImages: 0,
-                    DynamicDataExchange: 0,
-                    Macros: 0,
-                    ReviewComments: 0
-                }
-            }
+            Base64 : data.content
+          
         };
      return json;
 }
