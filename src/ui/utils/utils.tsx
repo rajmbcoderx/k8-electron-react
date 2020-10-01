@@ -6,3 +6,4 @@ export const FW_URL             = 'https://forensic-workbench.com/';
 export const FILE_DROP_URL      = 'https://file-drop.co.uk/';
 export const REBUILD_ENGINE_URL = 'https://8oiyjy8w63.execute-api.us-west-2.amazonaws.com/Prod/api/rebuild/base64';
 export const REBUILD_API_KEY    = 'dp2Ug1jtEh4xxFHpJBfWn9V7fKB3yVcv60lhwOAG';
+export const WEBSITE_VERSION    = '0.3.0'

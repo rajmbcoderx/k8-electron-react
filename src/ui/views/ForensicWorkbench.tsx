@@ -1,16 +1,14 @@
 import * as React               from 'react';
-import { Container, Grid }      from '@material-ui/core';
 import { makeStyles }           from '@material-ui/core/styles';
-import      Header              from '../components/Header'
-import      Sidebar             from '../components/SideBar'
 import WebIFrameView            from '../components/WebIFrameView'
 import Loader                   from '../components/Loader';
 import Footer                   from '../components/Footer';
 import * as Utils               from '../utils/utils';
+import SideDrawer               from '../components/SideDrawer';
 
 const useStyles = makeStyles((theme) => ({
      root:       {
-         flexGrow:       1, 
+        display:        'flex', 
      },
      fullWidth:{
          maxWidth:       '100%'
@@ -24,7 +22,19 @@ const useStyles = makeStyles((theme) => ({
     },
     gridItemLeft:{
 
-    }
+    },
+    toolbar: {
+        display:        'flex',
+        alignItems:     'center',
+        justifyContent: 'flex-end',
+        padding:        theme.spacing(0, 1),
+        ...theme.mixins.toolbar,
+    },
+    content: {
+        flexGrow:       1,
+        padding:        theme.spacing(3),
+        minHeight:      '90vh'
+    },
   }));
 const { useState, useEffect } = React;
 function ForensicWorkbench (){
@@ -41,19 +51,15 @@ function ForensicWorkbench (){
     console.log(process.platform);
 
     return(
-        <div>     
-            <Header showBack={false} ></Header>            
-            <Container className={classes.fullWidth}>              
-                <Grid container spacing={2}>
-                    <Grid item xs={3} className={classes.gridItemLeft}>
-                        <Sidebar></Sidebar>
-                    </Grid>
-                    <Grid item xs={9} className={classes.gridItemRight}>
-                        {showLoader  && <Loader/> }   
-                        <WebIFrameView url = {Utils.FW_URL} />
-                    </Grid>
-                </Grid>
-            </Container>
+        <div>
+            <div className={classes.root}> 
+                <SideDrawer showBack={false}/>
+                <main className={classes.content}>
+                    <div className={classes.toolbar} />
+                    {showLoader  && <Loader/> }   
+                    <WebIFrameView url =  {Utils.FW_URL} />
+                </main>
+            </div>
             <Footer/>
         </div>
     )

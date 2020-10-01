@@ -6,6 +6,7 @@ import ReleaseNote              from './ReleaseNote'
 import { Link}                  from 'react-router-dom'
 import                          '../assets/style/style.css'
 import * as Utils               from '../utils/utils'
+import Footer                   from '../components/Footer';
 
 const useStyles = makeStyles((theme) => ({
     root:       {
@@ -80,17 +81,7 @@ const useStyles = makeStyles((theme) => ({
    colorGreen:{
         color:           '#47848f',
         textDecoration:  'none'
-   },
-   copyrightText:{
-        padding:         '10px',
-        width:           '100%',
-        textAlign:       'center',
-        fontSize:        '11px',
-        background:      '#0c3451',
-        float:           'left',
-        boxSizing:       'border-box',
-        color:           '#fff',
-    }
+   }
  }));
  
 
@@ -109,7 +100,7 @@ function WelcomePage(){
                     <div className={classes.logo}>
                          <img src={logo} className={classes.logoImg}></img>
                          <h2 className={classes.heading}>K8 Proxy Desktop</h2>
-                         <h6 className={classes.version}>0.2.0</h6>
+                         <h6 className={classes.version}>{Utils.WEBSITE_VERSION}</h6>
                          <p className={classes.abtContent}>k8-proxy-desktop is a desktop based applications that provides a single entry point to all K8 projects. Build with Electron , react, it is aimed at providing a single window integration with GW git resources, file-drop, forensic-workbench, jupyter notebooks, and K8-* services. It is a standalone application for MacOS, Windows and Linux operating systems.</p>
                     </div>
                     <div className={classes.btnGroup}>
@@ -124,7 +115,7 @@ function WelcomePage(){
                 </Grid>
             </Grid>
         </Container>
-        <span className={classes.copyrightText}>© Copyright 2020 - Glasswall Solutions Ltd. All Rights Reserved</span>
+        <Footer/>
     </div>
         
     )
