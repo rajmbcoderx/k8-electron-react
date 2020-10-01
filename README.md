@@ -73,16 +73,19 @@ Install the snapd package if not present in the linux/ubuntu version you are usi
 
 <p>Step 2</p>
 Once snapd package has been installed verify it has been installed successfully by running below command.
+
 ![k8-proxy-desktop Screenshot](https://raw.githubusercontent.com/rajmbcoderx/k8-electron-react/master/Linux_SnapPackage_Verification_Command.JPG)
 
 
 <p>Step 3</p>
 Unzip the downloaded desktop package and move inside the directory. And run below command to install the package
-![k8-proxy-desktop Screenshot](https://raw.githubusercontent.com/rajmbcoderx/k8-electron-react/master/Linux_DesktopApp_Install_Command.JPG)
+
+![k8-proxy-desktop Screenshot2](https://raw.githubusercontent.com/rajmbcoderx/k8-electron-react/master/Linux_DesktopApp_Install_Command.JPG)
 
 
 <p>Step 4</p>
 Run below command to launch the desktop application
+
 ![k8-proxy-desktop Screenshot](https://raw.githubusercontent.com/rajmbcoderx/k8-electron-react/master/Linux_DesktopApp_Run_Command.JPG)
 
 
