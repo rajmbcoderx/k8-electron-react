@@ -25,6 +25,7 @@ import Slack                    from '../assets/images/slack.png'
 import GWLogo                   from '../assets/images/GWLogo.png'
 import jupyter                  from '../assets/images/jupyter.png'
 import RebuildIcon              from '../assets/images/rebuild.png'
+import { BorderBottom } from '@material-ui/icons';
 
 const drawerWidth = 280;
 
@@ -116,6 +117,22 @@ const useStyles = makeStyles((theme) => ({
         justifyContent:         'flex-end',
         padding:                theme.spacing(0, 1),
         ...theme.mixins.toolbar,
+    },
+    navList:{
+        '& a':{
+            paddingTop:          '10px',
+            paddingBottom:       '10px',
+            borderBottom:        '1px solid #ccc',
+            '&:hover':{
+                background:      '#ddd',                
+            }
+        }
+    },
+    navText:{
+        '& span':{
+            fontSize:             '15px',
+            fontWeight:           'bold'
+        }        
     }
 }));
 type headerOptions = {
@@ -221,11 +238,11 @@ function SideDrawer({ showBack }: headerOptions) {
                     </IconButton>
                 </div>
                 <Divider />
-                <List>
+                <List className={classes.navList}>
                 {navData.map((nav, index) => (
                         <ListItem key={index} button component={NavLink} to={nav.anchLink} activeClassName={classes.active}>
                             <ListItemIcon><img src={nav.navIcon}  className={classes.icons}></img></ListItemIcon>
-                            <ListItemText primary={nav.navName} />
+                            <ListItemText primary={nav.navName} className={classes.navText}/>
                         </ListItem>
                     ))}
                 </List>               

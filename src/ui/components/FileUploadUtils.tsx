@@ -43,7 +43,7 @@ export const makeRequest = (data: any, resultCallback: Function) => {
 
             if(response.status === 200){
                 //this.setState({rebuild_file: response.data})
-                alert("Successfully Rebuild");
+               // alert("Successfully Rebuild");
                 writeDecodedBase64File(response.data, data, resultCallback)
             }
             //this.setState({status:response.status, message:"Success"})
