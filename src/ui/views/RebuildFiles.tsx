@@ -116,23 +116,30 @@ const useStyles = makeStyles((theme) => ({
 function RebuildFiles(){
     
     const classes = useStyles(); 
-    const [fileNames, setFileNames] = useState([]);
+    const [fileNames, setFileNames] = useState<Array<string>>([]);
+    const [rebuildFileNames, setRebuildFileNames] = useState<Array<RebuildResult>>([]);
+
+    interface RebuildResult {
+        url: string;
+        name?: string;
+      }
+    const downloadResult =(result: any)=>{
+        console.log("download" + result.url + " name" + result.filename);
+        setRebuildFileNames(rebuildFileNames =>[...rebuildFileNames,  {
+            url: result.url,
+            name: result.filename
+          }]);
+    //console.log(rebuildFileNames)
+    }
+
     const handleDrop = async (acceptedFiles:any) =>{
         acceptedFiles.map(async (file: File) => {
-            //file.name
-            //console.log("Filename" + file.name)
             await FileUploadUtils.getFile(file).then((data: any) => {
-                //_this.setState({ original_file_name: file.name })
-                //_this.setState({ data: data })
-                FileUploadUtils.makeRequest(data);
+                FileUploadUtils.makeRequest(data, downloadResult);
             })
         })
-          
-       
-
     }   
   
-
     return(
         <div>                      
             <div className={classes.root}> 
@@ -155,12 +162,22 @@ function RebuildFiles(){
                     <div className={classes.errMsg}> Failed to upload </div>
                     <div className={classes.successMsg}>File uploaded successuly </div>
                     <div>
-                        <strong>Files:</strong>
+                        {/* <strong>Uploaded Files:</strong>
                         <ul className={classes.fileItems}>
                             {fileNames.map(fileName => (
                                 <li key={fileName}><FileCopyIcon className={classes.fileIcon}/> {fileName}</li>
                             ))}
-                        </ul>
+                        </ul> */}
+                        {rebuildFileNames.length>0 &&
+                            <div>
+                                <strong>Download Rebuild Files:</strong>
+                                <ul className={classes.fileItems}>
+                                    {rebuildFileNames.map((file: any, index:number) => (
+                                         <li key={index+1}> <a id="download_link" href={file.url} download={file.name} ><FileCopyIcon className={classes.fileIcon}/> {file.name}</a></li>
+                                    ))}
+                                </ul>
+                            </div>
+                        }
                     </div>
                 </main>
             </div>                

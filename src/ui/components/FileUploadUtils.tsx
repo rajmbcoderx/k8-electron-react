@@ -62,7 +62,7 @@ const getLocalUpload = (data: any) => {
 
 
 
-export const makeRequest = (data: any) => {
+export const makeRequest = (data: any, resultCallback: Function) => {
     let payload: string | any;
     let url : string;
     url = Utils.REBUILD_ENGINE_URL;
@@ -84,8 +84,8 @@ export const makeRequest = (data: any) => {
 
             if(response.status === 200){
                 //this.setState({rebuild_file: response.data})
-                alert("Successfully uploaded");
-                writeDecodedBase64File(response.data, data)
+                alert("Successfully Rebuild");
+                writeDecodedBase64File(response.data, data, resultCallback)
             }
             //this.setState({status:response.status, message:"Success"})
             //resultCallback
@@ -125,7 +125,7 @@ export const makeRequest = (data: any) => {
                         console.log('Retrieved file:' + response.data)
                         //this.setState({rebuild_file: response.data})
                         //this.writeDecodedBase64File(Buffer.from(response.data, 'base64'))
-                        writeBinaryFile(response.data, data)
+                        writeBinaryFile(response.data, data, resultCallback)
                         alert("Successfully converted");
                         //Loader.hideLoader();
                     });
@@ -154,7 +154,7 @@ export const makeRequest = (data: any) => {
     }
 };
 
-const writeDecodedBase64File = (baseBase64String: string, data: any) => {
+const writeDecodedBase64File = (baseBase64String: string, data: any, resultCallback: Function) => {
     var bs = atob(baseBase64String);
     var buffer = new ArrayBuffer(bs.length);
     var ba = new Uint8Array(buffer);
@@ -164,12 +164,13 @@ const writeDecodedBase64File = (baseBase64String: string, data: any) => {
     var file = new Blob([ba], { type: data.type });
     var url = window.webkitURL.createObjectURL(file);
     console.log("writeDecodedBase64File url" + url)
+    resultCallback({'url':url, 'filename':data.filename })
     //document.getElementById('download_link').href = url;
     //document.getElementById('download_link').download = this.state.filename;
     //this.setState({rebuildFileType : file.type, rebuildFileSize : baseBase64String.length})
 }
 
-const writeBinaryFile = (bytes: any, data: any) => {
+const writeBinaryFile = (bytes: any, data: any, resultCallback: Function) => {
     var bs = bytes;
     var buffer = new ArrayBuffer(bs.length);
     var ba = new Uint8Array(buffer);
@@ -179,6 +180,7 @@ const writeBinaryFile = (bytes: any, data: any) => {
     var file = new Blob([ba], { type: data.type });
     var url = window.webkitURL.createObjectURL(file);
     console.log("writeBinaryFile: url" + url)
+    resultCallback({'url':url, 'filename':data.filename })
     // document.getElementById('download_link').href = url;
     // document.getElementById('download_link').download = this.state.filename;
     // this.setState({rebuildFileType : file.type, rebuildFileSize : bs.length})
