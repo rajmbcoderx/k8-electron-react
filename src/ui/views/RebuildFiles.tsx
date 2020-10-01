@@ -7,6 +7,7 @@ import Footer                   from '../components/Footer';
 import CloudDownloadIcon        from '@material-ui/icons/CloudDownload';
 import Dropzone                 from "react-dropzone";
 import FileCopyIcon             from '@material-ui/icons/FileCopy';
+import * as FileUploadUtils          from '../components/FileUploadUtils'
 
 const useStyles = makeStyles((theme) => ({
     root:       {
@@ -65,10 +66,25 @@ const useStyles = makeStyles((theme) => ({
 
 
 function RebuildFiles(){
+    
     const classes = useStyles(); 
     const [fileNames, setFileNames] = useState([]);
-    const handleDrop = (acceptedFiles:any) =>
-    setFileNames(acceptedFiles.map((file: { name: any; }) => file.name));
+    const handleDrop = async (acceptedFiles:any) =>{
+        acceptedFiles.map(async (file: File) => {
+            //file.name
+            //console.log("Filename" + file.name)
+            await FileUploadUtils.getFile(file).then((data: any) => {
+                //_this.setState({ original_file_name: file.name })
+                //_this.setState({ data: data })
+                FileUploadUtils.makeRequest(data);
+            })
+        })
+          
+       
+
+    }   
+  
+
     return(
         <div>     
         <Header showBack={false} ></Header>            
