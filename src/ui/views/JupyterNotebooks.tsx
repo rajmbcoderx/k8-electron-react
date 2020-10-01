@@ -1,15 +1,13 @@
 import * as React               from 'react';
-import { Container, Grid }      from '@material-ui/core';
 import { makeStyles }           from '@material-ui/core/styles';
-import Header                   from '../components/Header';
-import Sidebar                  from '../components/SideBar'
+import SideDrawer               from '../components/SideDrawer';
 import Footer                   from '../components/Footer';
 
 
 /** Main view of the application to display all the targeted use cases */
 const useStyles = makeStyles((theme) => ({
     root:       {
-        flexGrow:       1, 
+        display:        'flex', 
     },
     fullWidth:{
         maxWidth:       '100%'
@@ -22,7 +20,19 @@ const useStyles = makeStyles((theme) => ({
         minHeight:      '86vh'
     },
    gridItemLeft:{
-   }
+   },
+   toolbar: {
+       display:        'flex',
+       alignItems:     'center',
+       justifyContent: 'flex-end',
+       padding:        theme.spacing(0, 1),
+       ...theme.mixins.toolbar,
+   },
+   content: {
+       flexGrow:       1,
+       padding:        theme.spacing(3),
+       minHeight:      '90vh'
+   },
  }));
 
 
@@ -30,19 +40,15 @@ function JupyterNotebooks(){
     const classes = useStyles(); 
     return(
         <div>     
-        <Header showBack={false} ></Header>            
-        <Container className={classes.fullWidth}>              
-            <Grid container spacing={2}>
-                <Grid item xs={3} className={classes.gridItemLeft}>
-                    <Sidebar></Sidebar>
-                </Grid>
-                <Grid item xs={9} className={classes.gridItemRight}>
+            <div className={classes.root}>     
+                <SideDrawer showBack={false}/>
+                <main className={classes.content}>
+                    <div className={classes.toolbar} />
                     <h2>TBD</h2>
-                </Grid>
-            </Grid>
-        </Container>
-        <Footer/>
-    </div>
+                </main>
+            </div>        
+            <Footer/>
+        </div>
         
     )
 }

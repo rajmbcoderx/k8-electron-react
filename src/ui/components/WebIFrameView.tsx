@@ -1,5 +1,5 @@
 import * as React               from 'react';
-import { Container, Grid }      from '@material-ui/core';
+import { Grid }      from '@material-ui/core';
 import Iframe                   from 'react-iframe'
 import { makeStyles }           from '@material-ui/core/styles';
 
@@ -21,17 +21,15 @@ type appLink = {
 function WebIFrameView({url}:appLink){
     const classes = useStyles(); 
     return(
-        <div>             
-            <Container>
-                <Grid>
-                    <Iframe
-                        url= {url}
-                        width="100%"
-                        height="600"
-                        className={classes.iframe}
-                    ></Iframe>                                                              
-                </Grid>
-            </Container>
+        <div>            
+            <Grid>
+                <Iframe
+                    url= {url}
+                    width="100%"
+                    height="600"
+                    className={classes.iframe}
+                ></Iframe>                                                              
+            </Grid>
         </div>
         
     )

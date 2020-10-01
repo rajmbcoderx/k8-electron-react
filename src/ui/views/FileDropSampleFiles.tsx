@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
         flexGrow:           1, 
     },
     sampleFileSection:{
-        padding:                    '0 0 0 20px',
+        padding:                    '0',
         marginBottom:               '20px',
 
         '& h3':{
@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
             color:                  '#276c86',
             textDecoration:         'none',
             fontWeight:             '600',
-            fontSize:               '12px',
+            fontSize:               '13px',
 
             '&:hover':{
                 textDecoration:     'underline'
