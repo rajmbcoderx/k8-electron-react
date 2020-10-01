@@ -31,7 +31,7 @@ Warning: This software is under active development. Use at your own risk.
 
 ### macOS
 
-Download the latest [k8-proxy-desktop release](https://github.com/rajmbcoderx/k8-electron-react/releases/download/0.2.0/k8-proxy-desktop.dmg.zip).
+Download the latest [k8-proxy-desktop release](https://github.com/rajmbcoderx/k8-electron-react/releases/download/0.3.0/k8-proxy-desktop.dmg.zip).
 
 Mac users will need to follow the below steps on the app when you first launch it, until we have [code signing](https://www.electron.build/code-signing) set up
 
@@ -53,7 +53,7 @@ TBD: Will automatically update when a new release is available.
 
 ### Windows
 
-Download the latest [k8-proxy-desktop relase](https://github.com/rajmbcoderx/k8-electron-react/releases/download/0.2.0/k8-proxy-desktop.exe.zip).
+Download the latest [k8-proxy-desktop relase](https://github.com/rajmbcoderx/k8-electron-react/releases/download/0.3.0/k8-proxy-desktop.exe.zip).
 
 TBD: will automatically update when a new release is available.
 
@@ -61,7 +61,7 @@ TBD: will automatically update when a new release is available.
 ### Linux Snap
 
 k8-proxy-desktop is only available for 64-bit Linux systems.
-Download the latest [k8-proxy-desktop relase](https://github.com/rajmbcoderx/k8-electron-react/releases/download/0.2.0/k8-proxy-desktop.snap.zip).
+Download the latest [k8-proxy-desktop relase](https://github.com/rajmbcoderx/k8-electron-react/releases/download/0.3.0/k8-proxy-desktop.snap.zip).
 
 ### Installing from source
 
