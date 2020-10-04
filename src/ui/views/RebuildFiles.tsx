@@ -14,6 +14,8 @@ import TableCell                from '@material-ui/core/TableCell';
 import TableContainer           from '@material-ui/core/TableContainer';
 import TableHead                from '@material-ui/core/TableHead';
 import TableRow                 from '@material-ui/core/TableRow';
+import DeleteIcon               from '@material-ui/icons/Delete';
+import FolderIcon               from '@material-ui/icons/Folder';
 
 var http = require('http');
 var fs   = require('fs');
@@ -134,6 +136,53 @@ const useStyles = makeStyles((theme) => ({
          padding:                   theme.spacing(3),
          minHeight:                 '90vh'
      },
+     btnGroup:{
+        margin:                     '10px 0',
+        textAlign:                  'right',
+        width:                      '100%',
+        float:                      'left'
+     },
+     downloadLink:{
+        maxWidth:                   '245px',
+        display:                    'inline-block',
+        textOverflow:               'ellipsis',
+        whiteSpace:                 'nowrap',
+        overflow:                   'hidden',
+        color:                      '#575757;'
+     },
+     viewBtn:{
+        color:                      '#fff',
+        border:                     'none',
+        padding:                    '7px 10px',
+        fontSize:                   '12px',
+        fontWeight:                 'normal',
+        backgroundColor:            '#0c3451',
+        borderRadius:               '3px',
+     },
+     deleteBtn:{
+         background:                '#1976D2',
+         border:                    'none',
+         borderRadius:              '3px',
+         padding:                   '5px 15px',
+         color:                     '#fff',
+         fontSize:                  '13px',
+         lineHeight:                '25px'
+     },
+     outFolderBtn:{
+        background:                 '#3cb371',
+        border:                     'none',
+        color:                      '#fff',
+        borderRadius:               '3px',
+        padding:                    '5px 15px',
+        fontSize:                   '13px',
+        lineHeight:                 '25px',
+        marginRight:                '10px'
+     },
+     btnIcon:{
+        float:                      'left',
+        fontSize:                   '22px',
+        marginRight:                '5px'
+     }
  }));
 
 
@@ -263,6 +312,10 @@ React.useEffect(() => {
                     </Dropzone>
                     <div className={classes.errMsg}> Failed to upload </div>
                     <div className={classes.successMsg}>File uploaded successuly </div>
+                    <div className={classes.btnGroup}>
+                        <button className={classes.outFolderBtn}><FolderIcon className={classes.btnIcon}/> Out Folder</button>
+                        <button className={classes.deleteBtn}><DeleteIcon className={classes.btnIcon}/> Delete Table</button>
+                    </div>
                     <div>
                         {/* <strong>Uploaded Files:</strong>
                         <ul className={classes.fileItems}>
@@ -283,20 +336,20 @@ React.useEffect(() => {
                                     <TableHead>
                                     <TableRow>
                                         <TableCell>Status</TableCell>
-                                        <TableCell align="right">Orginal</TableCell>
-                                        <TableCell align="right">Rebuild</TableCell>
-                                        <TableCell align="right">XML</TableCell>
-                                        <TableCell align="right">Date</TableCell>
+                                        <TableCell align="left">Orginal</TableCell>
+                                        <TableCell align="left">Rebuild</TableCell>
+                                        <TableCell align="left">XML</TableCell>
+                                        <TableCell align="left">Date</TableCell>
                                     </TableRow>
                                     </TableHead>
                                     <TableBody>
                                     {rebuildFileNames.map((row) => (
                                         <TableRow key={row.name}>
-                                        <TableCell align="right">{row.isError == true?"Failed":"Success"}</TableCell>
-                                        <TableCell align="right"><a id="download_link" href={row.sourceFileUrl} download={row.name} ><FileCopyIcon className={classes.fileIcon}/> {row.name}</a></TableCell>
-                                        <TableCell align="right"><a id="download_link" href={row.url} download={row.name} ><FileCopyIcon className={classes.fileIcon}/> {!row.isError?row.name: 'NA'}</a></TableCell>
-                                        <TableCell align="right">{row.msg}</TableCell>
-                                        <TableCell align="right">{new Date().toLocaleDateString()}</TableCell>
+                                        <TableCell align="left">{row.isError == true?"Failed":"Success"}</TableCell>
+                                        <TableCell align="left"><a id="download_link" href={row.sourceFileUrl} download={row.name} className={classes.downloadLink}><FileCopyIcon className={classes.fileIcon}/> {row.name}</a></TableCell>
+                                        <TableCell align="left"><a id="download_link" href={row.url} download={row.name} className={classes.downloadLink}><FileCopyIcon className={classes.fileIcon}/> {row.name}</a></TableCell>
+                                        <TableCell align="left"><button className={classes.viewBtn}>{row.msg}</button></TableCell>
+                                        <TableCell align="left">{new Date().toLocaleDateString()}</TableCell>
                                         </TableRow>
                                     ))}
                                     </TableBody>
