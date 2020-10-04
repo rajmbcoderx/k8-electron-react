@@ -18,6 +18,7 @@ import * as FileUploadUtils     from '../components/FileUploadUtils'
 import Loader                   from '../components/Loader';
 import * as Utils               from '../utils/utils'
 import RawXml                   from '../components/RawXml';
+var child_process                =    require("child_process");
 
 var http = require('http');
 var fs   = require('fs');
@@ -242,6 +243,7 @@ function RebuildFiles(){
           }
           console.log('success');});
         }
+        open_file_exp('./tmp/');
         
     }
 
@@ -349,6 +351,31 @@ React.useEffect(() => {
        // console.log("openXml" + e)
         setOpen(open);
     }
+
+    function open_file_exp(fpath: string) {
+        var command = '';
+        switch (process.platform) {
+          case 'darwin':
+            command = 'open -R ' + fpath;
+            break;
+          case 'win32':
+            if (process.env.SystemRoot) {
+              command = path.join(process.env.SystemRoot, 'explorer.exe');
+            } else {
+              command = 'explorer.exe';
+            }
+            command += ' /select,' + fpath;
+            break;
+          default:
+            fpath = path.dirname(fpath)
+            command = 'xdg-open ' + fpath;
+        }
+        console.log(command);
+        child_process.exec(command, function(stdout:any) {
+          //Do something if you really need to
+        });
+      }
+
     return(
         <div>   
             {open && <RawXml content={xml} isOpen={open} handleOpen={openXml}/>   }                

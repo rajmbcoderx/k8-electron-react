@@ -1,10 +1,30 @@
 import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import Highlight from 'react-highlight.js';
+
+
+
+const useStyles = makeStyles((theme) => ({
+  form: {
+    display: 'flex',
+    flexDirection: 'column',
+    margin: 'auto',
+    width: 'fit-content',
+  },
+  formControl: {
+    marginTop: theme.spacing(2),
+    minWidth: 120,
+  },
+  formControlLabel: {
+    marginTop: theme.spacing(1),
+  },
+}));
 
 
 type xmlContent ={
@@ -13,7 +33,8 @@ type xmlContent ={
     isOpen: boolean;
 }
 export default function ScrollDialog({isOpen, content, handleOpen }: xmlContent) {
-const [open, setOpen] = React.useState(isOpen);
+  const classes = useStyles();
+  const [open, setOpen] = React.useState(isOpen);
   const [scroll, setScroll] = React.useState<string>('paper');
 
 
@@ -33,6 +54,8 @@ const [open, setOpen] = React.useState(isOpen);
   return (
     <div>
       <Dialog
+        fullWidth={true}
+        maxWidth={'lg'}
         open={open}
         onClose={() => handleOpen(!open)}
         scroll={"paper" }
@@ -40,13 +63,15 @@ const [open, setOpen] = React.useState(isOpen);
         aria-describedby="scroll-dialog-description"
       >
         <DialogTitle id="scroll-dialog-title">RAW XML</DialogTitle>
-        <DialogContent dividers={scroll === 'paper'}>
+        <DialogContent dividers={scroll == 'paper'}>
           <DialogContentText
             id="scroll-dialog-description"
             ref={descriptionElementRef}
             tabIndex={-1}
           >
-            {content}
+            <Highlight language='xml'>
+                   {content}
+               </Highlight>
           </DialogContentText>
         </DialogContent>
         <DialogActions>
