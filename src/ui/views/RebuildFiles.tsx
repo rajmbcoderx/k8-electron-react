@@ -1,13 +1,6 @@
 import  React, {useState}       from 'react';
 import { makeStyles }           from '@material-ui/core/styles';
-import Footer                   from '../components/Footer';
-import Dropzone                 from "react-dropzone";
-import FileCopyIcon             from '@material-ui/icons/FileCopy';
-import DropIcon                 from '../assets/images/dropIcon.png'
-import SideDrawer               from '../components/SideDrawer';
-import * as FileUploadUtils     from '../components/FileUploadUtils'
-import Loader                   from '../components/Loader';
-import * as Utils               from '../utils/utils'
+
 import Table                    from '@material-ui/core/Table';
 import TableBody                from '@material-ui/core/TableBody';
 import TableCell                from '@material-ui/core/TableCell';
@@ -16,6 +9,15 @@ import TableHead                from '@material-ui/core/TableHead';
 import TableRow                 from '@material-ui/core/TableRow';
 import DeleteIcon               from '@material-ui/icons/Delete';
 import FolderIcon               from '@material-ui/icons/Folder';
+import Footer                   from '../components/Footer';
+import Dropzone                 from "react-dropzone";
+import FileCopyIcon             from '@material-ui/icons/FileCopy';
+import DropIcon                 from '../assets/images/dropIcon.png'
+import SideDrawer               from '../components/SideDrawer';
+import * as FileUploadUtils     from '../components/FileUploadUtils'
+import Loader                   from '../components/Loader';
+import * as Utils               from '../utils/utils'
+import RawXml                   from '../components/RawXml';
 
 var http = require('http');
 var fs   = require('fs');
@@ -206,6 +208,10 @@ function RebuildFiles(){
     const [counter, setCounter] = useState(0);
     const [name, setName] = useState("default");
     const [loader, setShowLoader] = useState(false);  
+    const [id, setId] = useState("");  
+    const [open, setOpen] = useState(false);  
+    const [xml, setXml] = useState("");  
+
 
     interface RebuildResult {
         id: string,
@@ -214,6 +220,7 @@ function RebuildFiles(){
         name?: string;
         msg?: string;
         isError?: boolean;
+        xmlResult: string;
       }
     const downloadResult =(result: any)=>{
         console.log("download" + result.url + " name" + result.filename);
@@ -223,7 +230,8 @@ function RebuildFiles(){
             name: result.filename,
             sourceFileUrl: result.source,
             isError: result.isError,
-            msg: result.msg
+            msg: result.msg,
+            xmlResult:result.xmlResult
 
           }]);
           setCounter(state=>state-1);
@@ -237,25 +245,42 @@ function RebuildFiles(){
         
     }
 
-    const analysisResult=(result: any)=>{
-        console.log("download" + result.url + " name" + result.filename);
-        setRebuildFileNames(rebuildFileNames =>[...rebuildFileNames,  {
-            id:result.id,
-            url: result.url,
-            name: result.filename,
-            sourceFileUrl: result.source,
-            isError: result.isError,
-            msg: result.msg
+    const analysisResult=(error: boolean, id: string, xmlResult: string, result: any )=>{
+        //console.log("analysisResult: error" + error + " name" + xmlResult);
+        if(!error){
+            let newArr: RebuildResult[] | undefined;
+            let foundIndex: number;
 
-          }]);
-          setCounter(state=>state-1);
-          console.log("__dirname:" + __dirname)
-          if(!result.isError){
-            fs.writeFile('./tmp/'+result.filename, result.imageBuffer, {encoding: 'base64'}, function(err: any) { if (err) {
-                console.log('err', err);
-          }
-          console.log('success');});
+            newArr = [...rebuildFileNames]; // copying the old datas array
+            foundIndex = rebuildFileNames.findIndex((rebuildFile) => rebuildFile.id === id);
+
+            let newRebuildObject: RebuildResult| undefined;
+            newRebuildObject = rebuildFileNames.find((rebuildFile) => rebuildFile.id === id);
+            if(newRebuildObject ) {
+                newRebuildObject.xmlResult = xmlResult;
+                newArr[foundIndex] = newRebuildObject;
+                setRebuildFileNames(newArr);
+            }
+            //console.log(JSON.stringify(newRebuildObject));
+
         }
+        // setRebuildFileNames(rebuildFileNames =>[...rebuildFileNames,  {
+        //     id:result.id,
+        //     url: result.url,
+        //     name: result.filename,
+        //     sourceFileUrl: result.source,
+        //     isError: result.isError,
+        //     msg: result.msg
+
+        //   }]);
+        //   setCounter(state=>state-1);
+        //   console.log("__dirname:" + __dirname)
+        //   if(!result.isError){
+        //     fs.writeFile('./tmp/'+result.filename, result.imageBuffer, {encoding: 'base64'}, function(err: any) { if (err) {
+        //         console.log('err', err);
+        //   }
+        //   console.log('success');});
+        // }
         
     }
     
@@ -285,14 +310,48 @@ React.useEffect(() => {
                 setFileNames((fileNames: any) =>[...fileNames, file.name]);
                 var url = window.webkitURL.createObjectURL(file);
                 console.log("URL:" + url);
-                FileUploadUtils.makeRequest(data, url, Utils.guid(), downloadResult, analysisResult);
+                let guid: string;
+                guid =  Utils.guid();
+                console.log("make request:" + guid)
+                FileUploadUtils.makeRequest(data, url, guid, downloadResult, analysisResult);
                 setShowLoader(true);
             })
         })
-    }   
+    }  
+    
+    React.useEffect(() => {
+        let rebuildFile: RebuildResult| undefined;
+        rebuildFile = rebuildFileNames.find((rebuildFile) => rebuildFile.id ==id);
+        if(rebuildFile){
+            console.log("rebuildFile.xmlResult" + rebuildFile.xmlResult)
+            setXml(rebuildFile.xmlResult);
+
+        }
+        
+
+      }, [id, xml, open]);
+
+    const viewXML =(id: string)=>{
+        console.log(id)
+        setId(id);
+        setOpen(!open);
+        let rebuildFile: RebuildResult| undefined;
+        rebuildFile = rebuildFileNames.find((rebuildFile) => rebuildFile.id ==id);
+        if(rebuildFile)
+         console.log("rebuildFile.xmlResult" + rebuildFile.xmlResult)
+        // return (
+        //     <RawXml content={rebuildFile && rebuildFile.xmlResult} />
+        // );
+    }
   
+    const openXml =(open:boolean)=>{
+        console.log("openXml" + open)
+       // console.log("openXml" + e)
+        setOpen(open);
+    }
     return(
-        <div>                      
+        <div>   
+            {open && <RawXml content={xml} isOpen={open} handleOpen={openXml}/>   }                
             <div className={classes.root}> 
                 <SideDrawer showBack={false}/>
                 <main className={classes.content}>
@@ -346,9 +405,9 @@ React.useEffect(() => {
                                     {rebuildFileNames.map((row) => (
                                         <TableRow key={row.name}>
                                         <TableCell align="left">{row.isError == true?"Failed":"Success"}</TableCell>
-                                        <TableCell align="left"><a id="download_link" href={row.sourceFileUrl} download={row.name} className={classes.downloadLink}><FileCopyIcon className={classes.fileIcon}/> {row.name}</a></TableCell>
+                                        <TableCell align="left"><a id="download_link" href={row.sourceFileUrl} download={row.name} className={classes.downloadLink}><FileCopyIcon className={classes.fileIcon}/> {row.id}</a></TableCell>
                                         <TableCell align="left"><a id="download_link" href={row.url} download={row.name} className={classes.downloadLink}><FileCopyIcon className={classes.fileIcon}/> {row.name}</a></TableCell>
-                                        <TableCell align="left"><button className={classes.viewBtn}>{row.msg}</button></TableCell>
+                                        <TableCell align="left"><button  onClick={() => viewXML(row.id)} className={classes.viewBtn}>{row.id}</button></TableCell>
                                         <TableCell align="left">{new Date().toLocaleDateString()}</TableCell>
                                         </TableRow>
                                     ))}

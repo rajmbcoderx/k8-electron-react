@@ -14,12 +14,13 @@ const getPayload = (data: any) => {
      return json;
 }
 
-const getAnslysisPayload = (data: any) => {
+const getAnalysisPayload = (data: any) => {
     let buffer = Buffer.from(data.content, 'base64');
     let size_of_file = buffer.length / 1000000;
     console.log("File Size (MB) : " + size_of_file);
     var json = {
-            Base64 : data.content
+            Base64 : data.content,
+            fileSize : size_of_file,
         };
      return json;
 }
@@ -32,6 +33,7 @@ const getLocalUpload = (data: any) => {
 
 
 export const makeRequest = (data: any, sourceFileUrl: string, requestId: string, resultCallback: Function, analysisResult: Function) => {
+   console.log("makeRequest[IN]" + requestId)
     let payload: string | any;
     let url : string;
     url = Utils.REBUILD_ENGINE_URL;
@@ -54,7 +56,8 @@ export const makeRequest = (data: any, sourceFileUrl: string, requestId: string,
             if(response.status === 200){
                 //this.setState({rebuild_file: response.data})
                // alert("Successfully Rebuild");
-                writeDecodedBase64File(response.data, data, sourceFileUrl, resultCallback)
+                //writeDecodedBase64File(response.data, data, sourceFileUrl, requestId, resultCallback)
+                getAnalysisResult(false, response.data, data, sourceFileUrl, requestId, resultCallback);
             }
             //this.setState({status:response.status, message:"Success"})
             //resultCallback
@@ -63,7 +66,7 @@ export const makeRequest = (data: any, sourceFileUrl: string, requestId: string,
             //Loader.hideLoader();
             console.log(JSON.stringify(err));
             alert(err.message);
-            resultCallback({'source':sourceFileUrl, 'url':'TBD', 'filename':data.filename, isError:true,  msg:err.message})
+            resultCallback({'source':sourceFileUrl, 'url':'TBD', 'filename':data.filename, isError:true,  msg:err.message, id:requestId})
             //this.setState({status:-1, message: err.message});
         })
     }
@@ -95,7 +98,9 @@ export const makeRequest = (data: any, sourceFileUrl: string, requestId: string,
                         console.log('Retrieved file:' + response.data)
                         //this.setState({rebuild_file: response.data})
                         //this.writeDecodedBase64File(Buffer.from(response.data, 'base64'))
-                        writeBinaryFile(response.data, data, sourceFileUrl, resultCallback)
+                        //writeBinaryFile(response.data, data, sourceFileUrl, requestId, resultCallback)
+                        getAnalysisResult(true, response.data, data, sourceFileUrl, requestId, resultCallback);
+                        
                         //alert("Successfully converted");
                         //Loader.hideLoader();
                     });
@@ -107,7 +112,7 @@ export const makeRequest = (data: any, sourceFileUrl: string, requestId: string,
             //Loader.hideLoader();
             console.log(JSON.stringify(err));
             alert(err.message);
-            resultCallback({'source':sourceFileUrl, 'url':'TBD', 'filename':data.filename, isError:true,  msg:err.message })
+            resultCallback({'source':sourceFileUrl, 'url':'TBD', 'filename':data.filename, isError:true,  msg:err.message, id:requestId})
             //this.setState({status:-1, message: err.message});
         })
         //this.setState({status:response.status, message:"Success"})
@@ -117,24 +122,28 @@ export const makeRequest = (data: any, sourceFileUrl: string, requestId: string,
             //Loader.hideLoader();
             console.log(JSON.stringify(err));
             alert(err.message);
-            resultCallback({'source':sourceFileUrl, 'url':'TBD', 'filename':data.filename, isError:true, msg:err.message })
+            resultCallback({'source':sourceFileUrl, 'url':'TBD', 'filename':data.filename, isError:true, msg:err.message, id:requestId})
             //this.setState({status:-1, message: err.message});
         })
     }
     else{
         alert('File too big. 4 bytes to 30 MB file size bracket');
-        resultCallback({'source':sourceFileUrl, 'url':'TBD', 'filename':data.filename, isError:true, msg:'File too big. 4 bytes to 30 MB file size bracket' })
+        resultCallback({'source':sourceFileUrl, 'url':'TBD', 'filename':data.filename, isError:true, msg:'File too big. 4 bytes to 30 MB file size bracket', id:requestId})
 
     }
+    console.log("makeRequest[OUT]" + requestId)
 };
 
-export const getAnalysisResult=(data: any, analysisResultCallback: Function)=>{
+//isBinary, response.data, data, sourceFileUrl, requestId, resultCallback, analysisResult
+
+export const getAnalysisResult=(isBinaryFile: boolean, base64OrBinary: any, data: any, sourceFile: string, requestId: string, resultCallback: Function)=>{
+    console.log("getAnalysisResult[IN]" + requestId)
 
     let payload: string | any;
     let url : string;
     url = Utils.REBUILD_ANALYSIS_URL;
 
-    payload = getAnslysisPayload(data)
+    payload = getAnalysisPayload(data)
     var fileSize = payload.fileSize;
     // Files smaller than 6MB - Normal
     payload = JSON.stringify(payload)
@@ -152,7 +161,13 @@ export const getAnalysisResult=(data: any, analysisResultCallback: Function)=>{
             if(response.status === 200){
                 //this.setState({rebuild_file: response.data})
                // alert("Successfully Rebuild");
-               analysisResultCallback({isError:true, response.data, data,})
+               //analysisResultCallback(false, requestId, response.data, data)
+               if(isBinaryFile){
+                    writeBinaryFile(base64OrBinary, response.data, data, sourceFile, requestId, resultCallback)
+               }else{
+                    writeDecodedBase64File(base64OrBinary, response.data, data, sourceFile, requestId, resultCallback)
+               }
+               
             }
             //this.setState({status:response.status, message:"Success"})
             //resultCallback
@@ -161,7 +176,7 @@ export const getAnalysisResult=(data: any, analysisResultCallback: Function)=>{
             //Loader.hideLoader();
             console.log(JSON.stringify(err));
             alert(err.message);
-            analysisResultCallback({isError:true, response:err.message, data})
+            resultCallback({'source':sourceFile, 'url':'TBD', 'filename':data.filename, isError:true, msg:err.message, id:requestId})
             //this.setState({status:-1, message: err.message});
         })
     }
@@ -193,7 +208,12 @@ export const getAnalysisResult=(data: any, analysisResultCallback: Function)=>{
                         console.log('Retrieved file:' + response.data)
                         //this.setState({rebuild_file: response.data})
                         //this.writeDecodedBase64File(Buffer.from(response.data, 'base64'))
-                        writeBinaryFile(response.data, data, sourceFileUrl, resultCallback)
+                        //writeBinaryFile(response.data, data, sourceFileUrl, resultCallback)
+                        if(isBinaryFile){
+                            writeBinaryFile(base64OrBinary, response.data, data, sourceFile, requestId, resultCallback)
+                       }else{
+                            writeDecodedBase64File(base64OrBinary, response.data, data, sourceFile, requestId, resultCallback)
+                       }
                         //alert("Successfully converted");
                         //Loader.hideLoader();
                     });
@@ -205,7 +225,7 @@ export const getAnalysisResult=(data: any, analysisResultCallback: Function)=>{
             //Loader.hideLoader();
             console.log(JSON.stringify(err));
             alert(err.message);
-            analysisResultCallback({'source':sourceFileUrl, 'url':'TBD', 'filename':data.filename, isError:true,  msg:err.message })
+            resultCallback({'source':sourceFile, 'url':'TBD', 'filename':data.filename, isError:true, msg:err.message, id:requestId})
             //this.setState({status:-1, message: err.message});
         })
         //this.setState({status:response.status, message:"Success"})
@@ -215,15 +235,20 @@ export const getAnalysisResult=(data: any, analysisResultCallback: Function)=>{
             //Loader.hideLoader();
             console.log(JSON.stringify(err));
             alert(err.message);
-            analysisResultCallback({'source':sourceFileUrl, 'url':'TBD', 'filename':data.filename, isError:true, msg:err.message })
+            resultCallback({'source':sourceFile, 'url':'TBD', 'filename':data.filename, isError:true, msg:err.message, id:requestId})
+            //analysisResultCallback({'source':sourceFileUrl, 'url':'TBD', 'filename':data.filename, isError:true, msg:err.message })
             //this.setState({status:-1, message: err.message});
         })
     }
     else{
         alert('File too big. 4 bytes to 30 MB file size bracket');
-        analysisResultCallback({'source':sourceFileUrl, 'url':'TBD', 'filename':data.filename, isError:true, msg:'File too big. 4 bytes to 30 MB file size bracket' })
+        //analysisResultCallback(true,  requestId, 'File too big. 4 bytes to 30 MB file size bracket', data);
+        resultCallback({'source':sourceFile, 'url':'TBD', 'filename':data.filename, isError:true, msg:'File too big. 4 bytes to 30 MB file size bracket', id:requestId})
+        //analysisResultCallback({'source':sourceFileUrl, 'url':'TBD', 'filename':data.filename, isError:true, msg:'File too big. 4 bytes to 30 MB file size bracket' })
 
     }
+    console.log("getAnalysisResult[OUT]" + requestId)
+}
 
 function decodeBase64Image(dataString: string) {
     //let matches: string 
@@ -243,7 +268,7 @@ function decodeBase64Image(dataString: string) {
   
     return response;
   }
-const writeDecodedBase64File = (baseBase64String: string, data: any, sourceFileUrl: string, resultCallback: Function) => {
+const writeDecodedBase64File = (baseBase64String: string, xmlReport:string, data: any, sourceFileUrl: string, requestId:string, resultCallback: Function) => {
     var imageBuffer = decodeBase64Image(baseBase64String);
     var bs = atob(baseBase64String);
     var buffer = new ArrayBuffer(bs.length);
@@ -256,13 +281,13 @@ const writeDecodedBase64File = (baseBase64String: string, data: any, sourceFileU
     var file1 = new File([file], 'anish.anish', { type: data.type});
     console.log("Rebuild path" + file1.name)
     console.log("writeDecodedBase64File url" + url)
-    resultCallback({'source':sourceFileUrl, 'url':url, 'filename':data.filename, isError:false, msg:'', imageBuffer:imageBuffer})
+    resultCallback({'source':sourceFileUrl, 'url':url, 'filename':data.filename, isError:false, msg:'', imageBuffer:imageBuffer, xmlResult: xmlReport, id:requestId})
     //document.getElementById('download_link').href = url;
     //document.getElementById('download_link').download = this.state.filename;
     //this.setState({rebuildFileType : file.type, rebuildFileSize : baseBase64String.length})
 }
 
-const writeBinaryFile = (bytes: any, data: any, sourceFileUrl: string, resultCallback: Function) => {
+const writeBinaryFile = (bytes: any,  xmlReport:string, data: any, sourceFileUrl: string, requestId: string, resultCallback: Function) => {
     var bs = bytes;
     var buffer = new ArrayBuffer(bs.length);
     var ba = new Uint8Array(buffer);
@@ -272,7 +297,7 @@ const writeBinaryFile = (bytes: any, data: any, sourceFileUrl: string, resultCal
     var file = new Blob([ba], { type: data.type });
     var url = window.webkitURL.createObjectURL(file);
     console.log("writeBinaryFile: url" + url)
-    resultCallback({'source':sourceFileUrl,  'url':url, 'filename':data.filename, isError: false, msg:'' })
+    resultCallback({'source':sourceFileUrl,  'url':url, 'filename':data.filename, isError: false, msg:'',xmlResult: xmlReport, id:requestId })
     // document.getElementById('download_link').href = url;
     // document.getElementById('download_link').download = this.state.filename;
     // this.setState({rebuildFileType : file.type, rebuildFileSize : bs.length})
@@ -300,4 +325,4 @@ const writeBinaryFile = (bytes: any, data: any, sourceFileUrl: string, resultCal
             return data;
         });
 
-    }
+}
