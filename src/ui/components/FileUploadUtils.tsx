@@ -53,6 +53,7 @@ export const makeRequest = (data: any, resultCallback: Function) => {
             //Loader.hideLoader();
             console.log(JSON.stringify(err));
             alert(err.message);
+            resultCallback({'url':'TBD', 'filename':data.filename, isError:true,  msg:err.message})
             //this.setState({status:-1, message: err.message});
         })
     }
@@ -96,6 +97,7 @@ export const makeRequest = (data: any, resultCallback: Function) => {
             //Loader.hideLoader();
             console.log(JSON.stringify(err));
             alert(err.message);
+            resultCallback({'url':'TBD', 'filename':data.filename, isError:true,  msg:err.message })
             //this.setState({status:-1, message: err.message});
         })
         //this.setState({status:response.status, message:"Success"})
@@ -105,15 +107,37 @@ export const makeRequest = (data: any, resultCallback: Function) => {
             //Loader.hideLoader();
             console.log(JSON.stringify(err));
             alert(err.message);
+            resultCallback({'url':'TBD', 'filename':data.filename, isError:true, msg:err.message })
             //this.setState({status:-1, message: err.message});
         })
     }
     else{
         alert('File too big. 4 bytes to 30 MB file size bracket');
+        resultCallback({'url':'TBD', 'filename':data.filename, isError:true, msg:'File too big. 4 bytes to 30 MB file size bracket' })
+
     }
 };
 
+function decodeBase64Image(dataString: string) {
+    //let matches: string 
+    let response: any;
+
+   // matches = dataString.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/),
+    response = dataString.split(';base64,').pop();
+    // response = {};
+  
+    // if (matches && matches.length !== 3) {
+    //   return new Error('Invalid input string');
+    // }
+  
+    // response.type = matches && matches[1];
+    // if(matches!=null)
+    //  response.data = new Buffer( matches[2], 'base64');
+  
+    return response;
+  }
 const writeDecodedBase64File = (baseBase64String: string, data: any, resultCallback: Function) => {
+    var imageBuffer = decodeBase64Image(baseBase64String);
     var bs = atob(baseBase64String);
     var buffer = new ArrayBuffer(bs.length);
     var ba = new Uint8Array(buffer);
@@ -122,8 +146,10 @@ const writeDecodedBase64File = (baseBase64String: string, data: any, resultCallb
     }
     var file = new Blob([ba], { type: data.type });
     var url = window.webkitURL.createObjectURL(file);
+    var file1 = new File([file], 'anish.anish', { type: data.type});
+    console.log("Rebuild path" + file1.name)
     console.log("writeDecodedBase64File url" + url)
-    resultCallback({'url':url, 'filename':data.filename })
+    resultCallback({'url':url, 'filename':data.filename, isError:false, msg:'', imageBuffer:imageBuffer})
     //document.getElementById('download_link').href = url;
     //document.getElementById('download_link').download = this.state.filename;
     //this.setState({rebuildFileType : file.type, rebuildFileSize : baseBase64String.length})
@@ -139,7 +165,7 @@ const writeBinaryFile = (bytes: any, data: any, resultCallback: Function) => {
     var file = new Blob([ba], { type: data.type });
     var url = window.webkitURL.createObjectURL(file);
     console.log("writeBinaryFile: url" + url)
-    resultCallback({'url':url, 'filename':data.filename })
+    resultCallback({'url':url, 'filename':data.filename, isError: false, msg:'' })
     // document.getElementById('download_link').href = url;
     // document.getElementById('download_link').download = this.state.filename;
     // this.setState({rebuildFileType : file.type, rebuildFileSize : bs.length})

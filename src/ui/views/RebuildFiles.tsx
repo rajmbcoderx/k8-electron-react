@@ -7,11 +7,24 @@ import DropIcon                 from '../assets/images/dropIcon.png'
 import SideDrawer               from '../components/SideDrawer';
 import * as FileUploadUtils     from '../components/FileUploadUtils'
 import Loader                   from '../components/Loader';
+import * as Utils               from '../utils/utils'
+import Table                    from '@material-ui/core/Table';
+import TableBody                from '@material-ui/core/TableBody';
+import TableCell                from '@material-ui/core/TableCell';
+import TableContainer           from '@material-ui/core/TableContainer';
+import TableHead                from '@material-ui/core/TableHead';
+import TableRow                 from '@material-ui/core/TableRow';
+
+var http = require('http');
+var fs   = require('fs');
 
 
 const useStyles = makeStyles((theme) => ({
     root:       {   
         display:                    'flex', 
+    },
+    table: {
+        minWidth: 650,
     },
     fullWidth:{
         maxWidth:                   '100%'
@@ -124,16 +137,32 @@ const useStyles = makeStyles((theme) => ({
  }));
 
 
+ function createData(name:string, calories:number, fat:number, carbs:number, protein:number) {
+    return { name, calories, fat, carbs, protein };
+  }
+  
+  const rows = [
+    createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
+    createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
+    createData('Eclair', 262, 16.0, 24, 6.0),
+    createData('Cupcake', 305, 3.7, 67, 4.3),
+    createData('Gingerbread', 356, 16.0, 49, 3.9),
+  ];
+
 function RebuildFiles(){
     
     const classes = useStyles(); 
     const [fileNames, setFileNames] = useState<Array<string>>([]);
     const [rebuildFileNames, setRebuildFileNames] = useState<Array<RebuildResult>>([]);
-    const [showLoader, setShowLoader] = useState(false);  
+    const [counter, setCounter] = useState(0);
+    const [name, setName] = useState("default");
+    const [loader, setShowLoader] = useState(false);  
 
     interface RebuildResult {
         url: string;
         name?: string;
+        msg?: string;
+        isError?: boolean;
       }
     const downloadResult =(result: any)=>{
         console.log("download" + result.url + " name" + result.filename);
@@ -141,13 +170,38 @@ function RebuildFiles(){
             url: result.url,
             name: result.filename
           }]);
-          setShowLoader(false);
-    //console.log(rebuildFileNames)
+          setCounter(state=>state-1);
+          console.log("__dirname:" + __dirname)
+          fs.writeFile('./tmp/'+result.filename, result.imageBuffer, {encoding: 'base64'}, function(err: any) { if (err) {
+            console.log('err', err);
+        }
+        console.log('success');});
     }
 
+    
+
+
+React.useEffect(() => {
+    var dir = './tmp';
+    if (!fs.existsSync(dir)){
+        fs.mkdirSync(dir);
+    }
+   
+  }, []);
+
+    React.useEffect(() => {
+        console.log("counter: " + counter)
+        if (counter == 0 && loader == true) {
+            setShowLoader(false);
+        }
+      }, [counter]);
+
     const handleDrop = async (acceptedFiles:any) =>{
+        setCounter((state: any)=>state + acceptedFiles.length)
+        setName("Anish");
         acceptedFiles.map(async (file: File) => {
             await FileUploadUtils.getFile(file).then((data: any) => {
+                setFileNames((fileNames: any) =>[...fileNames, file.name]);
                 FileUploadUtils.makeRequest(data, downloadResult);
                 setShowLoader(true);
             })
@@ -182,15 +236,37 @@ function RebuildFiles(){
                                 <li key={fileName}><FileCopyIcon className={classes.fileIcon}/> {fileName}</li>
                             ))}
                         </ul> */}
-                        {showLoader  && <Loader/> }   
+                        {loader  && <Loader/> }   
                         {rebuildFileNames.length>0 && 
                             <div>
                                 <strong>Download Rebuild Files:</strong>
-                                <ul className={classes.fileItems}>
+                                {/* <ul className={classes.fileItems}>
                                     {rebuildFileNames.map((file: any, index:number) => (
                                          <li key={index+1}> <a id="download_link" href={file.url} download={file.name} ><FileCopyIcon className={classes.fileIcon}/> {file.name}</a></li>
                                     ))}
-                                </ul>
+                                </ul> */}
+                                <Table className={classes.table} size="small" aria-label="a dense table">
+                                    <TableHead>
+                                    <TableRow>
+                                        <TableCell>Status</TableCell>
+                                        <TableCell align="right">Orginal</TableCell>
+                                        <TableCell align="right">Rebuild</TableCell>
+                                        <TableCell align="right">XML</TableCell>
+                                        <TableCell align="right">Date</TableCell>
+                                    </TableRow>
+                                    </TableHead>
+                                    <TableBody>
+                                    {rebuildFileNames.map((row) => (
+                                        <TableRow key={row.name}>
+                                        <TableCell align="right">{row.isError == true?"Failed":"Success"}</TableCell>
+                                        <TableCell align="right"><a id="download_link" href={row.url} download={row.name} ><FileCopyIcon className={classes.fileIcon}/> {row.name}</a></TableCell>
+                                        <TableCell align="right"><a id="download_link" href={row.url} download={row.name} ><FileCopyIcon className={classes.fileIcon}/> {row.name}</a></TableCell>
+                                        <TableCell align="right">{row.msg}</TableCell>
+                                        <TableCell align="right">{new Date().toLocaleDateString()}</TableCell>
+                                        </TableRow>
+                                    ))}
+                                    </TableBody>
+                                </Table>
                             </div>
                         }
                     </div>
