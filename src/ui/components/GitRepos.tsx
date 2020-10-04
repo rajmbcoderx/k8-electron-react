@@ -49,7 +49,7 @@ function GitRepos(){
     return(
         <div>
             <Container>            
-                <h2 className={classes.heading}>Here are the Open Source projects we are funding via Upwork</h2>
+                <h2 className={classes.heading}>Here are the k8 proxy projects</h2>
                 <p>Select the repo you want to visit</p>
                 <List className={classes.listContainer}>       
                     <ListItem className={classes.listItem}><ArrowRightIcon></ArrowRightIcon><a  className={classes.urlList} href="https://github.com/k8-proxy/Open-Source/tree/master/upwork/project-k8-glasswall-rebuild">K8 Glasswall Rebuild</a></ListItem>
@@ -64,6 +64,7 @@ function GitRepos(){
                     <ListItem className={classes.listItem}><ArrowRightIcon></ArrowRightIcon><a  className={classes.urlList} href="https://github.com/k8-proxy/k8-slack-bot">k8-slack-bot</a></ListItem>
                     <ListItem className={classes.listItem}><ArrowRightIcon></ArrowRightIcon><a  className={classes.urlList} href="https://github.com/k8-proxy/k8-proxy-desktop">k8-electron-react</a></ListItem>
                     <ListItem className={classes.listItem}><ArrowRightIcon></ArrowRightIcon><a  className={classes.urlList} href="https://github.com/k8-proxy/k8-security">p-k8-security</a></ListItem>
+
                 </List>
                 <div className={classes.viewGraph}>                    
                     <button className={classes.viewGraphBtn}>View Graphs</button>

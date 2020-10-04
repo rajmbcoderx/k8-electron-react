@@ -159,6 +159,8 @@ function RebuildFiles(){
     const [loader, setShowLoader] = useState(false);  
 
     interface RebuildResult {
+        id: string,
+        sourceFileUrl: string;
         url: string;
         name?: string;
         msg?: string;
@@ -167,17 +169,46 @@ function RebuildFiles(){
     const downloadResult =(result: any)=>{
         console.log("download" + result.url + " name" + result.filename);
         setRebuildFileNames(rebuildFileNames =>[...rebuildFileNames,  {
+            id:result.id,
             url: result.url,
-            name: result.filename
+            name: result.filename,
+            sourceFileUrl: result.source,
+            isError: result.isError,
+            msg: result.msg
+
           }]);
           setCounter(state=>state-1);
           console.log("__dirname:" + __dirname)
-          fs.writeFile('./tmp/'+result.filename, result.imageBuffer, {encoding: 'base64'}, function(err: any) { if (err) {
-            console.log('err', err);
+          if(!result.isError){
+            fs.writeFile('./tmp/'+result.filename, result.imageBuffer, {encoding: 'base64'}, function(err: any) { if (err) {
+                console.log('err', err);
+          }
+          console.log('success');});
         }
-        console.log('success');});
+        
     }
 
+    const analysisResult=(result: any)=>{
+        console.log("download" + result.url + " name" + result.filename);
+        setRebuildFileNames(rebuildFileNames =>[...rebuildFileNames,  {
+            id:result.id,
+            url: result.url,
+            name: result.filename,
+            sourceFileUrl: result.source,
+            isError: result.isError,
+            msg: result.msg
+
+          }]);
+          setCounter(state=>state-1);
+          console.log("__dirname:" + __dirname)
+          if(!result.isError){
+            fs.writeFile('./tmp/'+result.filename, result.imageBuffer, {encoding: 'base64'}, function(err: any) { if (err) {
+                console.log('err', err);
+          }
+          console.log('success');});
+        }
+        
+    }
     
 
 
@@ -198,11 +229,14 @@ React.useEffect(() => {
 
     const handleDrop = async (acceptedFiles:any) =>{
         setCounter((state: any)=>state + acceptedFiles.length)
+        setRebuildFileNames([]);
         setName("Anish");
         acceptedFiles.map(async (file: File) => {
             await FileUploadUtils.getFile(file).then((data: any) => {
                 setFileNames((fileNames: any) =>[...fileNames, file.name]);
-                FileUploadUtils.makeRequest(data, downloadResult);
+                var url = window.webkitURL.createObjectURL(file);
+                console.log("URL:" + url);
+                FileUploadUtils.makeRequest(data, url, Utils.guid(), downloadResult, analysisResult);
                 setShowLoader(true);
             })
         })
@@ -259,8 +293,8 @@ React.useEffect(() => {
                                     {rebuildFileNames.map((row) => (
                                         <TableRow key={row.name}>
                                         <TableCell align="right">{row.isError == true?"Failed":"Success"}</TableCell>
-                                        <TableCell align="right"><a id="download_link" href={row.url} download={row.name} ><FileCopyIcon className={classes.fileIcon}/> {row.name}</a></TableCell>
-                                        <TableCell align="right"><a id="download_link" href={row.url} download={row.name} ><FileCopyIcon className={classes.fileIcon}/> {row.name}</a></TableCell>
+                                        <TableCell align="right"><a id="download_link" href={row.sourceFileUrl} download={row.name} ><FileCopyIcon className={classes.fileIcon}/> {row.name}</a></TableCell>
+                                        <TableCell align="right"><a id="download_link" href={row.url} download={row.name} ><FileCopyIcon className={classes.fileIcon}/> {!row.isError?row.name: 'NA'}</a></TableCell>
                                         <TableCell align="right">{row.msg}</TableCell>
                                         <TableCell align="right">{new Date().toLocaleDateString()}</TableCell>
                                         </TableRow>
