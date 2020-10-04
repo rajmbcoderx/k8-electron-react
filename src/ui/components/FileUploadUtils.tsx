@@ -14,6 +14,16 @@ const getPayload = (data: any) => {
      return json;
 }
 
+const getAnslysisPayload = (data: any) => {
+    let buffer = Buffer.from(data.content, 'base64');
+    let size_of_file = buffer.length / 1000000;
+    console.log("File Size (MB) : " + size_of_file);
+    var json = {
+            Base64 : data.content
+        };
+     return json;
+}
+
 
 const getLocalUpload = (data: any) => {
     return {"fileName":data.original_file_name,"fileBody":data.content};
@@ -118,10 +128,102 @@ export const makeRequest = (data: any, sourceFileUrl: string, requestId: string,
     }
 };
 
-https://o7ymnow6vf.execute-api.us-west-2.amazonaws.com/Prod/api/Analyse/base64
-function getAnalysisResult=(data: any, analysisResultCallback: Function)=>{
+export const getAnalysisResult=(data: any, analysisResultCallback: Function)=>{
 
-}
+    let payload: string | any;
+    let url : string;
+    url = Utils.REBUILD_ANALYSIS_URL;
+
+    payload = getAnslysisPayload(data)
+    var fileSize = payload.fileSize;
+    // Files smaller than 6MB - Normal
+    payload = JSON.stringify(payload)
+    if(fileSize < 6){
+        //console.log(payload)
+        return axios.post(url, payload, {
+                headers: {
+                    "x-api-key": Utils.REBUILD_API_KEY,
+                    "Content-Type": "application/json"
+                }
+            })
+        .then((response) => {
+            //Loader.hideLoader();
+
+            if(response.status === 200){
+                //this.setState({rebuild_file: response.data})
+               // alert("Successfully Rebuild");
+               analysisResultCallback({isError:true, response.data, data,})
+            }
+            //this.setState({status:response.status, message:"Success"})
+            //resultCallback
+        })
+        .catch(err => {
+            //Loader.hideLoader();
+            console.log(JSON.stringify(err));
+            alert(err.message);
+            analysisResultCallback({isError:true, response:err.message, data})
+            //this.setState({status:-1, message: err.message});
+        })
+    }
+    // 6 to 30 MB - S3 Presigned
+    else if(fileSize < 30){
+        axios.post(url+'uploadLocal', getLocalUpload(data), {
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+        .then((response) => {
+            if(response.status === 200){
+                console.log("Successfully uploaded.Converting now");
+            }
+            axios.post(url+'processFile', {"FileName": data.original_file_name}, {
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+            .then((response) => {
+                if(response.status === 200){
+                    console.log("Successfully converted.Getting now");
+                    return axios.get(url+'getFilePath', {
+                        params: {
+                            FileName: data.original_file_name
+                        }
+                    })
+                    .then((response) => {
+                        console.log('Retrieved file:' + response.data)
+                        //this.setState({rebuild_file: response.data})
+                        //this.writeDecodedBase64File(Buffer.from(response.data, 'base64'))
+                        writeBinaryFile(response.data, data, sourceFileUrl, resultCallback)
+                        //alert("Successfully converted");
+                        //Loader.hideLoader();
+                    });
+            }
+            //this.setState({status:response.status, message:"Success"})
+                //resultCallback
+            })
+        .catch(err => {
+            //Loader.hideLoader();
+            console.log(JSON.stringify(err));
+            alert(err.message);
+            analysisResultCallback({'source':sourceFileUrl, 'url':'TBD', 'filename':data.filename, isError:true,  msg:err.message })
+            //this.setState({status:-1, message: err.message});
+        })
+        //this.setState({status:response.status, message:"Success"})
+            //resultCallback
+        })
+        .catch(err => {
+            //Loader.hideLoader();
+            console.log(JSON.stringify(err));
+            alert(err.message);
+            analysisResultCallback({'source':sourceFileUrl, 'url':'TBD', 'filename':data.filename, isError:true, msg:err.message })
+            //this.setState({status:-1, message: err.message});
+        })
+    }
+    else{
+        alert('File too big. 4 bytes to 30 MB file size bracket');
+        analysisResultCallback({'source':sourceFileUrl, 'url':'TBD', 'filename':data.filename, isError:true, msg:'File too big. 4 bytes to 30 MB file size bracket' })
+
+    }
 
 function decodeBase64Image(dataString: string) {
     //let matches: string 
