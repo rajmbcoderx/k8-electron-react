@@ -26,3 +26,7 @@ export const sleep = (milliseconds:number) => {
    
     return _p8(false) + _p8(true) + _p8(true) + _p8(false);
 }
+
+export const stipFileExt =(filename: string)=>{
+  return filename.split('.').slice(0, -1).join('.')
+}

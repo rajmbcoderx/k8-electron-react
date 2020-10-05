@@ -282,30 +282,31 @@ const useStyles = makeStyles((theme) => ({
 function RebuildFiles(){
     
     const classes = useStyles(); 
-    const [fileNames, setFileNames] = useState<Array<string>>([]);
-    const [rebuildFileNames, setRebuildFileNames] = useState<Array<RebuildResult>>([]);
-    const [counter, setCounter] = useState(0);
-    const [name, setName] = useState("default");
-    const [loader, setShowLoader] = useState(false);  
-    const [id, setId] = useState("");  
-    const [open, setOpen] = useState(false);  
-    const [xml, setXml] = useState("");  
-    const [page, setPage] = useState(0); 
-    const [rowsPerPage, setRowsPerPage] = useState(10);  
-    const [folderId, setFolderId] = useState("");  
-    const [targetDir, setTargetDir] = useState("");  
+    const [fileNames, setFileNames]                 = useState<Array<string>>([]);
+    const [rebuildFileNames, setRebuildFileNames]   = useState<Array<RebuildResult>>([]);
+    const [counter, setCounter]                     = useState(0);
+    const [loader, setShowLoader]                   = useState(false);  
+    const [id, setId]                               = useState("");  
+    const [open, setOpen]                           = useState(false);  
+    const [xml, setXml]                             = useState("");  
+    const [page, setPage]                           = useState(0); 
+    const [rowsPerPage, setRowsPerPage]             = useState(10);  
+    const [folderId, setFolderId]                   = useState("");  
+    const [targetDir, setTargetDir]                 = useState("");  
 
 
     interface RebuildResult {
-        id: string,
-        sourceFileUrl: string;
-        url: string;
-        name?: string;
-        msg?: string;
-        isError?: boolean;
-        xmlResult: string;
+        id:             string,
+        sourceFileUrl:  string;
+        url:            string;
+        name?:          string;
+        msg?:           string;
+        isError?:       boolean;
+        xmlResult:      string;
       }
+
     const downloadResult =(result: any)=>{
+
         setRebuildFileNames(rebuildFileNames =>[...rebuildFileNames,  {
             id:result.id,
             url: result.url,
@@ -314,36 +315,45 @@ function RebuildFiles(){
             isError: result.isError,
             msg: result.msg,
             xmlResult:result.xmlResult
-
           }]);
           setCounter(state=>state-1);
           if(!result.isError){
-            var dir = './tmp/'+result.targetDir +'/clean/';
-            fs.writeFile(dir+ '_rb_'+result.filename, result.imageBuffer, {encoding: 'base64'}, function(err: any) { if (err) {
-                        console.log('err', err);
-                }
-                console.log('success');});
-            
-                saveOriginalFile(result.source, result.targetDir, result.filename);
+                var dir = './tmp/'+result.targetDir +'/clean/';
+                fs.writeFile(dir+ result.filename, result.imageBuffer, {encoding: 'base64'}, function(err: any) { if (err) {
+                            console.log('err', err);
+                    }
+                  
+                });
+                saveOriginalFile(result.original, result.targetDir, result.filename);
+                saveXMLFile(result.xmlResult, result.targetDir, result.filename);
             }
-          
-        //open_file_exp('./tmp/');
         
     }
 
-    const saveOriginalFile = async (source: string, targetDir: string, filename: string) =>{
+    const saveOriginalFile = async (original: string, targetDir: string, filename: string) =>{
 
-        let blob = await fetch(source).then(r => r.blob());
-        var dir = './tmp/'+targetDir +'/original/';
-        fs.writeFile(dir+ filename, blob, {encoding: 'base64'}, function(err: any) { if (err) {
+        var dir = './tmp/'+targetDir +'/original/'+filename;
+        fs.writeFile(dir, original, {encoding: 'base64'}, function(err: any) { if (err) {
                     console.log('err', err);
             }
-            console.log('success');});
+            
+        });
     }
+
+    const saveXMLFile = async (xmlContent: string, targetDir: string, filename: string) =>{
+
+        var dir = './tmp/'+targetDir +'/xml/';
+        fs.writeFile(dir+ Utils.stipFileExt(filename)+'.xml', xmlContent, function(err: any) {
+             if (err) {
+                    console.log('err', err);
+            }
+           
+        });
+    }
+
     
 
     const analysisResult=(error: boolean, id: string, xmlResult: string, result: any )=>{
-        //console.log("analysisResult: error" + error + " name" + xmlResult);
         if(!error){
             let newArr: RebuildResult[] | undefined;
             let foundIndex: number;
@@ -358,25 +368,27 @@ function RebuildFiles(){
                 newArr[foundIndex] = newRebuildObject;
                 setRebuildFileNames(newArr);
             }
-            //console.log(JSON.stringify(newRebuildObject));
-
+ 
         }
     }
  
-React.useEffect(() => {
-    if(folderId!=''){
-        var dir = './tmp/'+folderId +'/clean/';
-        var malicious = './tmp/'+folderId +'/original/';
-        console.log("folderId: " + dir)
-        if (!fs.existsSync(dir)){
-            fs.promises.mkdir(dir, { recursive: true });
+    React.useEffect(() => {
+        if(folderId!=''){
+            var dir = './tmp/'+folderId +'/clean/';
+            var malicious = './tmp/'+folderId +'/original/';
+            var xml = './tmp/'+folderId +'/xml/';
+            if (!fs.existsSync(dir)){
+                fs.promises.mkdir(dir, { recursive: true });
+            }
+            if (!fs.existsSync(malicious)){
+                fs.promises.mkdir(malicious, { recursive: true });
+            }
+            if (!fs.existsSync(xml)){
+                fs.promises.mkdir(xml, { recursive: true });
+            }
+            setTargetDir(dir);
         }
-        if (!fs.existsSync(malicious)){
-            fs.promises.mkdir(malicious, { recursive: true });
-        }
-        setTargetDir(dir);
-    }
-  }, [folderId]);
+    }, [folderId]);
 
     React.useEffect(() => {
         if (counter == 0 && loader == true) {
@@ -385,7 +397,6 @@ React.useEffect(() => {
       }, [counter]);
 
     const handleDrop = async (acceptedFiles:any) =>{
-
         let outputDirId: string;
 
         setCounter((state: any)=>state + acceptedFiles.length)
@@ -399,6 +410,7 @@ React.useEffect(() => {
                 var url = window.webkitURL.createObjectURL(file);
                 let guid: string;
                 guid =  Utils.guid();
+                Utils.sleep(100);
                 FileUploadUtils.makeRequest(data, url, guid, outputDirId, downloadResult, analysisResult);
                 setShowLoader(true);
             })
@@ -413,22 +425,15 @@ React.useEffect(() => {
           }
          }, [id, xml, open]);
 
+
     const viewXML =(id: string)=>{
         console.log(id)
         setId(id);
         setOpen(!open);
-        let rebuildFile: RebuildResult| undefined;
-        rebuildFile = rebuildFileNames.find((rebuildFile) => rebuildFile.id ==id);
-        if(rebuildFile)
-         console.log("rebuildFile.xmlResult" + rebuildFile.xmlResult)
-        // return (
-        //     <RawXml content={rebuildFile && rebuildFile.xmlResult} />
-        // );
+      
     }
   
     const openXml =(open:boolean)=>{
-        console.log("openXml" + open)
-       // console.log("openXml" + e)
         setOpen(open);
     }
 
@@ -451,9 +456,8 @@ React.useEffect(() => {
             fpath = path.dirname(fpath)
             command = 'xdg-open ' + fpath;
         }
-        console.log(command);
+        //console.log(command);
         child_process.exec(command, function(stdout:any) {
-          //Do something if you really need to
         });
       }
 
