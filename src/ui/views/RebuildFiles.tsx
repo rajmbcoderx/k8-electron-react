@@ -21,10 +21,13 @@ import * as FileUploadUtils     from '../components/FileUploadUtils'
 import Loader                   from '../components/Loader';
 import * as Utils               from '../utils/utils'
 import RawXml                   from '../components/RawXml';
-var child_process                =    require("child_process");
 
-var http = require('http');
-var fs   = require('fs');
+
+
+var child_process   =    require("child_process");
+const path          = require('path');
+var http            = require('http');
+var fs              = require('fs');
 
 
 const useStyles = makeStyles((theme) => ({
@@ -441,7 +444,8 @@ React.useEffect(() => {
             } else {
               command = 'explorer.exe';
             }
-            command += ' /select,' + fpath;
+            fpath = fpath.replace(/\//g, '\\');
+            command += ' /select, ' + fpath;
             break;
           default:
             fpath = path.dirname(fpath)
@@ -533,6 +537,8 @@ React.useEffect(() => {
                                 <button onClick={clearAll} className={rebuildFileNames.length>0?classes.deleteBtn:classes.deleteBtnDisabled}><DeleteIcon className={classes.btnIcon}/> Clear All</button>
                             </div>
                         }
+                        {
+                        rebuildFileNames.length>0 &&
                          <CardActions className={classes.actions}>
                              <TablePagination
                                   onChangePage        ={handleChangePage }
@@ -548,6 +554,7 @@ React.useEffect(() => {
                                                         }}
                               />
                           </CardActions> 
+                          }
                     </div>
                 </main>
             </div>                

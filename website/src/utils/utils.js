@@ -1,8 +1,8 @@
 
 
-export const  MAC_BUILD = "https://github.com/rajmbcoderx/k8-electron-react/releases/download/0.3.0/k8-proxy-desktop.dmg.zip"
-export const  WINDOWS_BUILD = "https://github.com/rajmbcoderx/k8-electron-react/releases/download/0.3.0/k8-proxy-desktop.exe.zip"
-export const  LINUX_BUILD ="https://github.com/rajmbcoderx/k8-electron-react/releases/download/0.3.0/k8-proxy-desktop.snap.zip"
+export const  MAC_BUILD = "https://github.com/rajmbcoderx/k8-electron-react/releases/download/0.4.0/k8-proxy-desktop.dmg.zip"
+export const  WINDOWS_BUILD = "https://github.com/rajmbcoderx/k8-electron-react/releases/download/0.4.0/k8-proxy-desktop.exe.zip"
+export const  LINUX_BUILD ="https://github.com/rajmbcoderx/k8-electron-react/releases/download/0.4.0/k8-proxy-desktop.snap.zip"
 export const  RELEASE_URL = "https://github.com/rajmbcoderx/k8-electron-react/releases/";
 export let getOS = () =>{
 

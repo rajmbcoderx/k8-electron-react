@@ -83,7 +83,7 @@ function Footer(){
                 <a className={classes.navBtn} href={Utils.LICENSE_URL}> View License</a>
             </li>
             <li className={classes.footerNavItem}> 
-                <span className={classes.version}> Version {Utils.WEBSITE_VERSION}</span>
+                <span className={classes.version}> Version {Utils.VERSION}</span>
             </li>   
         </ul>
         <span className={classes.copyrightText}>© Copyright 2020 - Glasswall Solutions Ltd. All Rights Reserved</span>

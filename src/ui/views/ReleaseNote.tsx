@@ -92,63 +92,51 @@ function ReleaseNote(){
             <Grid container>   
                 <a className={classes.webAnchor} href={Utils.WEBSITE_URL} title="k8-proxy-desktop">K8 Proxy Desktop</a>
                 <h3 className={classes.releaseHeading}> <a className={classes.webHeading} href={Utils.RELEASE_URL}> Realease Note</a></h3>
-                 <Grid className={classes.releaseNoteContainer}>                    
+                <Grid className={classes.releaseNoteContainer}>                    
                     <div className={classes.releaseGrid}>
                         <div className={classes.releaseList}>                            
-                            <div className={classes.releaseVersion}>0.0.2</div>
-                            <h4 className={classes.releaseDate}>September 21th 2020 </h4>
+                            <div className={classes.releaseVersion}>{Utils.VERSION}</div>
+                            <h4 className={classes.releaseDate}>October 5th 2020 </h4>
                         </div>
                         <div className={classes.releaseContent}>
                             <span className={classes.releaseStatusFixed}>Fixed</span>
-                            <p className={classes.releaseText}>Website should be linked to the right platform file/s which the users can download #54 </p>
+                            <p className={classes.releaseText}>As a user I should be able to select a folder with files on the Rebuild API and have all the files cleaned #83</p>
                         </div>
                     </div>
                 </Grid>
                 <Grid className={classes.releaseNoteContainer}>                    
                     <div className={classes.releaseGrid}>
                         <div className={classes.releaseList}>                            
-                            <div className={classes.releaseVersion}>0.0.2</div>
-                            <h4 className={classes.releaseDate}>September 22th 2020 </h4>
+                            <div className={classes.releaseVersion}>{Utils.VERSION}</div>
+                            <h4 className={classes.releaseDate}>October 4th 2020 </h4>
                         </div>
                         <div className={classes.releaseContent}>
                             <span className={classes.releaseStatusFixed}>Fixed</span>
-                            <p className={classes.releaseText}>Use-case : As a user I should be able to add new suggestion or bug on the gitlab issue #44 </p>
+                            <p className={classes.releaseText}>To create a tabular report view displaying these columns : Status, Pre-Processed File link, Post-Processed File link and XML report through File analyzed endpoint.</p>
                         </div>
                     </div>
                 </Grid>
                 <Grid className={classes.releaseNoteContainer}>                    
                     <div className={classes.releaseGrid}>
                         <div className={classes.releaseList}>                            
-                            <div className={classes.releaseVersion}>0.0.2</div>
-                            <h4 className={classes.releaseDate}>September 23th 2020 </h4>
+                            <div className={classes.releaseVersion}>{Utils.VERSION}</div>
+                            <h4 className={classes.releaseDate}>October 3rd  2020 </h4>
                         </div>
                         <div className={classes.releaseContent}>
                             <span className={classes.releaseStatusFixed}>Fixed</span>
-                            <p className={classes.releaseText}>Use-case : As a user on home page for list of new features in the current version (Issues notes / Bugs ) #43</p>
+                            <p className={classes.releaseText}>  To create /tmp folder in installation folder path, which list all the files in this format: Hash of file - original.zip + new file + xml + JSON with the metadata</p>
                         </div>
                     </div>
                 </Grid>
                 <Grid className={classes.releaseNoteContainer}>                    
                     <div className={classes.releaseGrid}>
                         <div className={classes.releaseList}>                            
-                            <div className={classes.releaseVersion}>0.0.2</div>
-                            <h4 className={classes.releaseDate}>September 24th 2020 </h4>
+                            <div className={classes.releaseVersion}>{Utils.VERSION}</div>
+                            <h4 className={classes.releaseDate}>October 2nd  2020 </h4>
                         </div>
                         <div className={classes.releaseContent}>
                             <span className={classes.releaseStatusFixed}>Fixed</span>
-                            <p className={classes.releaseText}> As a user I should be able to add new suggestion or bug on the gitlab issue #40</p>
-                        </div>
-                    </div>
-                </Grid>
-                <Grid className={classes.releaseNoteContainer}>                    
-                    <div className={classes.releaseGrid}>
-                        <div className={classes.releaseList}>                            
-                            <div className={classes.releaseVersion}>0.0.2</div>
-                            <h4 className={classes.releaseDate}>September 24th 2020 </h4>
-                        </div>
-                        <div className={classes.releaseContent}>
-                            <span className={classes.releaseStatusFixed}>Fixed</span>
-                            <p className={classes.releaseText}>Update to have all the points on Readme to install #38 </p>
+                            <p className={classes.releaseText}>To remove success pop-up on processing individual file. </p>
                         </div>
                     </div>
                 </Grid>
