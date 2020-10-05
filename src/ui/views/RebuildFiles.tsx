@@ -236,6 +236,8 @@ function RebuildFiles(){
     const [xml, setXml] = useState("");  
     const [page, setPage] = useState(0); 
     const [rowsPerPage, setRowsPerPage] = useState(10);  
+    const [folderId, setFolderId] = useState("");  
+    const [targetDir, setTargetDir] = useState("");  
 
 
     interface RebuildResult {
@@ -261,8 +263,10 @@ function RebuildFiles(){
           }]);
           setCounter(state=>state-1);
           console.log("__dirname:" + __dirname)
+          console.log("folderId2: " + targetDir)
           if(!result.isError){
-            fs.writeFile('./tmp/'+result.filename, result.imageBuffer, {encoding: 'base64'}, function(err: any) { if (err) {
+            var dir = './tmp/'+result.targetDir +'/clean/';
+            fs.writeFile(dir+ result.filename, result.imageBuffer, {encoding: 'base64'}, function(err: any) { if (err) {
                 console.log('err', err);
           }
           console.log('success');});
@@ -313,12 +317,16 @@ function RebuildFiles(){
 
 
 React.useEffect(() => {
-    var dir = './tmp';
-    if (!fs.existsSync(dir)){
-        fs.mkdirSync(dir);
+    console.log("React.useEffect")
+    if(folderId!=''){
+        var dir = './tmp/'+folderId +'/clean/';
+        console.log("folderId: " + dir)
+        if (!fs.existsSync(dir)){
+            fs.promises.mkdir(dir, { recursive: true });
+        }
+        setTargetDir(dir);
     }
-   
-  }, []);
+  }, [folderId]);
 
     React.useEffect(() => {
         console.log("counter: " + counter)
@@ -328,9 +336,14 @@ React.useEffect(() => {
       }, [counter]);
 
     const handleDrop = async (acceptedFiles:any) =>{
+
+        let outputDirId: string;
+
         setCounter((state: any)=>state + acceptedFiles.length)
         setRebuildFileNames([]);
-        setName("Anish");
+        outputDirId = Utils.guid()
+        setFolderId(outputDirId);
+
         acceptedFiles.map(async (file: File) => {
             await FileUploadUtils.getFile(file).then((data: any) => {
                 setFileNames((fileNames: any) =>[...fileNames, file.name]);
@@ -339,7 +352,7 @@ React.useEffect(() => {
                 let guid: string;
                 guid =  Utils.guid();
                 console.log("make request:" + guid)
-                FileUploadUtils.makeRequest(data, url, guid, downloadResult, analysisResult);
+                FileUploadUtils.makeRequest(data, url, guid, outputDirId, downloadResult, analysisResult);
                 setShowLoader(true);
             })
         })
@@ -441,7 +454,7 @@ React.useEffect(() => {
                     <div className={classes.errMsg}> Failed to upload </div>
                     <div className={classes.successMsg}>File uploaded successuly </div>
                     <div className={classes.btnGroup}>
-                        <button onClick={()=>open_file_exp('./tmp')} className={rebuildFileNames.length>0? classes.outFolderBtn:classes.outFolderBtnDissabled}><FolderIcon className={classes.btnIcon}/> Out Folder</button>
+                        <button onClick={()=>open_file_exp(targetDir)} className={rebuildFileNames.length>0? classes.outFolderBtn:classes.outFolderBtnDissabled}><FolderIcon className={classes.btnIcon}/> Browser Output Folder</button>
                         <button onClick={clearAll} className={rebuildFileNames.length>0?classes.deleteBtn:classes.deleteBtnDisabled}><DeleteIcon className={classes.btnIcon}/> Clear All</button>
                     </div>
                     <div>
