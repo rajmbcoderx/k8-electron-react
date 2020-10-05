@@ -2,6 +2,8 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
@@ -23,6 +25,12 @@ const useStyles = makeStyles((theme) => ({
   },
   formControlLabel: {
     marginTop: theme.spacing(1),
+  }, 
+  closeButton: {
+    position: 'absolute',
+    right: theme.spacing(1),
+    top: theme.spacing(1),
+    color: theme.palette.grey[500],
   },
 }));
 
@@ -62,7 +70,11 @@ export default function ScrollDialog({isOpen, content, handleOpen }: xmlContent)
         aria-labelledby="scroll-dialog-title"
         aria-describedby="scroll-dialog-description"
       >
-        <DialogTitle id="scroll-dialog-title">RAW XML</DialogTitle>
+        <DialogTitle id="scroll-dialog-title">RAW XML
+        <IconButton aria-label="close" className={classes.closeButton} onClick={() => handleOpen(!open)}>
+          <CloseIcon />
+        </IconButton>
+        </DialogTitle>
         <DialogContent dividers={scroll == 'paper'}>
           <DialogContentText
             id="scroll-dialog-description"

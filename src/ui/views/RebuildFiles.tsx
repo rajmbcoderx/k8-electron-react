@@ -9,6 +9,9 @@ import TableHead                from '@material-ui/core/TableHead';
 import TableRow                 from '@material-ui/core/TableRow';
 import DeleteIcon               from '@material-ui/icons/Delete';
 import FolderIcon               from '@material-ui/icons/Folder';
+import { CardActions,
+        TablePagination 
+    }                           from '@material-ui/core';
 import Footer                   from '../components/Footer';
 import Dropzone                 from "react-dropzone";
 import FileCopyIcon             from '@material-ui/icons/FileCopy';
@@ -243,7 +246,7 @@ function RebuildFiles(){
           }
           console.log('success');});
         }
-        open_file_exp('./tmp/');
+        //open_file_exp('./tmp/');
         
     }
 
@@ -425,23 +428,36 @@ React.useEffect(() => {
                                         <TableCell align="left">Orginal</TableCell>
                                         <TableCell align="left">Rebuild</TableCell>
                                         <TableCell align="left">XML</TableCell>
-                                        <TableCell align="left">Date</TableCell>
                                     </TableRow>
                                     </TableHead>
                                     <TableBody>
                                     {rebuildFileNames.map((row) => (
                                         <TableRow key={row.name}>
                                         <TableCell align="left">{row.isError == true?"Failed":"Success"}</TableCell>
-                                        <TableCell align="left"><a id="download_link" href={row.sourceFileUrl} download={row.name} className={classes.downloadLink}><FileCopyIcon className={classes.fileIcon}/> {row.id}</a></TableCell>
+                                        <TableCell align="left"><a id="download_link" href={row.sourceFileUrl} download={row.name} className={classes.downloadLink}><FileCopyIcon className={classes.fileIcon}/> {row.name}</a></TableCell>
                                         <TableCell align="left"><a id="download_link" href={row.url} download={row.name} className={classes.downloadLink}><FileCopyIcon className={classes.fileIcon}/> {row.name}</a></TableCell>
-                                        <TableCell align="left"><button  onClick={() => viewXML(row.id)} className={classes.viewBtn}>{row.id}</button></TableCell>
-                                        <TableCell align="left">{new Date().toLocaleDateString()}</TableCell>
+                                        <TableCell align="left"><button  onClick={() => viewXML(row.id)} className={classes.viewBtn}>{'View Report'}</button></TableCell>
                                         </TableRow>
                                     ))}
                                     </TableBody>
                                 </Table>
                             </div>
                         }
+                         {/* <CardActions className={classes.actions}>
+                             <TablePagination
+                                  onChangePage        ={this.handleChangePage                          }
+                                  onChangeRowsPerPage ={this.handleChangeRowsPerPage                   }
+                                  component           ="div"
+                                  count               ={this.props.files.length                   }
+                                  page                ={this.state.page                           }
+                                  rowsPerPage         ={this.state.rowsPerPage                    }
+                                  rowsPerPageOptions  ={[5, 10, 25, { label: 'All', value: -1 }]     }               
+                                  SelectProps         ={{
+                                                          inputProps: { 'aria-label': 'rows per page' },
+                                                          native: true,
+                                                        }}
+                              />
+                          </CardActions>  */}
                     </div>
                 </main>
             </div>                
