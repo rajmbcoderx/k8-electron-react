@@ -50,6 +50,9 @@ const useStyles = makeStyles((theme) => ({
             margin:                 '0 0 20px 0',
         }
     },
+    actions: {
+        justifyContent: 'flex-end'
+    },
    gridItemLeft:{
    },
    dropzone:{
@@ -174,6 +177,14 @@ const useStyles = makeStyles((theme) => ({
          fontSize:                  '13px',
          lineHeight:                '25px'
      },
+     deleteBtnDisabled:{
+        border:                    'none',
+        borderRadius:              '3px',
+        padding:                   '5px 15px',
+        color:                     '#fff',
+        fontSize:                  '13px',
+        lineHeight:                '25px'
+    },
      outFolderBtn:{
         background:                 '#3cb371',
         border:                     'none',
@@ -183,6 +194,14 @@ const useStyles = makeStyles((theme) => ({
         fontSize:                   '13px',
         lineHeight:                 '25px',
         marginRight:                '10px'
+     },
+     outFolderBtnDissabled:{
+        border:                     'none',
+        color:                      '#fff',
+        borderRadius:               '3px',
+        padding:                    '5px 15px',
+        fontSize:                   '13px',
+        lineHeight:                 '25px',
      },
      btnIcon:{
         float:                      'left',
@@ -215,6 +234,8 @@ function RebuildFiles(){
     const [id, setId] = useState("");  
     const [open, setOpen] = useState(false);  
     const [xml, setXml] = useState("");  
+    const [page, setPage] = useState(0); 
+    const [rowsPerPage, setRowsPerPage] = useState(10);  
 
 
     interface RebuildResult {
@@ -379,6 +400,24 @@ React.useEffect(() => {
         });
       }
 
+      const handleChangePage = (event: any, newPage: number) => {
+        setPage(newPage);
+      };
+    
+      const handleChangeRowsPerPage = (event: any) => {
+        setRowsPerPage(parseInt(event.target.value, 10));
+        setPage(0);
+      };
+    
+
+    //   let files = (rowsPerPage > 0
+    //     ? rows && rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+    //     : rows)
+
+    const clearAll =()=>{
+        setRebuildFileNames([])
+    }
+
     return(
         <div>   
             {open && <RawXml content={xml} isOpen={open} handleOpen={openXml}/>   }                
@@ -402,8 +441,8 @@ React.useEffect(() => {
                     <div className={classes.errMsg}> Failed to upload </div>
                     <div className={classes.successMsg}>File uploaded successuly </div>
                     <div className={classes.btnGroup}>
-                        <button className={classes.outFolderBtn}><FolderIcon className={classes.btnIcon}/> Out Folder</button>
-                        <button className={classes.deleteBtn}><DeleteIcon className={classes.btnIcon}/> Delete Table</button>
+                        <button onClick={()=>open_file_exp('./tmp')} className={rebuildFileNames.length>0? classes.outFolderBtn:classes.outFolderBtnDissabled}><FolderIcon className={classes.btnIcon}/> Out Folder</button>
+                        <button onClick={clearAll} className={rebuildFileNames.length>0?classes.deleteBtn:classes.deleteBtnDisabled}><DeleteIcon className={classes.btnIcon}/> Clear All</button>
                     </div>
                     <div>
                         {/* <strong>Uploaded Files:</strong>
@@ -443,21 +482,21 @@ React.useEffect(() => {
                                 </Table>
                             </div>
                         }
-                         {/* <CardActions className={classes.actions}>
+                         <CardActions className={classes.actions}>
                              <TablePagination
-                                  onChangePage        ={this.handleChangePage                          }
-                                  onChangeRowsPerPage ={this.handleChangeRowsPerPage                   }
+                                  onChangePage        ={handleChangePage }
+                                  onChangeRowsPerPage ={handleChangeRowsPerPage}
                                   component           ="div"
-                                  count               ={this.props.files.length                   }
-                                  page                ={this.state.page                           }
-                                  rowsPerPage         ={this.state.rowsPerPage                    }
+                                  count               ={rebuildFileNames.length                   }
+                                  page                ={page                           }
+                                  rowsPerPage         ={rowsPerPage                    }
                                   rowsPerPageOptions  ={[5, 10, 25, { label: 'All', value: -1 }]     }               
                                   SelectProps         ={{
                                                           inputProps: { 'aria-label': 'rows per page' },
                                                           native: true,
                                                         }}
                               />
-                          </CardActions>  */}
+                          </CardActions> 
                     </div>
                 </main>
             </div>                
