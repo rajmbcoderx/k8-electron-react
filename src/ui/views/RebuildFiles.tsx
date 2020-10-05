@@ -286,7 +286,6 @@ function RebuildFiles(){
         xmlResult: string;
       }
     const downloadResult =(result: any)=>{
-        console.log("download" + result.url + " name" + result.filename);
         setRebuildFileNames(rebuildFileNames =>[...rebuildFileNames,  {
             id:result.id,
             url: result.url,
@@ -298,8 +297,6 @@ function RebuildFiles(){
 
           }]);
           setCounter(state=>state-1);
-          console.log("__dirname:" + __dirname)
-          console.log("folderId2: " + targetDir)
           if(!result.isError){
             var dir = './tmp/'+result.targetDir +'/clean/';
             fs.writeFile(dir+ result.filename, result.imageBuffer, {encoding: 'base64'}, function(err: any) { if (err) {
@@ -330,42 +327,26 @@ function RebuildFiles(){
             //console.log(JSON.stringify(newRebuildObject));
 
         }
-        // setRebuildFileNames(rebuildFileNames =>[...rebuildFileNames,  {
-        //     id:result.id,
-        //     url: result.url,
-        //     name: result.filename,
-        //     sourceFileUrl: result.source,
-        //     isError: result.isError,
-        //     msg: result.msg
-
-        //   }]);
-        //   setCounter(state=>state-1);
-        //   console.log("__dirname:" + __dirname)
-        //   if(!result.isError){
-        //     fs.writeFile('./tmp/'+result.filename, result.imageBuffer, {encoding: 'base64'}, function(err: any) { if (err) {
-        //         console.log('err', err);
-        //   }
-        //   console.log('success');});
-        // }
-        
     }
     
 
 
 React.useEffect(() => {
-    console.log("React.useEffect")
     if(folderId!=''){
         var dir = './tmp/'+folderId +'/clean/';
+        var malicious = './tmp/'+folderId +'/malicious/';
         console.log("folderId: " + dir)
         if (!fs.existsSync(dir)){
             fs.promises.mkdir(dir, { recursive: true });
+        }
+        if (!fs.existsSync(malicious)){
+            fs.promises.mkdir(malicious, { recursive: true });
         }
         setTargetDir(dir);
     }
   }, [folderId]);
 
     React.useEffect(() => {
-        console.log("counter: " + counter)
         if (counter == 0 && loader == true) {
             setShowLoader(false);
         }
@@ -384,10 +365,8 @@ React.useEffect(() => {
             await FileUploadUtils.getFile(file).then((data: any) => {
                 setFileNames((fileNames: any) =>[...fileNames, file.name]);
                 var url = window.webkitURL.createObjectURL(file);
-                console.log("URL:" + url);
                 let guid: string;
                 guid =  Utils.guid();
-                console.log("make request:" + guid)
                 FileUploadUtils.makeRequest(data, url, guid, outputDirId, downloadResult, analysisResult);
                 setShowLoader(true);
             })
@@ -398,13 +377,9 @@ React.useEffect(() => {
         let rebuildFile: RebuildResult| undefined;
         rebuildFile = rebuildFileNames.find((rebuildFile) => rebuildFile.id ==id);
         if(rebuildFile){
-            console.log("rebuildFile.xmlResult" + rebuildFile.xmlResult)
             setXml(rebuildFile.xmlResult);
-
-        }
-        
-
-      }, [id, xml, open]);
+          }
+         }, [id, xml, open]);
 
     const viewXML =(id: string)=>{
         console.log(id)
@@ -489,28 +464,14 @@ React.useEffect(() => {
                     </Dropzone>
                     <div className={classes.errMsg}> Failed to upload </div>
                     <div className={classes.successMsg}>File uploaded successuly </div>
-                    {/* <div className={classes.btnGroup}>
-                        <button onClick={()=>open_file_exp('./tmp')} className={rebuildFileNames.length>0? classes.outFolderBtn:classes.outFolderBtnDissabled}><FolderIcon className={classes.btnIcon}/> Out Folder</button>
-                        <button onClick={clearAll} className={rebuildFileNames.length>0?classes.deleteBtn:classes.deleteBtnDisabled}><DeleteIcon className={classes.btnIcon}/> Clear All</button>
-                    </div> */}
                     <div>
-                        {/* <strong>Uploaded Files:</strong>
-                        <ul className={classes.fileItems}>
-                            {fileNames.map(fileName => (
-                                <li key={fileName}><FileCopyIcon className={classes.fileIcon}/> {fileName}</li>
-                            ))}
-                        </ul> */}
+                   
                         {loader  && <Loader/> }   
                         {rebuildFileNames.length>0 && 
                              <div className={classes.tableField}>
-                                <h3>Download Rebuild Files:
-                                <button onClick={()=>open_file_exp(targetDir)} className={rebuildFileNames.length>0? classes.outFolderBtn:classes.outFolderBtnDissabled}><FolderIcon className={classes.btnIcon}/> Out Folder</button>
+                                <h3>Rebuild Files
+                                <button onClick={()=>open_file_exp(targetDir)} className={rebuildFileNames.length>0? classes.outFolderBtn:classes.outFolderBtnDissabled}><FolderIcon className={classes.btnIcon}/> Browse Output Folder</button>
                              </h3>
-                                {/* <ul className={classes.fileItems}>
-                                    {rebuildFileNames.map((file: any, index:number) => (
-                                         <li key={index+1}> <a id="download_link" href={file.url} download={file.name} ><FileCopyIcon className={classes.fileIcon}/> {file.name}</a></li>
-                                    ))}
-                                </ul> */}
                                 <Table className={classes.table} size="small" aria-label="a dense table">
                                     <TableHead>
                                     <TableRow>
