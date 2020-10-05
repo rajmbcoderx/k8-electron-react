@@ -30,9 +30,13 @@ var fs   = require('fs');
 const useStyles = makeStyles((theme) => ({
     root:       {   
         display:                    'flex', 
-    },
+    },    
     table: {
-        minWidth: 650,
+        minWidth:                   650,
+        '& td':{
+            paddingTop:             '10px',
+            paddingBottom:          '10px'
+        }
     },
     fullWidth:{
         maxWidth:                   '100%'
@@ -169,16 +173,22 @@ const useStyles = makeStyles((theme) => ({
         borderRadius:               '3px',
      },
      deleteBtn:{
-        background:                '#1976D2',
-        border:                    'none',
-        borderRadius:              '3px',
-        padding:                   '5px 15px',
-        color:                     '#fff',
-        fontSize:                  '13px',
-        lineHeight:                '25px',
-        position:                  'absolute',
+        background:                 '#1976D2',
+        border:                     'none',
+        borderRadius:               '3px',
+        padding:                    '5px 15px',
+        color:                      '#fff',
+        fontSize:                   '13px',
+        lineHeight:                 '25px',
+        position:                   'absolute',
         left:                       '5px',
-        marginTop:                 '10px',
+        marginTop:                  '10px',
+        cursor:                     'pointer',
+        transition:                 '0.5s',
+        '&:hover':{ 
+            background:             '#2389ee',
+            transition:             '0.5s'
+        }
      },
      deleteBtnDisabled:{
         border:                    'none',
@@ -200,7 +210,13 @@ const useStyles = makeStyles((theme) => ({
         padding:                    '5px 15px',
         fontSize:                   '13px',
         lineHeight:                 '25px',
-        float:                      'right'
+        float:                      'right',
+        cursor:                     'pointer',
+        transition:                 '0.5s',
+        '&:hover':{ 
+            background:             '#3fc87c',
+            transition:             '0.5s'
+        }
      },
      outFolderBtnDissabled:{
         border:                     'none',
@@ -242,8 +258,9 @@ const useStyles = makeStyles((theme) => ({
         }
     },
     texttBold:{
-        fontWeight:                 'bold'
-    }
+        fontWeight:                 'bold',
+        fontSize:                   '15px'
+    },
  }));
 
 
