@@ -474,8 +474,17 @@ React.useEffect(() => {
                                         <TableRow key={row.name}>
                                         <TableCell align="left">{row.isError == true?"Failed":"Success"}</TableCell>
                                         <TableCell align="left"><a id="download_link" href={row.sourceFileUrl} download={row.name} className={classes.downloadLink}><FileCopyIcon className={classes.fileIcon}/> {row.name}</a></TableCell>
-                                        <TableCell align="left"><a id="download_link" href={row.url} download={row.name} className={classes.downloadLink}><FileCopyIcon className={classes.fileIcon}/> {row.name}</a></TableCell>
-                                        <TableCell align="left"><button  onClick={() => viewXML(row.id)} className={classes.viewBtn}>{'View Report'}</button></TableCell>
+                                        {
+                                            !row.isError ?
+                                                <TableCell align="left"><a id="download_link" href={row.url} download={row.name} className={classes.downloadLink}><FileCopyIcon className={classes.fileIcon}/>{row.name}</a></TableCell>
+                                                : <TableCell align="left">{row.msg}</TableCell>
+                                        }
+                                         {
+                                            !row.isError ?
+                                            <TableCell align="left"><button  onClick={() => viewXML(row.id)} className={classes.viewBtn}>{!row.isError?'View Report':''}</button></TableCell>
+                                                : <TableCell align="left"></TableCell>
+                                        }
+                                             
                                         </TableRow>
                                     ))}
                                     </TableBody>

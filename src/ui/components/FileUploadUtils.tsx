@@ -65,7 +65,7 @@ export const makeRequest = (data: any, sourceFileUrl: string, requestId: string,
         .catch(err => {
             //Loader.hideLoader();
             console.log(JSON.stringify(err));
-            alert(err.message);
+            //alert(err.message);
             resultCallback({'source':sourceFileUrl, 'url':'TBD', 'filename':data.filename, isError:true,  msg:err.message, id:requestId})
             //this.setState({status:-1, message: err.message});
         })
@@ -111,7 +111,7 @@ export const makeRequest = (data: any, sourceFileUrl: string, requestId: string,
         .catch(err => {
             //Loader.hideLoader();
             console.log(JSON.stringify(err));
-            alert(err.message);
+            //alert(err.message);
             resultCallback({'source':sourceFileUrl, 'url':'TBD', 'filename':data.filename, isError:true,  msg:err.message, id:requestId})
             //this.setState({status:-1, message: err.message});
         })
@@ -121,13 +121,13 @@ export const makeRequest = (data: any, sourceFileUrl: string, requestId: string,
         .catch(err => {
             //Loader.hideLoader();
             console.log(JSON.stringify(err));
-            alert(err.message);
+            //alert(err.message);
             resultCallback({'source':sourceFileUrl, 'url':'TBD', 'filename':data.filename, isError:true, msg:err.message, id:requestId})
             //this.setState({status:-1, message: err.message});
         })
     }
     else{
-        alert('File too big. 4 bytes to 30 MB file size bracket');
+        //alert('File too big. 4 bytes to 30 MB file size bracket');
         resultCallback({'source':sourceFileUrl, 'url':'TBD', 'filename':data.filename, isError:true, msg:'File too big. 4 bytes to 30 MB file size bracket', id:requestId})
 
     }
@@ -175,7 +175,7 @@ export const getAnalysisResult=(isBinaryFile: boolean, base64OrBinary: any, data
         .catch(err => {
             //Loader.hideLoader();
             console.log(JSON.stringify(err));
-            alert(err.message);
+            //alert(err.message);
             resultCallback({'source':sourceFile, 'url':'TBD', 'filename':data.filename, isError:true, msg:err.message, id:requestId})
             //this.setState({status:-1, message: err.message});
         })
@@ -224,7 +224,7 @@ export const getAnalysisResult=(isBinaryFile: boolean, base64OrBinary: any, data
         .catch(err => {
             //Loader.hideLoader();
             console.log(JSON.stringify(err));
-            alert(err.message);
+            //alert(err.message);
             resultCallback({'source':sourceFile, 'url':'TBD', 'filename':data.filename, isError:true, msg:err.message, id:requestId})
             //this.setState({status:-1, message: err.message});
         })
@@ -234,14 +234,14 @@ export const getAnalysisResult=(isBinaryFile: boolean, base64OrBinary: any, data
         .catch(err => {
             //Loader.hideLoader();
             console.log(JSON.stringify(err));
-            alert(err.message);
+            //alert(err.message);
             resultCallback({'source':sourceFile, 'url':'TBD', 'filename':data.filename, isError:true, msg:err.message, id:requestId})
             //analysisResultCallback({'source':sourceFileUrl, 'url':'TBD', 'filename':data.filename, isError:true, msg:err.message })
             //this.setState({status:-1, message: err.message});
         })
     }
     else{
-        alert('File too big. 4 bytes to 30 MB file size bracket');
+        //alert('File too big. 4 bytes to 30 MB file size bracket');
         //analysisResultCallback(true,  requestId, 'File too big. 4 bytes to 30 MB file size bracket', data);
         resultCallback({'source':sourceFile, 'url':'TBD', 'filename':data.filename, isError:true, msg:'File too big. 4 bytes to 30 MB file size bracket', id:requestId})
         //analysisResultCallback({'source':sourceFileUrl, 'url':'TBD', 'filename':data.filename, isError:true, msg:'File too big. 4 bytes to 30 MB file size bracket' })
