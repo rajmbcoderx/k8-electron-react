@@ -145,12 +145,12 @@ const useStyles = makeStyles((theme) => ({
          padding:                   theme.spacing(3),
          minHeight:                 '90vh'
      },
-     btnGroup:{
-        margin:                     '10px 0',
-        textAlign:                  'right',
-        width:                      '100%',
-        float:                      'left'
-     },
+    //  btnGroup:{
+    //     margin:                     '10px 0',
+    //     textAlign:                  'right',
+    //     width:                      '100%',
+    //     float:                      'left'
+    //  },
      downloadLink:{
         maxWidth:                   '245px',
         display:                    'inline-block',
@@ -169,13 +169,16 @@ const useStyles = makeStyles((theme) => ({
         borderRadius:               '3px',
      },
      deleteBtn:{
-         background:                '#1976D2',
-         border:                    'none',
-         borderRadius:              '3px',
-         padding:                   '5px 15px',
-         color:                     '#fff',
-         fontSize:                  '13px',
-         lineHeight:                '25px'
+        background:                '#1976D2',
+        border:                    'none',
+        borderRadius:              '3px',
+        padding:                   '5px 15px',
+        color:                     '#fff',
+        fontSize:                  '13px',
+        lineHeight:                '25px',
+        position:                  'absolute',
+        left:                       '5px',
+        marginTop:                 '10px',
      },
      deleteBtnDisabled:{
         border:                    'none',
@@ -183,7 +186,11 @@ const useStyles = makeStyles((theme) => ({
         padding:                   '5px 15px',
         color:                     '#fff',
         fontSize:                  '13px',
-        lineHeight:                '25px'
+        lineHeight:                '25px',
+        background:                '#ddd',
+        position:                  'absolute',
+        left:                      '5px',
+        marginTop:                 '10px',
     },
      outFolderBtn:{
         background:                 '#3cb371',
@@ -193,7 +200,7 @@ const useStyles = makeStyles((theme) => ({
         padding:                    '5px 15px',
         fontSize:                   '13px',
         lineHeight:                 '25px',
-        marginRight:                '10px'
+        float:                      'right'
      },
      outFolderBtnDissabled:{
         border:                     'none',
@@ -202,12 +209,41 @@ const useStyles = makeStyles((theme) => ({
         padding:                    '5px 15px',
         fontSize:                   '13px',
         lineHeight:                 '25px',
+        background:                 '#ddd'
      },
      btnIcon:{
         float:                      'left',
         fontSize:                   '22px',
         marginRight:                '5px'
-     }
+     },
+     status:{
+        '& p':{
+            color:                  '#098c44',
+            fontWeight:             'bold'
+        },
+        '& span':{
+            color:                  '#ff0000',
+            fontWeight:             'bold'
+        }
+     },
+     tableField:{
+         position:                  'relative',
+        '& h3':{
+            background:             '#003962',
+            float:                  'left',
+            width:                  '100%',
+            borderTop:              '1px solid #ccc',
+            borderBottom:           '1px solid #ccc',
+            padding:                '5px 5px 5px 10px',
+            color:                  '#fff',
+            marginBottom:           '5px',
+            lineHeight:             '35px',
+            fontWeight:             'normal'
+        }
+    },
+    texttBold:{
+        fontWeight:                 'bold'
+    }
  }));
 
 
@@ -440,10 +476,10 @@ React.useEffect(() => {
                     </Dropzone>
                     <div className={classes.errMsg}> Failed to upload </div>
                     <div className={classes.successMsg}>File uploaded successuly </div>
-                    <div className={classes.btnGroup}>
+                    {/* <div className={classes.btnGroup}>
                         <button onClick={()=>open_file_exp('./tmp')} className={rebuildFileNames.length>0? classes.outFolderBtn:classes.outFolderBtnDissabled}><FolderIcon className={classes.btnIcon}/> Out Folder</button>
                         <button onClick={clearAll} className={rebuildFileNames.length>0?classes.deleteBtn:classes.deleteBtnDisabled}><DeleteIcon className={classes.btnIcon}/> Clear All</button>
-                    </div>
+                    </div> */}
                     <div>
                         {/* <strong>Uploaded Files:</strong>
                         <ul className={classes.fileItems}>
@@ -453,8 +489,10 @@ React.useEffect(() => {
                         </ul> */}
                         {loader  && <Loader/> }   
                         {rebuildFileNames.length>0 && 
-                            <div>
-                                <strong>Download Rebuild Files:</strong>
+                             <div className={classes.tableField}>
+                                <h3>Download Rebuild Files:
+                                <button onClick={()=>open_file_exp('./tmp')} className={rebuildFileNames.length>0? classes.outFolderBtn:classes.outFolderBtnDissabled}><FolderIcon className={classes.btnIcon}/> Out Folder</button>
+                             </h3>
                                 {/* <ul className={classes.fileItems}>
                                     {rebuildFileNames.map((file: any, index:number) => (
                                          <li key={index+1}> <a id="download_link" href={file.url} download={file.name} ><FileCopyIcon className={classes.fileIcon}/> {file.name}</a></li>
@@ -463,20 +501,20 @@ React.useEffect(() => {
                                 <Table className={classes.table} size="small" aria-label="a dense table">
                                     <TableHead>
                                     <TableRow>
-                                        <TableCell>Status</TableCell>
-                                        <TableCell align="left">Orginal</TableCell>
-                                        <TableCell align="left">Rebuild</TableCell>
-                                        <TableCell align="left">XML</TableCell>
+                                        <TableCell className={classes.texttBold}>Status</TableCell>
+                                        <TableCell align="left" className={classes.texttBold}>Orginal</TableCell>
+                                        <TableCell align="left" className={classes.texttBold}>Rebuild</TableCell>
+                                        <TableCell align="left" className={classes.texttBold}>XML</TableCell>
                                     </TableRow>
                                     </TableHead>
                                     <TableBody>
                                     {rebuildFileNames.map((row) => (
                                         <TableRow key={row.name}>
-                                        <TableCell align="left">{row.isError == true?"Failed":"Success"}</TableCell>
-                                        <TableCell align="left"><a id="download_link" href={row.sourceFileUrl} download={row.name} className={classes.downloadLink}><FileCopyIcon className={classes.fileIcon}/> {row.name}</a></TableCell>
+                                        <TableCell align="left" className={classes.status}>{row.isError == true? <span>Failed</span>:<p>Success</p>}</TableCell>
+                                        <TableCell align="left"><a id="download_link" href={row.sourceFileUrl} download={row.name} className={classes.downloadLink} title={row.name}><FileCopyIcon className={classes.fileIcon}/> {row.name}</a></TableCell>
                                         {
                                             !row.isError ?
-                                                <TableCell align="left"><a id="download_link" href={row.url} download={row.name} className={classes.downloadLink}><FileCopyIcon className={classes.fileIcon}/>{row.name}</a></TableCell>
+                                                <TableCell align="left"><a id="download_link" href={row.url} download={row.name} className={classes.downloadLink} title={row.name}><FileCopyIcon className={classes.fileIcon}/>{row.name}</a></TableCell>
                                                 : <TableCell align="left">{row.msg}</TableCell>
                                         }
                                          {
@@ -489,6 +527,7 @@ React.useEffect(() => {
                                     ))}
                                     </TableBody>
                                 </Table>
+                                <button onClick={clearAll} className={rebuildFileNames.length>0?classes.deleteBtn:classes.deleteBtnDisabled}><DeleteIcon className={classes.btnIcon}/> Clear All</button>
                             </div>
                         }
                          <CardActions className={classes.actions}>
