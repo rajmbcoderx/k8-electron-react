@@ -299,14 +299,28 @@ function RebuildFiles(){
           setCounter(state=>state-1);
           if(!result.isError){
             var dir = './tmp/'+result.targetDir +'/clean/';
-            fs.writeFile(dir+ result.filename, result.imageBuffer, {encoding: 'base64'}, function(err: any) { if (err) {
-                console.log('err', err);
-          }
-          console.log('success');});
-        }
+            fs.writeFile(dir+ '_rb_'+result.filename, result.imageBuffer, {encoding: 'base64'}, function(err: any) { if (err) {
+                        console.log('err', err);
+                }
+                console.log('success');});
+            
+                saveOriginalFile(result.source, result.targetDir, result.filename);
+            }
+          
         //open_file_exp('./tmp/');
         
     }
+
+    const saveOriginalFile = async (source: string, targetDir: string, filename: string) =>{
+
+        let blob = await fetch(source).then(r => r.blob());
+        var dir = './tmp/'+targetDir +'/original/';
+        fs.writeFile(dir+ filename, blob, {encoding: 'base64'}, function(err: any) { if (err) {
+                    console.log('err', err);
+            }
+            console.log('success');});
+    }
+    
 
     const analysisResult=(error: boolean, id: string, xmlResult: string, result: any )=>{
         //console.log("analysisResult: error" + error + " name" + xmlResult);
@@ -328,13 +342,11 @@ function RebuildFiles(){
 
         }
     }
-    
-
-
+ 
 React.useEffect(() => {
     if(folderId!=''){
         var dir = './tmp/'+folderId +'/clean/';
-        var malicious = './tmp/'+folderId +'/malicious/';
+        var malicious = './tmp/'+folderId +'/original/';
         console.log("folderId: " + dir)
         if (!fs.existsSync(dir)){
             fs.promises.mkdir(dir, { recursive: true });
@@ -476,8 +488,8 @@ React.useEffect(() => {
                                     <TableHead>
                                     <TableRow>
                                         <TableCell className={classes.texttBold}>Status</TableCell>
-                                        <TableCell align="left" className={classes.texttBold}>Orginal</TableCell>
-                                        <TableCell align="left" className={classes.texttBold}>Rebuild</TableCell>
+                                        <TableCell align="left" className={classes.texttBold}>Original</TableCell>
+                                        <TableCell align="left" className={classes.texttBold}>Rebuilt</TableCell>
                                         <TableCell align="left" className={classes.texttBold}>XML</TableCell>
                                     </TableRow>
                                     </TableHead>
