@@ -65,7 +65,7 @@ const useStyles = makeStyles((theme) => ({
    dropzone:{
         border:                     '2px dashed #6ab8f0',
         borderRadius:               '35px',
-        minHeight:                  '350px',
+        minHeight:                  '300px',
         display:                    'flex',
         justifyContent:             'center',
         marginBottom:               '20px',
@@ -191,6 +191,9 @@ const useStyles = makeStyles((theme) => ({
         '&:hover':{ 
             background:             '#2389ee',
             transition:             '0.5s'
+        },
+        '&:focus':{ 
+            outline:             '0'
         }
      },
      deleteBtnDisabled:{
@@ -219,6 +222,9 @@ const useStyles = makeStyles((theme) => ({
         '&:hover':{ 
             background:             '#3fc87c',
             transition:             '0.5s'
+        },
+        '&:focus':{ 
+            outline:             '0'
         }
      },
      outFolderBtnDissabled:{
@@ -249,6 +255,7 @@ const useStyles = makeStyles((theme) => ({
          position:                  'relative',
         '& h3':{
             background:             '#003962',
+            borderRadius:           '3px',
             float:                  'left',
             width:                  '100%',
             borderTop:              '1px solid #ccc',
@@ -264,6 +271,72 @@ const useStyles = makeStyles((theme) => ({
         fontWeight:                 'bold',
         fontSize:                   '15px'
     },
+    settings:{
+        borderBottom:               '1px solid #ccc',
+        paddingBottom:              '20px',
+        float:                      'left',
+        width:                      '100%',
+        // '& h2':{
+        //     float:                  'left',
+        //     width:                  '100%',
+        //     color:                  '#003962',
+        //     fontSize:               '17px',
+        //     borderBottom:           '1px solid #ccc'
+        // },
+        '& h4':{
+            fontSize:               '14px',
+            color:                  '#003962',
+            margin:                 '15px 0'
+        }        
+    },
+    btnHeading:{
+        float:                      'left',
+        width:                      '100%',
+    },
+    fileType:{
+        float:                      'left',
+        width:                      '100%'
+    },
+    saveFileBtn:{
+        '& button':{
+            background:              '#084d94',
+            border:                  'none',
+            color:                   '#fff',
+            borderRadius:            '3px',
+            padding:                 '5px 15px',
+            fontSize:                '13px',
+            lineHeight:              '25px',
+            float:                   'left',
+            cursor:                  'pointer',
+            transition:              '0.5s',
+            marginRight:             '10px',
+            '&:hover':{ 
+                background:          '#0f59a5',
+                transition:          '0.5s'
+            },
+            '&:focus':{ 
+                outline:             '0'
+            }
+        },        
+        '& input':{
+            border:                 '1px solid #ccc',
+            padding:                '9px',
+            borderRadius:           '3px',
+            float:                  'left',
+            minWidth:               'calc(100% - 200px)',
+            marginRight:            '12px'
+        }
+    },
+    fileOption:{
+        float:                      'left',
+        '& input':{
+            marginRight:            '15px'
+        },
+        '& span':{            
+            fontSize:               '16px',
+            marginRight:            '10px'
+        }
+    }
  }));
 
 
@@ -505,10 +578,32 @@ function RebuildFiles(){
                    
                         {loader  && <Loader/> }   
                         {rebuildFileNames.length>0 && 
-                             <div className={classes.tableField}>
+                            <div className={classes.tableField}>
+                                <div className={classes.settings}>  
+                                    {/* <h2>Settings</h2> */}
+                                    <div className={classes.btnHeading}>                                                                           
+                                        <h4>Select Directory Path</h4>
+                                        <div className={classes.saveFileBtn}>
+                                            <input type="text" placeholder="Directory Path"/>
+                                            <button> <FolderIcon className={classes.btnIcon}/> Choose out directory</button>
+                                        </div>
+                                    </div>
+                                    <div className={classes.fileType}>
+                                        <h4>Folder Type</h4>
+                                        <div className={classes.fileOption}>
+                                            <input type="radio" value="flat" name="fileoption"/>
+                                            <span>Flat</span>
+                                        </div>
+                                        <div className={classes.fileOption}>
+                                            <input type="radio" value="hierarchy" name="fileoption"/>
+                                            <span>Hierarchy</span>
+                                        </div>
+                                    </div>
+                                 </div>
+
                                 <h3>Rebuild Files
-                                <button onClick={()=>open_file_exp(targetDir)} className={rebuildFileNames.length>0? classes.outFolderBtn:classes.outFolderBtnDissabled}><FolderIcon className={classes.btnIcon}/> Browse Output Folder</button>
-                             </h3>
+                                    <button onClick={()=>open_file_exp(targetDir)} className={rebuildFileNames.length>0? classes.outFolderBtn:classes.outFolderBtnDissabled}><FolderIcon className={classes.btnIcon}/> Browse Output Folder</button>
+                                </h3>
                                 <Table className={classes.table} size="small" aria-label="a dense table">
                                     <TableHead>
                                     <TableRow>
