@@ -24,7 +24,7 @@ import RawXml                   from '../components/RawXml';
 const { dialog }                = require('electron').remote
 console.log(dialog)
 
-var child_process   =    require("child_process");
+var child_process   = require("child_process");
 const path          = require('path');
 var http            = require('http');
 var fs              = require('fs');
@@ -383,6 +383,7 @@ function RebuildFiles(){
 
     const downloadResult =(result: any)=>{
 
+       
         setRebuildFileNames(rebuildFileNames =>[...rebuildFileNames,  {
             id:result.id,
             url: result.url,
@@ -394,21 +395,30 @@ function RebuildFiles(){
           }]);
           setCounter(state=>state-1);
           if(!result.isError){
-                var dir = './tmp/'+result.targetDir +'/clean/';
-                fs.writeFile(dir+ result.filename, result.imageBuffer, {encoding: 'base64'}, function(err: any) { if (err) {
-                            console.log('err', err);
-                    }
-                  
-                });
+                saveRebuildFile(result.imageBuffer, result.targetDir, result.filename);
                 saveOriginalFile(result.original, result.targetDir, result.filename);
                 saveXMLFile(result.xmlResult, result.targetDir, result.filename);
             }
         
     }
 
+    const saveRebuildFile = async(content: string, targetDir: string, filename: string)=>{
+        var dir = './processed/'+targetDir +'/clean/';
+        fs.writeFile(dir+ filename, content, {encoding: 'base64'}, function(err: any) { if (err) {
+                    console.log('err', err);
+            }
+        });
+
+        //rebuild dir
+       fs.writeFile(userTargetDir + "/"+ filename, content, {encoding: 'base64'}, function(err: any) { if (err) {
+                    console.log('err', err);
+            }
+        });
+
+    }
     const saveOriginalFile = async (original: string, targetDir: string, filename: string) =>{
 
-        var dir = './tmp/'+targetDir +'/original/'+filename;
+        var dir = './processed/'+targetDir +'/original/'+filename;
         fs.writeFile(dir, original, {encoding: 'base64'}, function(err: any) { if (err) {
                     console.log('err', err);
             }
@@ -418,7 +428,7 @@ function RebuildFiles(){
 
     const saveXMLFile = async (xmlContent: string, targetDir: string, filename: string) =>{
 
-        var dir = './tmp/'+targetDir +'/xml/';
+        var dir = './processed/'+targetDir +'/xml/';
         fs.writeFile(dir+ Utils.stipFileExt(filename)+'.xml', xmlContent, function(err: any) {
              if (err) {
                     console.log('err', err);
@@ -450,9 +460,9 @@ function RebuildFiles(){
  
     React.useEffect(() => {
         if(folderId!=''){
-            var dir = './tmp/'+folderId +'/clean/';
-            var malicious = './tmp/'+folderId +'/original/';
-            var xml = './tmp/'+folderId +'/xml/';
+            var dir = './processed/'+folderId +'/clean/';
+            var malicious = './processed/'+folderId +'/original/';
+            var xml = './processed/'+folderId +'/xml/';
             if (!fs.existsSync(dir)){
                 fs.promises.mkdir(dir, { recursive: true });
             }
@@ -476,6 +486,19 @@ function RebuildFiles(){
 
     const handleDrop = async (acceptedFiles:any) =>{
         let outputDirId: string;
+                
+        // if(userTargetDir ==""){
+        //     async (): Promise<void> => {
+        //         const { response } = await dialog.showMessageBox({
+        //         message: `Seleect Rebuild directory`,
+        //         detail: `Please select processed files directory`,
+        //         buttons: [ `Ok`],
+        //         defaultId: 1,
+        //         type: `info`,
+        //         })
+        //     }
+        //     return;
+        // }
 
         setCounter((state: any)=>state + acceptedFiles.length)
         setRebuildFileNames([]);
@@ -561,6 +584,7 @@ function RebuildFiles(){
     }
     const failureCallback =(error: any)=>{
         console.log("failureCallback" + error)
+        alert(`An error ocurred selecting the directory :${error.message}`) 
     }
 
     const selectUserTargetDir =()=>{
@@ -613,7 +637,7 @@ function RebuildFiles(){
                                     <div className={classes.btnHeading}>                                                                           
                                         <h4>Select Directory Path</h4>
                                         <div className={classes.saveFileBtn}>
-                                            <input type="text" placeholder="Directory Path" value={userTargetDir}/>
+                                            <input type="text" placeholder="Directory Path" defaultValue={userTargetDir}/>
                                             <button onClick={selectUserTargetDir}> <FolderIcon className={classes.btnIcon}/> Select Target Directory</button>
                                         </div>
                                     </div>

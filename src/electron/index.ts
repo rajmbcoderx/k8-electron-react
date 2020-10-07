@@ -5,6 +5,7 @@ const {
     Certificate,
     Menu,
     Tray }          = require('electron');
+const remote = app.remote;
 const path          = require('path')
 const shell         = require('electron').shell
 const { dialog }    = require('electron')
@@ -139,7 +140,9 @@ function makeWindow(): typeof BrowserWindow {
             nodeIntegration: true,
             webSecurity: false,
             allowDisplayingInsecureContent: true,
-            allowRunningInsecureContent: true
+            allowRunningInsecureContent: true,
+            enableRemoteModule: true
+
         }
     })
    
