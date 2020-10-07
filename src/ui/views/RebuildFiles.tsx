@@ -323,7 +323,7 @@ const useStyles = makeStyles((theme) => ({
             padding:                '9px',
             borderRadius:           '3px',
             float:                  'left',
-            minWidth:               'calc(100% - 200px)',
+            minWidth:               'calc(100% - 220px)',
             marginRight:            '12px'
         }
     },

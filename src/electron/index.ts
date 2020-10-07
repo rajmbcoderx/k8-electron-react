@@ -142,7 +142,6 @@ function makeWindow(): typeof BrowserWindow {
             allowDisplayingInsecureContent: true,
             allowRunningInsecureContent: true,
             enableRemoteModule: true
-
         }
     })
    
