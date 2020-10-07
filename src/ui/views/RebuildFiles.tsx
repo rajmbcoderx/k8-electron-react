@@ -21,8 +21,8 @@ import * as FileUploadUtils     from '../components/FileUploadUtils'
 import Loader                   from '../components/Loader';
 import * as Utils               from '../utils/utils'
 import RawXml                   from '../components/RawXml';
-
-
+const { dialog }                = require('electron').remote
+console.log(dialog)
 
 var child_process   =    require("child_process");
 const path          = require('path');
@@ -366,6 +366,9 @@ function RebuildFiles(){
     const [rowsPerPage, setRowsPerPage]             = useState(10);  
     const [folderId, setFolderId]                   = useState("");  
     const [targetDir, setTargetDir]                 = useState("");  
+    const [userTargetDir, setUserTargetDir]         = useState("");  
+
+
 
 
     interface RebuildResult {
@@ -469,6 +472,8 @@ function RebuildFiles(){
         }
       }, [counter]);
 
+    
+
     const handleDrop = async (acceptedFiles:any) =>{
         let outputDirId: string;
 
@@ -548,6 +553,30 @@ function RebuildFiles(){
     //     ? rows && rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
     //     : rows)
 
+    const successCallback =(result: any)=>{
+        console.log("successCallback" + result)
+        console.log(result.canceled)
+        console.log(result.filePaths)
+        setUserTargetDir(result.filePaths[0])
+    }
+    const failureCallback =(error: any)=>{
+        console.log("failureCallback" + error)
+    }
+
+    const selectUserTargetDir =()=>{
+        let options = {
+            title : "Rebuild Folder", 
+            // See place holder 3 in above image
+            buttonLabel : "Select Rebuild Folder",
+            properties:["openDirectory"]
+        };
+        
+        let promise: any;
+        promise = dialog.showOpenDialog(options)
+        console.log(promise)
+        promise.then(successCallback, failureCallback);
+    }
+
     const clearAll =()=>{
         setRebuildFileNames([])
     }
@@ -584,8 +613,8 @@ function RebuildFiles(){
                                     <div className={classes.btnHeading}>                                                                           
                                         <h4>Select Directory Path</h4>
                                         <div className={classes.saveFileBtn}>
-                                            <input type="text" placeholder="Directory Path"/>
-                                            <button> <FolderIcon className={classes.btnIcon}/> Choose out directory</button>
+                                            <input type="text" placeholder="Directory Path" value={userTargetDir}/>
+                                            <button onClick={selectUserTargetDir}> <FolderIcon className={classes.btnIcon}/> Select Target Directory</button>
                                         </div>
                                     </div>
                                     <div className={classes.fileType}>
