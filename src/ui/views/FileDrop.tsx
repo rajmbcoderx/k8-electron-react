@@ -10,16 +10,8 @@ import SideDrawer               from '../components/SideDrawer';
 
 
 const useStyles = makeStyles((theme) => ({
-     root:       {
-         
-         display:                'flex',
-     },
-     fullWidth:{
-         maxWidth:       '100%'
-     },
-     container:  {
-         display:        'grid',
-         gridGap:        theme.spacing(2),
+     root:  {         
+         display:        'flex',
      },
     gridItemRight:{
         position:        'relative'
@@ -35,9 +27,11 @@ const useStyles = makeStyles((theme) => ({
     },
     content: {
         flexGrow:       1,
-        padding:        theme.spacing(2),
-        minHeight:      '90vh'
     },
+    contentArea:{
+         minHeight:      '81vh',
+         padding:        theme.spacing(3),
+    }
   }));
 
 function FileDrop (){
@@ -48,17 +42,17 @@ function FileDrop (){
     }, []); 
 
     return(
-        <div>
-            <div className={classes.root}>        
-                <SideDrawer showBack={false}/>
-                <main className={classes.content}>
-                    <div className={classes.toolbar} />
+        <div className={classes.root}>        
+            <SideDrawer showBack={false}/>
+            <main className={classes.content}>
+                <div className={classes.toolbar} />
+                <div className={classes.contentArea}>
                     <FileDropSampleFiles/>
                     {showLoader  && <Loader/> }  
                     <WebIFrameView url = {Utils.FILE_DROP_URL} />
-                </main>
-            </div>
-            <Footer/>
+                </div>                    
+                <Footer/>
+            </main>
         </div>
     )
 }

@@ -7,6 +7,7 @@ import SideDrawer               from '../components/SideDrawer';
 const useStyles = makeStyles((theme) => ({
     root:       {
         display:        'flex',
+        flexFlow:       'wrap'
     },
     fullWidth:{
         maxWidth:       '100%'
@@ -29,9 +30,11 @@ const useStyles = makeStyles((theme) => ({
     },
     content: {
         flexGrow:       1,
-        padding:        theme.spacing(3),
-        minHeight:      '90vh'
     },
+    contentArea:{
+         minHeight:      '81vh',
+         padding:        theme.spacing(3),
+    }
  }));
 
 
@@ -42,11 +45,13 @@ function DashboardK8(){
             <div className={classes.root}> 
                 <SideDrawer showBack={false}/>
                 <main className={classes.content}>
-                <div className={classes.toolbar} />
-                    <h2>TBD</h2>
+                    <div className={classes.toolbar} />
+                    <div className={classes.contentArea}>
+                        <h2>TBD</h2>    
+                    </div>
+                    <Footer/>
                 </main>
             </div>
-            <Footer/>
         </div>
         
     )

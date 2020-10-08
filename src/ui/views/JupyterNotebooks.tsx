@@ -8,13 +8,7 @@ import Footer                   from '../components/Footer';
 const useStyles = makeStyles((theme) => ({
     root:       {
         display:        'flex', 
-    },
-    fullWidth:{
-        maxWidth:       '100%'
-    },
-    container:  {
-        display:        'grid',
-        gridGap:        theme.spacing(2),
+        flexFlow:       'wrap'
     },
     gridItemRight:{
         minHeight:      '86vh'
@@ -30,25 +24,27 @@ const useStyles = makeStyles((theme) => ({
    },
    content: {
        flexGrow:       1,
-       padding:        theme.spacing(3),
-       minHeight:      '90vh'
    },
+   contentArea:{
+        minHeight:      '81vh',
+        padding:        theme.spacing(3),
+   }
  }));
 
 
 function JupyterNotebooks(){
     const classes = useStyles(); 
-    return(
-        <div>     
-            <div className={classes.root}>     
-                <SideDrawer showBack={false}/>
-                <main className={classes.content}>
-                    <div className={classes.toolbar} />
-                    <h2>TBD</h2>
-                </main>
-            </div>        
-            <Footer/>
-        </div>
+    return(    
+        <div className={classes.root}>     
+            <SideDrawer showBack={false}/>
+            <main className={classes.content}>
+                <div className={classes.toolbar} />
+                <div className={classes.contentArea}>
+                    <h2>TBD</h2>    
+                </div>
+                <Footer/>
+            </main>   
+        </div>  
         
     )
 }

@@ -22,8 +22,9 @@ const useStyles = makeStyles((theme) => ({
         fontFamily:     'Nunito Sans'
     },
    gridItemRight:{
-       borderLeft:     '1px solid #ccc',
-       padding:         '15px!important'
+       borderLeft:      '1px solid #ccc',
+       padding:         '15px!important',
+       boxShadow:       '-4px 3px 11px #ccc'
    },
    gridItemLeft:{
         textAlign:       'center',
@@ -93,30 +94,30 @@ function WelcomePage(){
     // }
     return(
         <div>                
-        <Container className={classes.fullWidth}>              
-            <Grid container spacing={2}>
-                <Grid item xs={9} className={classes.gridItemLeft}>
-                    <h2 className={classes.welcomeTxt}>Welcome to K8 Proxy Desktop</h2>
-                    <div className={classes.logo}>
-                         <img src={logo} className={classes.logoImg}></img>
-                         <h2 className={classes.heading}>K8 Proxy Desktop</h2>
-                         <h6 className={classes.version}>{Utils.VERSION}</h6>
-                         <p className={classes.abtContent}>k8-proxy-desktop is a desktop based applications that provides a single entry point to all K8 projects. Build with Electron , react, it is aimed at providing a single window integration with GW git resources, file-drop, forensic-workbench, jupyter notebooks, and K8-* services. It is a standalone application for MacOS, Windows and Linux operating systems.</p>
-                    </div>
-                    <div className={classes.btnGroup}>
-                        <Link to="/home" className={classes.getStartBtn}>Get Started</Link>                        
-                    </div>
-                    <footer>
-                        <p className={classes.termsCondition}>Agree to the <a href={Utils.LICENSE_URL} className={classes.colorGreen}>Terms and Conditions.</a></p>
-                    </footer>
+            <Container className={classes.fullWidth}>              
+                <Grid container spacing={2}>
+                    <Grid item xs={9} className={classes.gridItemLeft}>
+                        <h2 className={classes.welcomeTxt}>Welcome to K8 Proxy Desktop</h2>
+                        <div className={classes.logo}>
+                            <img src={logo} className={classes.logoImg}></img>
+                            <h2 className={classes.heading}>K8 Proxy Desktop</h2>
+                            <h6 className={classes.version}>{Utils.VERSION}</h6>
+                            <p className={classes.abtContent}>k8-proxy-desktop is a desktop based applications that provides a single entry point to all K8 projects. Build with Electron , react, it is aimed at providing a single window integration with GW git resources, file-drop, forensic-workbench, jupyter notebooks, and K8-* services. It is a standalone application for MacOS, Windows and Linux operating systems.</p>
+                        </div>
+                        <div className={classes.btnGroup}>
+                            <Link to="/home" className={classes.getStartBtn}>Get Started</Link>                        
+                        </div>
+                        <footer>
+                            <p className={classes.termsCondition}>Agree to the <a href={Utils.LICENSE_URL} className={classes.colorGreen}>Terms and Conditions.</a></p>
+                        </footer>
+                    </Grid>
+                    <Grid item xs={3} className={classes.gridItemRight}>
+                        <ReleaseNote/>
+                    </Grid>
                 </Grid>
-                <Grid item xs={3} className={classes.gridItemRight}>
-                    <ReleaseNote/>
-                </Grid>
-            </Grid>
-        </Container>
-        <Footer/>
-    </div>
+            </Container>
+            <Footer/>
+        </div>
         
     )
 }
