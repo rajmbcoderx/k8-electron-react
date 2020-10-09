@@ -54,6 +54,8 @@
     "@material-ui/icons": "^4.9.1",
     "@types/react-highlight.js": "^1.0.0",
     "axios": "^0.20.0",
+    "common-path": "^1.0.1",
+    "crypto": "^1.0.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-dropzone": "^11.2.0",

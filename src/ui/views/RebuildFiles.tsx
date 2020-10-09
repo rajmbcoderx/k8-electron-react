@@ -22,12 +22,12 @@ import Loader                   from '../components/Loader';
 import * as Utils               from '../utils/utils'
 import RawXml                   from '../components/RawXml';
 const { dialog }                = require('electron').remote
-console.log(dialog)
 
 var child_process   = require("child_process");
 const path          = require('path');
 var http            = require('http');
 var fs              = require('fs');
+const commonPath = require('common-path');
 
 
 const useStyles = makeStyles((theme) => ({
@@ -367,8 +367,10 @@ function RebuildFiles(){
     const [folderId, setFolderId]                   = useState("");  
     const [targetDir, setTargetDir]                 = useState("");  
     const [userTargetDir, setUserTargetDir]         = useState("");  
+    const [masterMetaFile, setMasterMetaFile]       = useState<Array<Metadata>>([]);
+    const [outputDirType, setOutputDirType]         = useState(Utils.OUTPUT_DIR_FLAT)
 
-
+   
 
 
     interface RebuildResult {
@@ -379,57 +381,158 @@ function RebuildFiles(){
         msg?:           string;
         isError?:       boolean;
         xmlResult:      string;
+        path?:           string;
+        cleanFile?:     any;
       }
 
-    const downloadResult =(result: any)=>{
+    
+      interface Metadata {
+        original_file:      string,
+        clean_file?:         string;
+        report?:             string;
+        status?:            string;
+        message?:           string;
+        time?:              string;
+        userTargetFolder?:   string;
+      }
 
-       
+    //   {
+    //     "folder": "ox1231231221321",
+    //     "original": "orifinal/abcd.text",
+    //     "clean": "clean/abcd.text",
+    //     "report": "report/abcd.xml",
+    //     "status": "Success",
+    //     "time": "18/10/2020 12:34",
+    //     "userTargetFolder": "c:/sdfds/sdfds",
+    //     "metadata": "abcd.json"
+    //   },
+
+    // {
+    //     "original": "orifinal/abcd.text",
+    //     "clean": "clean/abcd.text",
+    //     "report": "report/abcd.xml",
+    //     "status": "Success",
+    //     "time": "18/10/2020 12:34"
+    //   }
+    const downloadResult =(result: any)=>{
+      
+        //console.log(JSON.stringify(result))
         setRebuildFileNames(rebuildFileNames =>[...rebuildFileNames,  {
-            id:result.id,
-            url: result.url,
-            name: result.filename,
-            sourceFileUrl: result.source,
-            isError: result.isError,
-            msg: result.msg,
-            xmlResult:result.xmlResult
-          }]);
-          setCounter(state=>state-1);
-          if(!result.isError){
-                saveRebuildFile(result.imageBuffer, result.targetDir, result.filename);
-                saveOriginalFile(result.original, result.targetDir, result.filename);
-                saveXMLFile(result.xmlResult, result.targetDir, result.filename);
+                id:result.id,
+                url: result.url,
+                name: result.filename,
+                sourceFileUrl: result.source,
+                isError: result.isError,
+                msg: result.msg,
+                xmlResult:result.xmlResult,
+                path: result.path,
+                cleanFile: result.cleanFile
+                }]);
+
+        setCounter(state=>state-1);
+
+        let fileHash: string;
+        fileHash = Utils.getFileHash(result.original)
+        //console.log("fileHash" + fileHash)
+          
+        if(!result.isError){
+            var cleanFilePath = Utils._PROCESSED_FOLDER + result.targetDir + "/" + fileHash +  "/" + Utils._CLEAN_FOLDER;
+            saveBase64File(result.cleanFile, cleanFilePath, result.filename );
+
+            var OriginalFilePath = Utils._PROCESSED_FOLDER + result.targetDir + "/" + fileHash +  "/" + Utils._ORIGINAL_FOLDER;
+            saveBase64File(result.original, OriginalFilePath, result.filename);
+
+            var reportFilePath = Utils._PROCESSED_FOLDER + result.targetDir + "/" + fileHash +  "/" + Utils._REPORT_FOLDER;
+            saveTextFile(result.xmlResult,reportFilePath, Utils.stipFileExt(result.filename)+'.xml');
+
+            var metadataFilePath = Utils._PROCESSED_FOLDER + result.targetDir + "/" + fileHash +  "/";
+
+            let content: Metadata;
+            content ={
+
+                original_file:   Utils._ORIGINAL_FOLDER + result.filename,
+            clean_file:   Utils._CLEAN_FOLDER + result.filename,
+            report:  Utils._REPORT_FOLDER + Utils.stipFileExt(result.filename)+'.xml',
+            status:  "Success",
+            time:new Date().toLocaleDateString(),
+            userTargetFolder: userTargetDir,
             }
+            
+            
+            //alert(outputDirType)
+            saveTextFile(JSON.stringify(content), metadataFilePath, 'metadata.json');
+        
+            content.original_file = fileHash + "/" + Utils._ORIGINAL_FOLDER + result.filename
+            content.clean_file = fileHash + "/" + Utils._CLEAN_FOLDER + result.filename
+            content.report = fileHash + "/" + Utils._REPORT_FOLDER + Utils.stipFileExt(result.filename)+'.xml'
+            content.userTargetFolder = userTargetDir;
+            //content.metadata = fileHash + "/metadata.json"  
+                masterMetaFile.push(content);
+
+                //setMasterMetaFile(masterMetaFile =>[...masterMetaFile, content]);
+            //masterMetaFile = [...masterMetaFile,  content]
+           
+            if(userTargetDir !=""){
+                var filepath = userTargetDir+"/";
+                if(outputDirType === Utils.OUTPUT_DIR_FLAT){
+                    saveBase64File(result.cleanFile, filepath, result.filename );
+                }
+                //
+            }
+ 
+            // if(counter ==0){
+            //     saveTextFile(JSON.stringify(content),  Utils._PROCESSED_FOLDER + result.targetDir , 'metadata.json');
+            // }
+        }else{
+
+            var OriginalFilePath = Utils._PROCESSED_FOLDER + result.targetDir + "/" + fileHash +  "/" + Utils._ORIGINAL_FOLDER;
+            console.log("Error case:" +OriginalFilePath + ", result.targetDir:" + result.targetDir)
+            saveBase64File(result.original, OriginalFilePath, result.filename);
+
+            let content: Metadata;
+            content ={
+                original_file:   fileHash + "/" + Utils._ORIGINAL_FOLDER + result.filename,
+                clean_file:  '',
+                report: '',
+                status:  "Failure",
+                time:new Date().toLocaleDateString(),
+                userTargetFolder: userTargetDir,
+                message:result.msg
+            }
+            masterMetaFile.push(content);
+        }
         
     }
 
-    const saveRebuildFile = async(content: string, targetDir: string, filename: string)=>{
-        var dir = './processed/'+targetDir +'/clean/';
-        fs.writeFile(dir+ filename, content, {encoding: 'base64'}, function(err: any) { if (err) {
+    const saveBase64File = async(content: string, filePath: string, filename: string)=>{
+
+        !fs.existsSync(filePath) && fs.mkdirSync(filePath, { recursive: true })
+        fs.writeFile(filePath + filename, content, {encoding: 'base64'}, function(err: any) { if (err) {
                     console.log('err', err);
             }
         });
 
         //rebuild dir
-       fs.writeFile(userTargetDir + "/"+ filename, content, {encoding: 'base64'}, function(err: any) { if (err) {
-                    console.log('err', err);
-            }
-        });
+    //    fs.writeFile(userTargetDir + "/"+ filename, content, {encoding: 'base64'}, function(err: any) { if (err) {
+    //                 console.log('err', err);
+    //         }
+    //     });
 
     }
-    const saveOriginalFile = async (original: string, targetDir: string, filename: string) =>{
+    // const saveOriginalFile = async (content: string, filePath: string, filename: string) =>{
 
-        var dir = './processed/'+targetDir +'/original/'+filename;
-        fs.writeFile(dir, original, {encoding: 'base64'}, function(err: any) { if (err) {
-                    console.log('err', err);
-            }
+    //     !fs.existsSync(filePath) && fs.mkdirSync(filePath, { recursive: true })
+    //     fs.writeFile(filePath+ filename, content, {encoding: 'base64'}, function(err: any) { if (err) {
+    //                 console.log('err', err);
+    //         }
             
-        });
-    }
+    //     });
+    // }
 
-    const saveXMLFile = async (xmlContent: string, targetDir: string, filename: string) =>{
+    const saveTextFile = async (xmlContent: string, filePath: string, filename: string) =>{
 
-        var dir = './processed/'+targetDir +'/xml/';
-        fs.writeFile(dir+ Utils.stipFileExt(filename)+'.xml', xmlContent, function(err: any) {
+        !fs.existsSync(filePath) && fs.mkdirSync(filePath, { recursive: true })
+        fs.writeFile(filePath+ filename, xmlContent, function(err: any) {
              if (err) {
                     console.log('err', err);
             }
@@ -439,54 +542,93 @@ function RebuildFiles(){
 
     
 
-    const analysisResult=(error: boolean, id: string, xmlResult: string, result: any )=>{
-        if(!error){
-            let newArr: RebuildResult[] | undefined;
-            let foundIndex: number;
+    // const analysisResult=(error: boolean, id: string, xmlResult: string, result: any )=>{
+    //     if(!error){
+    //         let newArr: RebuildResult[] | undefined;
+    //         let foundIndex: number;
 
-            newArr = [...rebuildFileNames]; // copying the old datas array
-            foundIndex = rebuildFileNames.findIndex((rebuildFile) => rebuildFile.id === id);
+    //         newArr = [...rebuildFileNames]; // copying the old datas array
+    //         foundIndex = rebuildFileNames.findIndex((rebuildFile) => rebuildFile.id === id);
 
-            let newRebuildObject: RebuildResult| undefined;
-            newRebuildObject = rebuildFileNames.find((rebuildFile) => rebuildFile.id === id);
-            if(newRebuildObject ) {
-                newRebuildObject.xmlResult = xmlResult;
-                newArr[foundIndex] = newRebuildObject;
-                setRebuildFileNames(newArr);
-            }
+    //         let newRebuildObject: RebuildResult| undefined;
+    //         newRebuildObject = rebuildFileNames.find((rebuildFile) => rebuildFile.id === id);
+    //         if(newRebuildObject ) {
+    //             newRebuildObject.xmlResult = xmlResult;
+    //             newArr[foundIndex] = newRebuildObject;
+    //             setRebuildFileNames(newArr);
+    //         }
  
-        }
-    }
+    //     }
+    // }
  
     React.useEffect(() => {
         if(folderId!=''){
-            var dir = './processed/'+folderId +'/clean/';
-            var malicious = './processed/'+folderId +'/original/';
-            var xml = './processed/'+folderId +'/xml/';
-            if (!fs.existsSync(dir)){
-                fs.promises.mkdir(dir, { recursive: true });
+            var rootFolder = Utils._PROCESSED_FOLDER +folderId
+            //  +'/clean/';
+            // var malicious = './processed/'+folderId +'/original/';
+            // var xml = './processed/'+folderId +'/xml/';
+            if (!fs.existsSync(rootFolder)){
+                fs.promises.mkdir(rootFolder, { recursive: true });
             }
-            if (!fs.existsSync(malicious)){
-                fs.promises.mkdir(malicious, { recursive: true });
-            }
-            if (!fs.existsSync(xml)){
-                fs.promises.mkdir(xml, { recursive: true });
-            }
-            setTargetDir(dir);
+            // if (!fs.existsSync(malicious)){
+            //     fs.promises.mkdir(malicious, { recursive: true });
+            // }
+            // if (!fs.existsSync(xml)){
+            //     fs.promises.mkdir(xml, { recursive: true });
+            // }
+            setTargetDir(rootFolder);
         }
     }, [folderId]);
 
+
+    const getRebuildFileContent =(filePath: string)=>{
+        var rebuild = rebuildFileNames.find(rebuild=>rebuild.path === filePath);
+        if(rebuild)
+            return rebuild.cleanFile;
+        else    
+            return null;
+    }
     React.useEffect(() => {
         if (counter == 0 && loader == true) {
             setShowLoader(false);
+            saveTextFile(JSON.stringify(masterMetaFile),  targetDir +"/", 'metadata.json');
+
+            if(userTargetDir !="" && outputDirType === Utils.OUTPUT_DIR_HIERARCY){
+                let PATHS: string[];
+                PATHS=[]
+                rebuildFileNames.map(rebuild=>{
+                    if(rebuild.path)
+                        PATHS.push(rebuild.path);
+                });
+                const common = commonPath(PATHS);
+                common.parsedPaths.map((cPath:any)=>{
+                    // console.log(cPath.subdir)
+                    // console.log(cPath.basePart)
+                    // console.log(cPath.original)
+                
+                    saveBase64File( getRebuildFileContent(cPath.original), userTargetDir + "/" + cPath.subdir + "/", cPath.basePart );
+                    
+            });
+        }
         }
       }, [counter]);
 
     
+    
+    React.useEffect(() => {
+        let rebuildFile: RebuildResult| undefined;
+        rebuildFile = rebuildFileNames.find((rebuildFile) => rebuildFile.id ==id);
+        if(rebuildFile){
+            setXml(rebuildFile.xmlResult);
+          }
+         }, [id, xml, open]);
+
+
+
 
     const handleDrop = async (acceptedFiles:any) =>{
         let outputDirId: string;
-                
+        
         // if(userTargetDir ==""){
         //     async (): Promise<void> => {
         //         const { response } = await dialog.showMessageBox({
@@ -502,9 +644,11 @@ function RebuildFiles(){
 
         setCounter((state: any)=>state + acceptedFiles.length)
         setRebuildFileNames([]);
+        //setMasterMetaFile([]);
         outputDirId = Utils.guid()
         setFolderId(outputDirId);
 
+        //console.log(acceptedFiles[0].path)
         acceptedFiles.map(async (file: File) => {
             await FileUploadUtils.getFile(file).then((data: any) => {
                 setFileNames((fileNames: any) =>[...fileNames, file.name]);
@@ -512,23 +656,15 @@ function RebuildFiles(){
                 let guid: string;
                 guid =  Utils.guid();
                 Utils.sleep(100);
-                FileUploadUtils.makeRequest(data, url, guid, outputDirId, downloadResult, analysisResult);
+                //console.log(Utils.getFileHash(data.content));
+                //console.log(JSON.stringify(file));
+                FileUploadUtils.makeRequest(data, url, guid, outputDirId, downloadResult);
                 setShowLoader(true);
             })
         })
     }  
-    
-    React.useEffect(() => {
-        let rebuildFile: RebuildResult| undefined;
-        rebuildFile = rebuildFileNames.find((rebuildFile) => rebuildFile.id ==id);
-        if(rebuildFile){
-            setXml(rebuildFile.xmlResult);
-          }
-         }, [id, xml, open]);
-
-
     const viewXML =(id: string)=>{
-        console.log(id)
+        //console.log(id)
         setId(id);
         setOpen(!open);
       
@@ -539,6 +675,8 @@ function RebuildFiles(){
     }
 
     function open_file_exp(fpath: string) {
+        //console.log("open_file_exp" + fpath)
+
         var command = '';
         switch (process.platform) {
           case 'darwin':
@@ -577,13 +715,13 @@ function RebuildFiles(){
     //     : rows)
 
     const successCallback =(result: any)=>{
-        console.log("successCallback" + result)
-        console.log(result.canceled)
-        console.log(result.filePaths)
+        //console.log("successCallback" + result)
+        // console.log(result.canceled)
+        // console.log(result.filePaths)
         setUserTargetDir(result.filePaths[0])
     }
     const failureCallback =(error: any)=>{
-        console.log("failureCallback" + error)
+        //console.log("failureCallback" + error)
         alert(`An error ocurred selecting the directory :${error.message}`) 
     }
 
@@ -597,13 +735,19 @@ function RebuildFiles(){
         
         let promise: any;
         promise = dialog.showOpenDialog(options)
-        console.log(promise)
+        //console.log(promise)
         promise.then(successCallback, failureCallback);
     }
 
     const clearAll =()=>{
         setRebuildFileNames([])
+        setMasterMetaFile([]);
     }
+
+    const handleChange= (e:any) =>{
+        setOutputDirType(e.currentTarget.value)
+        //alert(e.currentTarget.value)
+      }
 
     return(
         <div>   
@@ -630,30 +774,39 @@ function RebuildFiles(){
                     <div>
                    
                         {loader  && <Loader/> }   
-                        {rebuildFileNames.length>0 && 
+                        
                             <div className={classes.tableField}>
                                 <div className={classes.settings}>  
                                     {/* <h2>Settings</h2> */}
                                     <div className={classes.btnHeading}>                                                                           
                                         <h4>Select Directory Path</h4>
                                         <div className={classes.saveFileBtn}>
-                                            <input type="text" placeholder="Directory Path" defaultValue={userTargetDir}/>
+                                            <input readOnly = {true} type="text" placeholder="Directory Path" defaultValue={userTargetDir}/>
                                             <button onClick={selectUserTargetDir}> <FolderIcon className={classes.btnIcon}/> Select Target Directory</button>
                                         </div>
                                     </div>
                                     <div className={classes.fileType}>
-                                        <h4>Folder Type</h4>
+                                        <h4>Output Type</h4>
                                         <div className={classes.fileOption}>
-                                            <input type="radio" value="flat" name="fileoption"/>
+                                            <input  type="radio" 
+                                                    checked={outputDirType == Utils.OUTPUT_DIR_FLAT} 
+                                                    onChange={handleChange}
+                                                    value={Utils.OUTPUT_DIR_FLAT} 
+                                                    name="fileoption"/>
                                             <span>Flat</span>
                                         </div>
                                         <div className={classes.fileOption}>
-                                            <input type="radio" value="hierarchy" name="fileoption"/>
+                                            <input  type="radio" 
+                                                    value={Utils.OUTPUT_DIR_HIERARCY}
+                                                    onChange={handleChange}
+                                                    checked={outputDirType == Utils.OUTPUT_DIR_HIERARCY} 
+                                                    name="fileoption"/>
                                             <span>Hierarchy</span>
                                         </div>
                                     </div>
                                  </div>
-
+                                 {rebuildFileNames.length>0 && 
+                                <div> 
                                 <h3>Rebuild Files
                                     <button onClick={()=>open_file_exp(targetDir)} className={rebuildFileNames.length>0? classes.outFolderBtn:classes.outFolderBtnDissabled}><FolderIcon className={classes.btnIcon}/> Browse Output Folder</button>
                                 </h3>
@@ -687,8 +840,10 @@ function RebuildFiles(){
                                     </TableBody>
                                 </Table>
                                 <button onClick={clearAll} className={rebuildFileNames.length>0?classes.deleteBtn:classes.deleteBtnDisabled}><DeleteIcon className={classes.btnIcon}/> Clear All</button>
+                                </div>
+                                }
                             </div>
-                        }
+                       
                         {
                         rebuildFileNames.length>0 &&
                          <CardActions className={classes.actions}>

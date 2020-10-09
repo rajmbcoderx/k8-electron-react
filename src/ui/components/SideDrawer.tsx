@@ -151,36 +151,37 @@ function SideDrawer({ showBack }: headerOptions) {
         setOpen(false);
     };
 
-    const navData = [{
-        navName :   'Git Browser',
-        navIcon :   gitIcon,
-        anchLink:   '/home'       
-    },
-    {
-        navName :   'File-drop',
-        navIcon :   FileDropIcon,
-        anchLink:   '/fileDrop'     
-    },
-    {
-        navName:    'Dashboard Kubernetes pods',
-        navIcon:    desktopApp,
-        anchLink:   '/dashboardK8'    
-    },
-    {
-        navName:    'Slack UI for bots', 
-        navIcon:    Slack,
-        anchLink:   '/slackBot'    
-    },
-    {
-        navName:    'Forensic Workbench', 
-        navIcon:    GWLogo,
-        anchLink:   '/fw'    
-    },
-    {
-        navName:    'Jupyter Notebooks', 
-        navIcon:    jupyter,
-        anchLink:   '/jupyterNotebook'    
-    },
+    const navData = [
+    // {
+    //     navName :   'Git Browser',
+    //     navIcon :   gitIcon,
+    //     anchLink:   '/home'       
+    // },
+    // {
+    //     navName :   'File-drop',
+    //     navIcon :   FileDropIcon,
+    //     anchLink:   '/fileDrop'     
+    // },
+    // {
+    //     navName:    'Dashboard Kubernetes pods',
+    //     navIcon:    desktopApp,
+    //     anchLink:   '/dashboardK8'    
+    // },
+    // {
+    //     navName:    'Slack UI for bots', 
+    //     navIcon:    Slack,
+    //     anchLink:   '/slackBot'    
+    // },
+    // {
+    //     navName:    'Forensic Workbench', 
+    //     navIcon:    GWLogo,
+    //     anchLink:   '/fw'    
+    // },
+    // {
+    //     navName:    'Jupyter Notebooks', 
+    //     navIcon:    jupyter,
+    //     anchLink:   '/jupyterNotebook'    
+    // },
     {
         navName:    'Rebuild Files',
         navIcon:    RebuildIcon,

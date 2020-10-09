@@ -104,7 +104,7 @@ function WelcomePage(){
                          <p className={classes.abtContent}>k8-proxy-desktop is a desktop based applications that provides a single entry point to all K8 projects. Build with Electron , react, it is aimed at providing a single window integration with GW git resources, file-drop, forensic-workbench, jupyter notebooks, and K8-* services. It is a standalone application for MacOS, Windows and Linux operating systems.</p>
                     </div>
                     <div className={classes.btnGroup}>
-                        <Link to="/home" className={classes.getStartBtn}>Get Started</Link>                        
+                        <Link to="/rebuildFiles" className={classes.getStartBtn}>Get Started</Link>                        
                     </div>
                     <footer>
                         <p className={classes.termsCondition}>Agree to the <a href={Utils.LICENSE_URL} className={classes.colorGreen}>Terms and Conditions.</a></p>

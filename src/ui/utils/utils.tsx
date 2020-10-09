@@ -11,6 +11,19 @@ export const REBUILD_API_KEY    = 'dp2Ug1jtEh4xxFHpJBfWn9V7fKB3yVcv60lhwOAG';
 export const VERSION    = '0.4.0'
 
 
+export const _PROCESSED_FOLDER = "./processed/"
+export const _CLEAN_FOLDER = "clean/"
+export const _ORIGINAL_FOLDER = "original/"
+export const _REPORT_FOLDER = "report/"
+
+export const OUTPUT_DIR_FLAT      ="flat";
+export const OUTPUT_DIR_HIERARCY  ="hierarcy";
+
+// var dir = './processed/'+folderId +'/clean/';
+// var malicious = './processed/'+folderId +'/original/';
+// var xml = './processed/'+folderId +'/xml/';
+
+
 
 export const sleep = (milliseconds:number) => {
     return new Promise(resolve => setTimeout(resolve, milliseconds))
@@ -24,9 +37,30 @@ export const sleep = (milliseconds:number) => {
 }
  export const guid=()=> {
    
-    return _p8(false) + _p8(true) + _p8(true) + _p8(false);
+    //return _p8(false) + _p8(true) + _p8(true) + _p8(false);
+    return _p8(false) + _p8(true);
+    
 }
 
 export const stipFileExt =(filename: string)=>{
   return filename.split('.').slice(0, -1).join('.')
+}
+
+export const getFileHash=(content: string)=> {
+  var crypto = require('crypto');
+  // change to 'md5' if you want an MD5 hash
+  var hash = crypto.createHash('sha1');
+
+  // change to 'binary' if you want a binary hash.
+  hash.setEncoding('hex');
+
+  // the text that you want to hash
+  hash.write(content);
+
+  // very important! You cannot read from the stream until you have called end()
+  hash.end();
+
+  // and now you get the resulting hash
+  var sha1sum = hash.read();
+  return sha1sum;
 }
