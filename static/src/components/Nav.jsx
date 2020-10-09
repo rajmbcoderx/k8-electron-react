@@ -7,7 +7,7 @@ export default function Nav() {
     <nav className="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
       <a className="navbar-brand" href="index.html">
         <img src={lensLogo} alt="alternative" />
-        <span> K8 sProxy Desktop Application</span>
+        <span> K8 Proxy Desktop Application</span>
       </a>
 
       <button
