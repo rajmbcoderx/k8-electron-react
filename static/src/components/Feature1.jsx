@@ -6,14 +6,14 @@ export default function Feature1() {
     <div id="features" className="basic-3">
       <div className="container">
         <div className="row">
-          <div className="col-lg-6">
+          <div className="col-lg-7">
             <img
               className ="img-fluid"
               src       ={betterKubernetes}
               alt       ="alternative"
             />
           </div>
-          <div className="col-lg-6">
+          <div className="col-lg-5">
             <div className="text-container">
               <h3>The K8 Proxy File Drop</h3>
               <p>
