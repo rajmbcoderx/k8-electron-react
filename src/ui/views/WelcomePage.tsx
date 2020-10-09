@@ -97,12 +97,12 @@ function WelcomePage(){
             <Container className={classes.fullWidth}>              
                 <Grid container spacing={2}>
                     <Grid item xs={9} className={classes.gridItemLeft}>
-                        <h2 className={classes.welcomeTxt}>Welcome to K8 Proxy Desktop</h2>
+                        <h2 className={classes.welcomeTxt}>Welcome to Glasswall Proxy Desktop</h2>
                         <div className={classes.logo}>
                             <img src={logo} className={classes.logoImg}></img>
-                            <h2 className={classes.heading}>K8 Proxy Desktop</h2>
+                            <h2 className={classes.heading}>Glasswall Proxy Desktop</h2>
                             <h6 className={classes.version}>{Utils.VERSION}</h6>
-                            <p className={classes.abtContent}>k8-proxy-desktop is a desktop based applications that provides a single entry point to all K8 projects. Build with Electron , react, it is aimed at providing a single window integration with GW git resources, file-drop, forensic-workbench, jupyter notebooks, and K8-* services. It is a standalone application for MacOS, Windows and Linux operating systems.</p>
+                            <p className={classes.abtContent}>Glasswall proxy desktop is a desktop based applications that provide multi file drag and drop rebuild workflow.</p>
                         </div>
                         <div className={classes.btnGroup}>
                             <Link to="/rebuildFiles" className={classes.getStartBtn}>Get Started</Link>                        

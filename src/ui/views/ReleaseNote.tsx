@@ -95,11 +95,11 @@ function ReleaseNote(){
                 <div className={classes.releaseGrid}>
                     <div className={classes.releaseList}>                            
                         <div className={classes.releaseVersion}>{Utils.VERSION}</div>
-                        <h4 className={classes.releaseDate}>October 5th 2020 </h4>
+                        <h4 className={classes.releaseDate}>October 8th 2020 </h4>
                     </div>
                     <div className={classes.releaseContent}>
                         <span className={classes.releaseStatusFixed}>Fixed</span>
-                        <p className={classes.releaseText}>As a user I should be able to select a folder with files on the Rebuild API and have all the files cleaned #83</p>
+                        <p className={classes.releaseText}>Rebuild Output (tmp) directory structure need to be modified.</p>
                     </div>
                 </div>
             </Grid>
@@ -107,11 +107,11 @@ function ReleaseNote(){
                 <div className={classes.releaseGrid}>
                     <div className={classes.releaseList}>                            
                         <div className={classes.releaseVersion}>{Utils.VERSION}</div>
-                        <h4 className={classes.releaseDate}>October 4th 2020 </h4>
+                        <h4 className={classes.releaseDate}>October 7th 2020 </h4>
                     </div>
                     <div className={classes.releaseContent}>
                         <span className={classes.releaseStatusFixed}>Fixed</span>
-                        <p className={classes.releaseText}>To create a tabular report view displaying these columns : Status, Pre-Processed File link, Post-Processed File link and XML report through File analyzed endpoint.</p>
+                        <p className={classes.releaseText}>An option to user to select custom location for saving rebuild files.</p>
                     </div>
                 </div>
             </Grid>
@@ -119,11 +119,11 @@ function ReleaseNote(){
                 <div className={classes.releaseGrid}>
                     <div className={classes.releaseList}>                            
                         <div className={classes.releaseVersion}>{Utils.VERSION}</div>
-                        <h4 className={classes.releaseDate}>October 3rd  2020 </h4>
+                        <h4 className={classes.releaseDate}>October 6th  2020 </h4>
                     </div>
                     <div className={classes.releaseContent}>
                         <span className={classes.releaseStatusFixed}>Fixed</span>
-                        <p className={classes.releaseText}>  To create /tmp folder in installation folder path, which list all the files in this format: Hash of file - original.zip + new file + xml + JSON with the metadata</p>
+                        <p className={classes.releaseText}>  Same directory format to be kept for dragged directory post re-build api.</p>
                     </div>
                 </div>
             </Grid>
@@ -131,14 +131,28 @@ function ReleaseNote(){
                 <div className={classes.releaseGrid}>
                     <div className={classes.releaseList}>                            
                         <div className={classes.releaseVersion}>{Utils.VERSION}</div>
-                        <h4 className={classes.releaseDate}>October 2nd  2020 </h4>
+                        <h4 className={classes.releaseDate}>October 5th  2020 </h4>
                     </div>
                     <div className={classes.releaseContent}>
                         <span className={classes.releaseStatusFixed}>Fixed</span>
-                        <p className={classes.releaseText}>To remove success pop-up on processing individual file. </p>
+                        <p className={classes.releaseText}>Check box to be provided so that user can select to keep existing directory format or flat format. </p>
                     </div>
                 </div>
             </Grid>
+            <Grid className={classes.releaseNoteContainer}>                    
+                <div className={classes.releaseGrid}>
+                    <div className={classes.releaseList}>                            
+                        <div className={classes.releaseVersion}>{Utils.VERSION}</div>
+                        <h4 className={classes.releaseDate}>October 4th  2020 </h4>
+                    </div>
+                    <div className={classes.releaseContent}>
+                        <span className={classes.releaseStatusFixed}>Fixed</span>
+                        <p className={classes.releaseText}>Current website to be replicated with file drop feature</p>
+                    </div>
+                </div>
+            </Grid>
+
+   
         </Grid>
         
     )
