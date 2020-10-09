@@ -23,11 +23,10 @@ import * as Utils               from '../utils/utils'
 import RawXml                   from '../components/RawXml';
 const { dialog }                = require('electron').remote
 
-var child_process   = require("child_process");
-const path          = require('path');
-var http            = require('http');
-var fs              = require('fs');
-const commonPath = require('common-path');
+var child_process               = require("child_process");
+const path                      = require('path');
+var fs                          = require('fs');
+const commonPath                = require('common-path');
 
 
 const useStyles = makeStyles((theme) => ({
@@ -525,24 +524,8 @@ function RebuildFiles(){
                     console.log('err', err);
             }
         });
-
-        //rebuild dir
-    //    fs.writeFile(userTargetDir + "/"+ filename, content, {encoding: 'base64'}, function(err: any) { if (err) {
-    //                 console.log('err', err);
-    //         }
-    //     });
-
     }
-    // const saveOriginalFile = async (content: string, filePath: string, filename: string) =>{
-
-    //     !fs.existsSync(filePath) && fs.mkdirSync(filePath, { recursive: true })
-    //     fs.writeFile(filePath+ filename, content, {encoding: 'base64'}, function(err: any) { if (err) {
-    //                 console.log('err', err);
-    //         }
-            
-    //     });
-    // }
-
+   
     const saveTextFile = async (xmlContent: string, filePath: string, filename: string) =>{
 
         !fs.existsSync(filePath) && fs.mkdirSync(filePath, { recursive: true })
@@ -554,42 +537,13 @@ function RebuildFiles(){
         });
     }
 
-    
-
-    // const analysisResult=(error: boolean, id: string, xmlResult: string, result: any )=>{
-    //     if(!error){
-    //         let newArr: RebuildResult[] | undefined;
-    //         let foundIndex: number;
-
-    //         newArr = [...rebuildFileNames]; // copying the old datas array
-    //         foundIndex = rebuildFileNames.findIndex((rebuildFile) => rebuildFile.id === id);
-
-    //         let newRebuildObject: RebuildResult| undefined;
-    //         newRebuildObject = rebuildFileNames.find((rebuildFile) => rebuildFile.id === id);
-    //         if(newRebuildObject ) {
-    //             newRebuildObject.xmlResult = xmlResult;
-    //             newArr[foundIndex] = newRebuildObject;
-    //             setRebuildFileNames(newArr);
-    //         }
- 
-    //     }
-    // }
- 
     React.useEffect(() => {
         if(folderId!=''){
             var rootFolder = Utils._PROCESSED_FOLDER +folderId
-            //  +'/clean/';
-            // var malicious = './processed/'+folderId +'/original/';
-            // var xml = './processed/'+folderId +'/xml/';
             if (!fs.existsSync(rootFolder)){
                 fs.promises.mkdir(rootFolder, { recursive: true });
             }
-            // if (!fs.existsSync(malicious)){
-            //     fs.promises.mkdir(malicious, { recursive: true });
-            // }
-            // if (!fs.existsSync(xml)){
-            //     fs.promises.mkdir(xml, { recursive: true });
-            // }
+       
             setTargetDir(rootFolder);
         }
     }, [folderId]);
@@ -616,12 +570,7 @@ function RebuildFiles(){
                 });
                 const common = commonPath(PATHS);
                 common.parsedPaths.map((cPath:any)=>{
-                    // console.log(cPath.subdir)
-                    // console.log(cPath.basePart)
-                    // console.log(cPath.original)
-                
                     saveBase64File( getRebuildFileContent(cPath.original), userTargetDir + "/" + cPath.subdir + "/", cPath.basePart );
-                    
             });
         }
         }
@@ -644,42 +593,26 @@ function RebuildFiles(){
         let outputDirId: string;
         if(userTargetDir ==""){
             setshowAlertBox(true);
-            return;
         }
-        
-        // if(userTargetDir ==""){
-        //     async (): Promise<void> => {
-        //         const { response } = await dialog.showMessageBox({
-        //         message: `Seleect Rebuild directory`,
-        //         detail: `Please select processed files directory`,
-        //         buttons: [ `Ok`],
-        //         defaultId: 1,
-        //         type: `info`,
-        //         })
-        //     }
-        //     return;
-        // }
         else {
-        setCounter((state: any)=>state + acceptedFiles.length)
-        setRebuildFileNames([]);
-        //setMasterMetaFile([]);
-        outputDirId = Utils.guid()
-        setFolderId(outputDirId);
+            setCounter((state: any)=>state + acceptedFiles.length)
+            setRebuildFileNames([]);
+            masterMetaFile.length =0;
+            outputDirId = Utils.guid()
+            setFolderId(outputDirId);
 
-        //console.log(acceptedFiles[0].path)
-        acceptedFiles.map(async (file: File) => {
-            await FileUploadUtils.getFile(file).then((data: any) => {
-                setFileNames((fileNames: any) =>[...fileNames, file.name]);
-                var url = window.webkitURL.createObjectURL(file);
-                let guid: string;
-                guid =  Utils.guid();
-                Utils.sleep(100);
-                //console.log(Utils.getFileHash(data.content));
-                //console.log(JSON.stringify(file));
-                FileUploadUtils.makeRequest(data, url, guid, outputDirId, downloadResult);
-                setShowLoader(true);
+            //console.log(acceptedFiles[0].path)
+            acceptedFiles.map(async (file: File) => {
+                await FileUploadUtils.getFile(file).then((data: any) => {
+                    setFileNames((fileNames: any) =>[...fileNames, file.name]);
+                    var url = window.webkitURL.createObjectURL(file);
+                    let guid: string;
+                    guid =  Utils.guid();
+                    Utils.sleep(100);
+                    FileUploadUtils.makeRequest(data, url, guid, outputDirId, downloadResult);
+                    setShowLoader(true);
+                })
             })
-        })
         }
     }  
     const viewXML =(id: string)=>{
@@ -895,6 +828,7 @@ function RebuildFiles(){
                           </CardActions> 
                           }
                     </div>
+                    <Footer/>
                 </main>
             </div>   
         </div>
