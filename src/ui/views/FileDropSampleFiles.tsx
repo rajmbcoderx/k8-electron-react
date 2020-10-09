@@ -4,9 +4,7 @@ import GetAppIcon from '@material-ui/icons/GetApp';
 
 /** Main view of the application to display all the targeted use cases */
 const useStyles = makeStyles((theme) => ({
-    root:       {
-        flexGrow:           1, 
-    },
+    
     sampleFileSection:{
         padding:                    '0',
         marginBottom:               '20px',

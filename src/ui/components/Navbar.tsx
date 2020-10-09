@@ -49,19 +49,17 @@ const useStyles = makeStyles((theme) => ({
 function Navbar(){
     const classes = useStyles();
    return(
-       <div>
-            <div className={classes.navbar}>                
-                <ul>
-                    <li className={classes.navItem}> 
-                        <Link className={classes.navBtn} to="/home"><HomeIcon className={classes.matIcon}/> Home</Link>
-                    </li>
-                    <li className={classes.navItem}> 
-                    {/* <button className={classes.navBtn} onClick={handleOpen}><BugReportIcon className={classes.matIcon}/> Report issue</button> */}
-                        <PopupBtn/>
-                    </li>   
-                </ul>
-            </div>           
-        </div>
+        <div className={classes.navbar}>                
+            <ul>
+                <li className={classes.navItem}> 
+                    <Link className={classes.navBtn} to="/home"><HomeIcon className={classes.matIcon}/> Home</Link>
+                </li>
+                <li className={classes.navItem}> 
+                {/* <button className={classes.navBtn} onClick={handleOpen}><BugReportIcon className={classes.matIcon}/> Report issue</button> */}
+                    <PopupBtn/>
+                </li>   
+            </ul>
+        </div> 
     )
 }
 

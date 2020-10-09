@@ -11,7 +11,8 @@ const useStyles = makeStyles((theme) => ({
     },
     urlList:{        
         color:          '#0c3451',
-        width:          '300px',
+        // width:          '300px',
+        width:          '100%',
         textDecoration: 'none',
         borderBottom:   '1px solid #ccc',
         padding:        '10px 0 10px 3px',
@@ -27,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
     listItem:{
         width:          '50%',
         float:          'left',
-        marginTop:      '10px'
+        // marginTop:      '10px'
     },
     viewGraph:{
         width:          '100%',
@@ -47,30 +48,27 @@ const useStyles = makeStyles((theme) => ({
 function GitRepos(){
     const classes = useStyles();
     return(
-        <div>
-            <Container>            
-                <h2 className={classes.heading}>Here are the k8 proxy projects</h2>
-                <p>Select the repo you want to visit</p>
-                <List className={classes.listContainer}>       
-                    <ListItem className={classes.listItem}><ArrowRightIcon></ArrowRightIcon><a  className={classes.urlList} href="https://github.com/k8-proxy/Open-Source/tree/master/upwork/project-k8-glasswall-rebuild">K8 Glasswall Rebuild</a></ListItem>
-                    <ListItem className={classes.listItem}><ArrowRightIcon></ArrowRightIcon><a  className={classes.urlList} href="https://github.com/k8-proxy/k8-traffic-generator">k8-traffic-generator</a></ListItem>
-                    <ListItem className={classes.listItem}><ArrowRightIcon></ArrowRightIcon><a  className={classes.urlList} href="https://github.com/k8-proxy/k8-data-visualization">k8-data-visualization</a></ListItem>
-                    <ListItem className={classes.listItem}><ArrowRightIcon></ArrowRightIcon><a  className={classes.urlList} href="https://github.com/k8-proxy/k8-reverse-proxy">k8-reverse-proxy</a></ListItem>
-                    <ListItem className={classes.listItem}><ArrowRightIcon></ArrowRightIcon><a  className={classes.urlList} href="https://github.com/k8-proxy/k8-performance-use-cases">k6-performance-use-cases</a></ListItem>
-                    <ListItem className={classes.listItem}><ArrowRightIcon></ArrowRightIcon><a  className={classes.urlList} href="https://github.com/k8-proxy/k8-test-data">k8-test-data</a></ListItem>
-                    <ListItem className={classes.listItem}><ArrowRightIcon></ArrowRightIcon><a  className={classes.urlList} href="https://github.com/filetrust/rebuild-k8s-filetypedetection">rebuild-k8s-filetypedetection</a></ListItem>
-                    <ListItem className={classes.listItem}><ArrowRightIcon></ArrowRightIcon><a  className={classes.urlList} href="https://github.com/k8-proxy/threat-intelligence-reporting">Threat-intelligence-reporting</a></ListItem>
-                    <ListItem className={classes.listItem}><ArrowRightIcon></ArrowRightIcon><a  className={classes.urlList} href="https://github.com/k8-proxy/s-k8-releases">k8-ova</a></ListItem>
-                    <ListItem className={classes.listItem}><ArrowRightIcon></ArrowRightIcon><a  className={classes.urlList} href="https://github.com/k8-proxy/k8-slack-bot">k8-slack-bot</a></ListItem>
-                    <ListItem className={classes.listItem}><ArrowRightIcon></ArrowRightIcon><a  className={classes.urlList} href="https://github.com/k8-proxy/k8-proxy-desktop">k8-electron-react</a></ListItem>
-                    <ListItem className={classes.listItem}><ArrowRightIcon></ArrowRightIcon><a  className={classes.urlList} href="https://github.com/k8-proxy/k8-security">p-k8-security</a></ListItem>
-
-                </List>
-                <div className={classes.viewGraph}>                    
-                    <button className={classes.viewGraphBtn}>View Graphs</button>
-                </div>
-            </Container>
-        </div>
+        <Container>            
+            <h2 className={classes.heading}>Here are the k8 proxy projects</h2>
+            <p>Select the repo you want to visit</p>
+            <List className={classes.listContainer}>       
+                <ListItem className={classes.listItem}><ArrowRightIcon></ArrowRightIcon><a  className={classes.urlList} href="https://github.com/k8-proxy/Open-Source/tree/master/upwork/project-k8-glasswall-rebuild">K8 Glasswall Rebuild</a></ListItem>
+                <ListItem className={classes.listItem}><ArrowRightIcon></ArrowRightIcon><a  className={classes.urlList} href="https://github.com/k8-proxy/k8-traffic-generator">k8-traffic-generator</a></ListItem>
+                <ListItem className={classes.listItem}><ArrowRightIcon></ArrowRightIcon><a  className={classes.urlList} href="https://github.com/k8-proxy/k8-data-visualization">k8-data-visualization</a></ListItem>
+                <ListItem className={classes.listItem}><ArrowRightIcon></ArrowRightIcon><a  className={classes.urlList} href="https://github.com/k8-proxy/k8-reverse-proxy">k8-reverse-proxy</a></ListItem>
+                <ListItem className={classes.listItem}><ArrowRightIcon></ArrowRightIcon><a  className={classes.urlList} href="https://github.com/k8-proxy/k8-performance-use-cases">k6-performance-use-cases</a></ListItem>
+                <ListItem className={classes.listItem}><ArrowRightIcon></ArrowRightIcon><a  className={classes.urlList} href="https://github.com/k8-proxy/k8-test-data">k8-test-data</a></ListItem>
+                <ListItem className={classes.listItem}><ArrowRightIcon></ArrowRightIcon><a  className={classes.urlList} href="https://github.com/filetrust/rebuild-k8s-filetypedetection">rebuild-k8s-filetypedetection</a></ListItem>
+                <ListItem className={classes.listItem}><ArrowRightIcon></ArrowRightIcon><a  className={classes.urlList} href="https://github.com/k8-proxy/threat-intelligence-reporting">Threat-intelligence-reporting</a></ListItem>
+                <ListItem className={classes.listItem}><ArrowRightIcon></ArrowRightIcon><a  className={classes.urlList} href="https://github.com/k8-proxy/s-k8-releases">k8-ova</a></ListItem>
+                <ListItem className={classes.listItem}><ArrowRightIcon></ArrowRightIcon><a  className={classes.urlList} href="https://github.com/k8-proxy/k8-slack-bot">k8-slack-bot</a></ListItem>
+                <ListItem className={classes.listItem}><ArrowRightIcon></ArrowRightIcon><a  className={classes.urlList} href="https://github.com/k8-proxy/k8-proxy-desktop">k8-electron-react</a></ListItem>
+                <ListItem className={classes.listItem}><ArrowRightIcon></ArrowRightIcon><a  className={classes.urlList} href="https://github.com/k8-proxy/k8-security">p-k8-security</a></ListItem>
+            </List>
+            <div className={classes.viewGraph}>                    
+                <button className={classes.viewGraphBtn}>View Graphs</button>
+            </div>
+        </Container>
     )
 }
 

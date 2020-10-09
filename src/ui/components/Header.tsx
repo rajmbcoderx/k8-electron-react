@@ -51,13 +51,14 @@ type headerOptions = {
 function Header({showBack}:headerOptions){
     const classes = useStyles(); 
     return(        
-        <div  className={classes.header} >
+        <div className={classes.header} >
             {
-                showBack && <Link to="/home"><ArrowBackIcon  className={classes.anchBtn}/></Link>}
-                <div className={classes.logoSection}>
-                    <img src={Logo}  className={classes.logo}></img> 
-                </div> 
-                <Navbar></Navbar>
+                showBack && <Link to="/home"><ArrowBackIcon  className={classes.anchBtn}/></Link>
+            }
+            <div className={classes.logoSection}>
+                <img src={Logo}  className={classes.logo}></img> 
+            </div> 
+            <Navbar></Navbar>
         </div>
         
     )

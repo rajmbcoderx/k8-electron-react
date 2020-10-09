@@ -56,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
     releaseContent:{
         fontFamily:         'Nunito Sans',
         float:              'left',
-        paddingLeft:        '63px',
+        paddingLeft:        '55px',
         width:              '100%',
         boxSizing:          'border-box'
     },
@@ -87,61 +87,59 @@ const useStyles = makeStyles((theme) => ({
 
 function ReleaseNote(){
     const classes = useStyles(); 
-    return(
-        <div>    
-            <Grid container>   
-                <a className={classes.webAnchor} href={Utils.WEBSITE_URL} title="k8-proxy-desktop">K8 Proxy Desktop</a>
-                <h3 className={classes.releaseHeading}> <a className={classes.webHeading} href={Utils.RELEASE_URL}> Realease Note</a></h3>
-                <Grid className={classes.releaseNoteContainer}>                    
-                    <div className={classes.releaseGrid}>
-                        <div className={classes.releaseList}>                            
-                            <div className={classes.releaseVersion}>{Utils.VERSION}</div>
-                            <h4 className={classes.releaseDate}>October 5th 2020 </h4>
-                        </div>
-                        <div className={classes.releaseContent}>
-                            <span className={classes.releaseStatusFixed}>Fixed</span>
-                            <p className={classes.releaseText}>As a user I should be able to select a folder with files on the Rebuild API and have all the files cleaned #83</p>
-                        </div>
+    return(  
+        <Grid container>   
+            <a className={classes.webAnchor} href={Utils.WEBSITE_URL} title="k8-proxy-desktop">K8 Proxy Desktop</a>
+            <h3 className={classes.releaseHeading}> <a className={classes.webHeading} href={Utils.RELEASE_URL}> Realease Note</a></h3>
+            <Grid className={classes.releaseNoteContainer}>                    
+                <div className={classes.releaseGrid}>
+                    <div className={classes.releaseList}>                            
+                        <div className={classes.releaseVersion}>{Utils.VERSION}</div>
+                        <h4 className={classes.releaseDate}>October 5th 2020 </h4>
                     </div>
-                </Grid>
-                <Grid className={classes.releaseNoteContainer}>                    
-                    <div className={classes.releaseGrid}>
-                        <div className={classes.releaseList}>                            
-                            <div className={classes.releaseVersion}>{Utils.VERSION}</div>
-                            <h4 className={classes.releaseDate}>October 4th 2020 </h4>
-                        </div>
-                        <div className={classes.releaseContent}>
-                            <span className={classes.releaseStatusFixed}>Fixed</span>
-                            <p className={classes.releaseText}>To create a tabular report view displaying these columns : Status, Pre-Processed File link, Post-Processed File link and XML report through File analyzed endpoint.</p>
-                        </div>
+                    <div className={classes.releaseContent}>
+                        <span className={classes.releaseStatusFixed}>Fixed</span>
+                        <p className={classes.releaseText}>As a user I should be able to select a folder with files on the Rebuild API and have all the files cleaned #83</p>
                     </div>
-                </Grid>
-                <Grid className={classes.releaseNoteContainer}>                    
-                    <div className={classes.releaseGrid}>
-                        <div className={classes.releaseList}>                            
-                            <div className={classes.releaseVersion}>{Utils.VERSION}</div>
-                            <h4 className={classes.releaseDate}>October 3rd  2020 </h4>
-                        </div>
-                        <div className={classes.releaseContent}>
-                            <span className={classes.releaseStatusFixed}>Fixed</span>
-                            <p className={classes.releaseText}>  To create /tmp folder in installation folder path, which list all the files in this format: Hash of file - original.zip + new file + xml + JSON with the metadata</p>
-                        </div>
-                    </div>
-                </Grid>
-                <Grid className={classes.releaseNoteContainer}>                    
-                    <div className={classes.releaseGrid}>
-                        <div className={classes.releaseList}>                            
-                            <div className={classes.releaseVersion}>{Utils.VERSION}</div>
-                            <h4 className={classes.releaseDate}>October 2nd  2020 </h4>
-                        </div>
-                        <div className={classes.releaseContent}>
-                            <span className={classes.releaseStatusFixed}>Fixed</span>
-                            <p className={classes.releaseText}>To remove success pop-up on processing individual file. </p>
-                        </div>
-                    </div>
-                </Grid>
+                </div>
             </Grid>
-        </div>
+            <Grid className={classes.releaseNoteContainer}>                    
+                <div className={classes.releaseGrid}>
+                    <div className={classes.releaseList}>                            
+                        <div className={classes.releaseVersion}>{Utils.VERSION}</div>
+                        <h4 className={classes.releaseDate}>October 4th 2020 </h4>
+                    </div>
+                    <div className={classes.releaseContent}>
+                        <span className={classes.releaseStatusFixed}>Fixed</span>
+                        <p className={classes.releaseText}>To create a tabular report view displaying these columns : Status, Pre-Processed File link, Post-Processed File link and XML report through File analyzed endpoint.</p>
+                    </div>
+                </div>
+            </Grid>
+            <Grid className={classes.releaseNoteContainer}>                    
+                <div className={classes.releaseGrid}>
+                    <div className={classes.releaseList}>                            
+                        <div className={classes.releaseVersion}>{Utils.VERSION}</div>
+                        <h4 className={classes.releaseDate}>October 3rd  2020 </h4>
+                    </div>
+                    <div className={classes.releaseContent}>
+                        <span className={classes.releaseStatusFixed}>Fixed</span>
+                        <p className={classes.releaseText}>  To create /tmp folder in installation folder path, which list all the files in this format: Hash of file - original.zip + new file + xml + JSON with the metadata</p>
+                    </div>
+                </div>
+            </Grid>
+            <Grid className={classes.releaseNoteContainer}>                    
+                <div className={classes.releaseGrid}>
+                    <div className={classes.releaseList}>                            
+                        <div className={classes.releaseVersion}>{Utils.VERSION}</div>
+                        <h4 className={classes.releaseDate}>October 2nd  2020 </h4>
+                    </div>
+                    <div className={classes.releaseContent}>
+                        <span className={classes.releaseStatusFixed}>Fixed</span>
+                        <p className={classes.releaseText}>To remove success pop-up on processing individual file. </p>
+                    </div>
+                </div>
+            </Grid>
+        </Grid>
         
     )
     

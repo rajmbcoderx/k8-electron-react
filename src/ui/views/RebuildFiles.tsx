@@ -41,9 +41,6 @@ const useStyles = makeStyles((theme) => ({
             paddingBottom:          '10px'
         }
     },
-    fullWidth:{
-        maxWidth:                   '100%'
-    },
     container:  {
         display:                    'grid',
         gridGap:                    theme.spacing(2),
@@ -58,11 +55,11 @@ const useStyles = makeStyles((theme) => ({
         }
     },
     actions: {
-        justifyContent: 'flex-end'
+        justifyContent:             'flex-end'
     },
-   gridItemLeft:{
-   },
-   dropzone:{
+    gridItemLeft:{
+    },
+    dropzone:{
         border:                     '2px dashed #6ab8f0',
         borderRadius:               '35px',
         minHeight:                  '300px',
@@ -148,16 +145,12 @@ const useStyles = makeStyles((theme) => ({
          ...theme.mixins.toolbar,
      },
      content: {
-         flexGrow:                  1,
-         padding:                   theme.spacing(3),
-         minHeight:                 '90vh'
-     },
-    //  btnGroup:{
-    //     margin:                     '10px 0',
-    //     textAlign:                  'right',
-    //     width:                      '100%',
-    //     float:                      'left'
-    //  },
+        flexGrow:       1,
+    },
+    contentArea:{
+         minHeight:      '81vh',
+         padding:        theme.spacing(3),
+    },
      downloadLink:{
         maxWidth:                   '245px',
         display:                    'inline-block',
@@ -276,13 +269,6 @@ const useStyles = makeStyles((theme) => ({
         paddingBottom:              '20px',
         float:                      'left',
         width:                      '100%',
-        // '& h2':{
-        //     float:                  'left',
-        //     width:                  '100%',
-        //     color:                  '#003962',
-        //     fontSize:               '17px',
-        //     borderBottom:           '1px solid #ccc'
-        // },
         '& h4':{
             fontSize:               '14px',
             color:                  '#003962',
@@ -336,6 +322,33 @@ const useStyles = makeStyles((theme) => ({
             fontSize:               '16px',
             marginRight:            '10px'
         }
+    },
+    alertContainer:{
+        width:                      '100%',
+        position:                   'fixed',
+        height:                     '100%',
+        display:                    'flex',
+        justifyContent:             'center',
+        alignItems:                 'center',
+        top:                        '0',
+        left:                       '0',
+        background:                 'rgba(0,0,0,0.4)',
+        zIndex:                     1300
+    },  
+    alertModel:{
+        width:                      '400px',
+        background:                 '#fff',
+        padding:                    '20px',
+        borderRadius:               '5px',
+        textAlign:                  'center'
+    },
+    submitBtn:{
+        background:                 '#0c3451',
+        color:                      '#fff',
+        border:                     'none',
+        padding:                    '10px 20px',
+        borderRadius:               '3px',
+        cursor:                     'pointer'
     }
  }));
 
@@ -369,6 +382,7 @@ function RebuildFiles(){
     const [userTargetDir, setUserTargetDir]         = useState("");  
     const [masterMetaFile, setMasterMetaFile]       = useState<Array<Metadata>>([]);
     const [outputDirType, setOutputDirType]         = useState(Utils.OUTPUT_DIR_FLAT)
+    const [showAlertBox, setshowAlertBox]           = useState(false);  
 
    
 
@@ -628,6 +642,9 @@ function RebuildFiles(){
 
     const handleDrop = async (acceptedFiles:any) =>{
         let outputDirId: string;
+        if(userTargetDir ==""){
+            setshowAlertBox(true);
+        }
         
         // if(userTargetDir ==""){
         //     async (): Promise<void> => {
@@ -641,7 +658,7 @@ function RebuildFiles(){
         //     }
         //     return;
         // }
-
+        else {
         setCounter((state: any)=>state + acceptedFiles.length)
         setRebuildFileNames([]);
         //setMasterMetaFile([]);
@@ -662,6 +679,7 @@ function RebuildFiles(){
                 setShowLoader(true);
             })
         })
+        }
     }  
     const viewXML =(id: string)=>{
         //console.log(id)
@@ -755,16 +773,18 @@ function RebuildFiles(){
             <div className={classes.root}> 
                 <SideDrawer showBack={false}/>
                 <main className={classes.content}>
-                    <div className={classes.toolbar} />                
+                    <div className={classes.toolbar} />  
+                    <div className={classes.contentArea}>             
                     <h3>Rebuild Files</h3>
-                    <Dropzone onDrop={handleDrop} >
-                        {({ getRootProps, getInputProps }) => (
-                        <div {...getRootProps()} className={classes.dropzone}>
-                            <input {...getInputProps()} />
-                                <div className={classes.dropField}>
-                                <p>Drag and drop files</p>
-                                <img src={DropIcon} className={classes.icons}/> 
-                                <button className={classes.selectFileBtn}>Select files</button>
+                        <Dropzone onDrop={handleDrop} >
+                            {({ getRootProps, getInputProps }) => (
+                            <div {...getRootProps()} className={classes.dropzone}>
+                                <input {...getInputProps()} />
+                                    <div className={classes.dropField}>
+                                    <p>Drag and drop files</p>
+                                    <img src={DropIcon} className={classes.icons}/> 
+                                    <button className={classes.selectFileBtn}>Select files</button>
+                                </div>
                             </div>
                         </div>
                         )}
@@ -772,7 +792,14 @@ function RebuildFiles(){
                     <div className={classes.errMsg}> Failed to upload </div>
                     <div className={classes.successMsg}>File uploaded successuly </div>
                     <div>
-                   
+                    {showAlertBox && 
+                                <div className={classes.alertContainer}>
+                                    <div className={classes.alertModel}>              
+                                        <h3>Please Select Target Directory</h3>               
+                                        <button className={classes.submitBtn} onClick={closeAlertBox}>ok</button>
+                                    </div>
+                                </div>   
+                    }                       
                         {loader  && <Loader/> }   
                         
                             <div className={classes.tableField}>
@@ -864,8 +891,7 @@ function RebuildFiles(){
                           }
                     </div>
                 </main>
-            </div>                
-            <Footer/>
+            </div>   
         </div>
         
     )

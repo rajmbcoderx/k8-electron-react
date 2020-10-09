@@ -5,9 +5,7 @@ import { makeStyles }           from '@material-ui/core/styles';
 
 
 const useStyles = makeStyles((theme) => ({
-    root:       {
-        flexGrow:       1, 
-    },
+    
     iframe:{
         border:         '1px solid #ccc',
         float:          'left'
@@ -20,17 +18,15 @@ type appLink = {
 
 function WebIFrameView({url}:appLink){
     const classes = useStyles(); 
-    return(
-        <div>            
-            <Grid>
-                <Iframe
-                    url= {url}
-                    width="100%"
-                    height="600"
-                    className={classes.iframe}
-                ></Iframe>                                                              
-            </Grid>
-        </div>
+    return(           
+        <Grid>
+            <Iframe
+                url= {url}
+                width="100%"
+                height="600"
+                className={classes.iframe}
+            ></Iframe>                                                              
+        </Grid>
         
     )
 }
