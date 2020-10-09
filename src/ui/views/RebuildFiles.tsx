@@ -644,6 +644,7 @@ function RebuildFiles(){
         let outputDirId: string;
         if(userTargetDir ==""){
             setshowAlertBox(true);
+            return;
         }
         
         // if(userTargetDir ==""){
@@ -766,6 +767,10 @@ function RebuildFiles(){
         setOutputDirType(e.currentTarget.value)
         //alert(e.currentTarget.value)
       }
+    
+    const closeAlertBox = () => {
+        setshowAlertBox(false);
+    }
 
     return(
         <div>   
@@ -786,7 +791,6 @@ function RebuildFiles(){
                                     <button className={classes.selectFileBtn}>Select files</button>
                                 </div>
                             </div>
-                        </div>
                         )}
                     </Dropzone>
                     <div className={classes.errMsg}> Failed to upload </div>
@@ -870,6 +874,7 @@ function RebuildFiles(){
                                 </div>
                                 }
                             </div>
+                            </div>
                        
                         {
                         rebuildFileNames.length>0 &&
@@ -893,6 +898,7 @@ function RebuildFiles(){
                 </main>
             </div>   
         </div>
+       
         
     )
 }
