@@ -1,5 +1,9 @@
 import axios        from "axios";
+import axiosRetry   from 'axios-retry';
 import * as Utils   from '../utils/utils'
+
+//axiosRetry(axios, { retries: 3 });
+
 
 const getPayload = (data: any) => {
     let buffer = Buffer.from(data.content, 'base64');
@@ -32,6 +36,11 @@ const getLocalUpload = (data: any) => {
 
 export const makeRequest = (request: any, sourceFileUrl: string, requestId: string, folderId: string,
       resultCallback: Function) => {
+
+    axiosRetry(axios, { retries: 5 , retryDelay: (retryCount) => {
+        console.log("http axiosRetry")
+        return retryCount * 5000;
+        }});
 
     let payload: string | any;
     let url : string;
@@ -135,6 +144,7 @@ export const getAnalysisResult= async (isBinaryFile: boolean, reBuildResponse: a
                 }
             })
         .then((response) => {
+            console.log("response.status" + response.status)
             if(response.status === 200){
                if(isBinaryFile){
                     writeBinaryFile(reBuildResponse, response.data, request, sourceFile, requestId, targetFolder, resultCallback)
@@ -143,10 +153,12 @@ export const getAnalysisResult= async (isBinaryFile: boolean, reBuildResponse: a
                          targetFolder, resultCallback)
                }
             }
+
+            console.log("response.status" + response.status)
           
         })
         .catch(err => {
-            console.log(JSON.stringify(err));
+            console.log("11" + err.message);
             resultCallback({'source':sourceFile, 'url':'TBD', 'filename':request.filename, isError:true,
                  msg:err.message, id:requestId, targetDir:targetFolder, original:request.content})
         })
@@ -187,13 +199,13 @@ export const getAnalysisResult= async (isBinaryFile: boolean, reBuildResponse: a
             }
             })
         .catch(err => {
-            console.log(JSON.stringify(err));
+            console.log("22" + err.message);
             resultCallback({'source':sourceFile, 'url':'TBD', 'filename':request.filename, isError:true,
                  msg:err.message, id:requestId, targetDir:targetFolder, original:request.content})
         })
         })
         .catch(err => {
-            console.log(JSON.stringify(err));
+            console.log("33" + err.message);
             resultCallback({'source':sourceFile, 'url':'TBD', 'filename':request.filename, isError:true,
                  msg:err.message, id:requestId, targetDir: targetFolder, original:request.content})
    
