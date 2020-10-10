@@ -11,15 +11,15 @@ export default function Loader() {
             <div className="col-lg-12">
               <div className="text-container header-img">
                 <h1>
-                   K8 Proxy Desktop Application <br />
-                  FOR <span id="js-static">Rebuild Files</span>
+                   Glasswall Desktop Application <br />
+                  For <span id="js-static">Rebuild Files</span>
                   {/* {" "}
                   <span id="js-rotating">
                     GIT BROWSER, FILE DROP, K8 PODS DASHBOARD, SLACK UI FOR BOTS, FORENSIC WORKBENCH
                   </span> */}
                 </h1>
                 <p className="p-large">
-                k8-proxy-desktop is a desktop based applications that provide a single entry point to File Drop application Its open source. Download it today!
+                Glasswall desktop application provides multi file drag and drop rebuild workflow. Its open source. Download it today!
                 </p>
                 <a
                     className = "btn-solid-lg"

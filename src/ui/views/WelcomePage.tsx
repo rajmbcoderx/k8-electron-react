@@ -88,10 +88,6 @@ const useStyles = makeStyles((theme) => ({
 
 function WelcomePage(){
     const classes = useStyles(); 
-    //const [value, setValue] = React.useState(false);
-    // const getStarted = () =>{
-    //     localStorage.setItem('test', value);
-    // }
     return(
         <div>                
             <Container className={classes.fullWidth}>              

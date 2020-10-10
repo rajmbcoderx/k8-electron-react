@@ -15,7 +15,7 @@ export default function Feature1() {
           </div>
           <div className="col-lg-5">
             <div className="text-container">
-              <h3>The K8 Proxy File Drop</h3>
+              <h3>The File Drop</h3>
               <p>
               Organize clusters into logical groups. Workspaces are used to organize a number of clusters into logical groups. It is easy to create and switch between workspaces. 
               </p>

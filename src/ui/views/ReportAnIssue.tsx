@@ -5,6 +5,7 @@ import Header                           from '../components/Header';
 import Footer                           from '../components/Footer';
 import Loader                           from '../components/Loader';
 import WebIFrameView                    from '../components/WebIFrameView';
+import * as Utils                       from '../utils/utils';
 
 const useStyles = makeStyles((theme) => ({
     pageContainer:{
@@ -36,7 +37,7 @@ function ReportAnIssue(){
                 <Grid>
                 <div className={classes.pageContainer}>   
                 {showLoader  && <Loader/> }   
-                        <WebIFrameView url = "https://github.com/k8-proxy/k8-proxy-desktop/issues/new" />
+                        <WebIFrameView url = {Utils.REPO_GIT_ISSUE_URL} />
                 </div>
                 </Grid>
             </Container>

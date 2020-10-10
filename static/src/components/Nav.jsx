@@ -7,7 +7,7 @@ export default function Nav() {
     <nav className="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
       <a className="navbar-brand" href="index.html">
         <img src={lensLogo} alt="alternative" />
-        <span> K8 Proxy Desktop Application</span>
+        <span> Glasswall Desktop Application</span>
       </a>
 
       <button
@@ -45,7 +45,7 @@ export default function Nav() {
               className="nav-link"
               href={Utils.RELEASE_URL}
             >
-              REPOSITORIES 
+              RELEASES 
             </a>
           </li>
         </ul>

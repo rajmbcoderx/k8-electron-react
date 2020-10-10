@@ -14,44 +14,39 @@ import Highlight                from 'react-highlight.js';
 
 const useStyles = makeStyles((theme) => ({
   form: {
-    display: 'flex',
-    flexDirection: 'column',
-    margin: 'auto',
-    width: 'fit-content',
+    display       : 'flex',
+    flexDirection : 'column',
+    margin        : 'auto',
+    width         : 'fit-content',
   },
   formControl: {
-    marginTop: theme.spacing(2),
-    minWidth: 120,
+    marginTop     : theme.spacing(2),
+    minWidth      : 120,
   },
   formControlLabel: {
-    marginTop: theme.spacing(1),
+    marginTop     : theme.spacing(1),
   }, 
   closeButton: {
-    position: 'absolute',
-    right: theme.spacing(1),
-    top: theme.spacing(1),
-    color: theme.palette.grey[500],
+    position      : 'absolute',
+    right         : theme.spacing(1),
+    top           : theme.spacing(1),
+    color         : theme.palette.grey[500],
   },
 }));
 
 
 type xmlContent ={
-    content: string| undefined;
-    handleOpen:  (value: boolean) => void;
-    isOpen: boolean;
+    content     : string| undefined;
+    handleOpen  :  (value: boolean) => void;
+    isOpen      : boolean;
 }
 export default function ScrollDialog({isOpen, content, handleOpen }: xmlContent) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(isOpen);
   const [scroll, setScroll] = React.useState<string>('paper');
 
-
-
-  // const handleClose = () => {
-  //   setOpen(false);
-  // };
-
   const descriptionElementRef = React.useRef(null);
+  
   React.useEffect(() => {
     if (open) {
       const { current: descriptionElement } = descriptionElementRef;
@@ -62,12 +57,12 @@ export default function ScrollDialog({isOpen, content, handleOpen }: xmlContent)
   return (
     <div>
       <Dialog
-        fullWidth={true}
-        maxWidth={'lg'}
-        open={open}
-        onClose={() => handleOpen(!open)}
-        scroll={"paper" }
-        aria-labelledby="scroll-dialog-title"
+        fullWidth       ={true}
+        maxWidth        ={'lg'}
+        open            ={open}
+        onClose         ={() => handleOpen(!open)}
+        scroll          ={"paper" }
+        aria-labelledby ="scroll-dialog-title"
         aria-describedby="scroll-dialog-description"
       >
         <DialogTitle id="scroll-dialog-title">RAW XML
@@ -77,13 +72,11 @@ export default function ScrollDialog({isOpen, content, handleOpen }: xmlContent)
         </DialogTitle>
         <DialogContent dividers={scroll == 'paper'}>
           <DialogContentText
-            id="scroll-dialog-description"
-            ref={descriptionElementRef}
-            tabIndex={-1}
+            id        ="scroll-dialog-description"
+            ref       ={descriptionElementRef}
+            tabIndex  ={-1}
           >
-            <Highlight language='xml'>
-                   {content}
-               </Highlight>
+            <Highlight language='xml'>{content}</Highlight>
           </DialogContentText>
         </DialogContent>
         <DialogActions>

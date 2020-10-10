@@ -6,23 +6,17 @@ export const FW_URL                 = 'https://forensic-workbench.com/';
 export const FILE_DROP_URL          = 'https://file-drop.co.uk/';
 export const REBUILD_ENGINE_URL     = 'https://8oiyjy8w63.execute-api.us-west-2.amazonaws.com/Prod/api/rebuild/base64';
 export const REBUILD_ANALYSIS_URL   = 'https://o7ymnow6vf.execute-api.us-west-2.amazonaws.com/Prod/api/Analyse/base64';
+export const REPO_GIT_ISSUE_URL     = "https://github.com/k8-proxy/k8-proxy-desktop/issues/new";
 
-export const REBUILD_API_KEY    = 'dp2Ug1jtEh4xxFHpJBfWn9V7fKB3yVcv60lhwOAG';
-export const VERSION    = '0.5.0'
+export const REBUILD_API_KEY        = 'dp2Ug1jtEh4xxFHpJBfWn9V7fKB3yVcv60lhwOAG';
+export const VERSION                = '0.5.0'
+export const _PROCESSED_FOLDER      = "./processed/"
+export const _CLEAN_FOLDER          = "clean/"
+export const _ORIGINAL_FOLDER       = "original/"
+export const _REPORT_FOLDER         = "report/"
 
-
-export const _PROCESSED_FOLDER = "./processed/"
-export const _CLEAN_FOLDER = "clean/"
-export const _ORIGINAL_FOLDER = "original/"
-export const _REPORT_FOLDER = "report/"
-
-export const OUTPUT_DIR_FLAT      ="flat";
-export const OUTPUT_DIR_HIERARCY  ="hierarcy";
-
-// var dir = './processed/'+folderId +'/clean/';
-// var malicious = './processed/'+folderId +'/original/';
-// var xml = './processed/'+folderId +'/xml/';
-
+export const OUTPUT_DIR_FLAT        = "flat";
+export const OUTPUT_DIR_HIERARCY    = "hierarcy";
 
 
 export const sleep = (milliseconds:number) => {

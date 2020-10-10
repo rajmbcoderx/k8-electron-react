@@ -9,7 +9,7 @@ export default function Demo() {
           <div className="col-lg-12">
             <h2>How it Works</h2>
             <div className="p-heading p-large">
-              The live demo of Proxy Desktop features.
+              The live demo of Glasswall Desktop features.
             </div>
           </div>
         </div>

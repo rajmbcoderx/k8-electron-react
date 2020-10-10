@@ -7,9 +7,9 @@ export default function Footer() {
         <div className="row">
           <div className="col-md-4">
             <div className="footer-col">
-              <h4>About K8 Proxy Desktop</h4>
+              <h4>About Glasswall Desktop</h4>
               <p>
-              K8 Proxy Desktop was originally developed by ____ Inc. .
+              Glasswall Desktop was originally developed by Glasswall Solutions Ltd.
               </p>
             </div>
           </div>

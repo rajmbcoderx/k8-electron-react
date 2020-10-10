@@ -2,8 +2,6 @@ import axios        from "axios";
 import axiosRetry   from 'axios-retry';
 import * as Utils   from '../utils/utils'
 
-//axiosRetry(axios, { retries: 3 });
-
 
 const getPayload = (data: any) => {
     let buffer = Buffer.from(data.content, 'base64');
@@ -12,27 +10,71 @@ const getPayload = (data: any) => {
     var json = {
             fileSize : size_of_file,
             Base64 : data.content
-          
         };
-     return json;
+    return json;
 }
 
 const getAnalysisPayload = (data: any) => {
     let buffer = Buffer.from(data.content, 'base64');
     let size_of_file = buffer.length / 1000000;
-    //console.log("File Size (MB) : " + size_of_file);
     var json = {
             Base64 : data.content,
             fileSize : size_of_file,
         };
-     return json;
+        return json;
 }
-
 
 const getLocalUpload = (data: any) => {
     return {"fileName":data.original_file_name,"fileBody":data.content};
 }
 
+const decodeBase64Image=(dataString: string) =>{
+    let response: any;
+    response = dataString.split(';base64,').pop();
+    return response;
+}
+
+const writeDecodedBase64File = (baseBase64Response: string, xmlReport:string, request: any, sourceFileUrl: string,
+    requestId:string, targetFolder: string, resultCallback: Function) => {
+   var decodedBase64 = decodeBase64Image(baseBase64Response);
+   var bs = atob(baseBase64Response);
+   var buffer = new ArrayBuffer(bs.length);
+   var ba = new Uint8Array(buffer);
+   for (var i = 0; i < bs.length; i++) {
+       ba[i] = bs.charCodeAt(i);
+   }
+   var file = new Blob([ba], { type: request.type });
+   var url = window.webkitURL.createObjectURL(file);
+   resultCallback({'source':sourceFileUrl, 'url':url, 'filename':request.filename, isError:false, msg:'',
+       cleanFile:decodedBase64, xmlResult: xmlReport, id:requestId, targetDir:targetFolder, original:request.content, path:request.path})
+   
+}
+
+const writeBinaryFile = (bytes: any,  xmlReport:string, request: any, sourceFileUrl: string, requestId: string,
+    targetFolder:string, resultCallback: Function) => {
+   var bs = bytes;
+   var buffer = new ArrayBuffer(bs.length);
+   var ba = new Uint8Array(buffer);
+   for (var i = 0; i < bs.length; i++) {
+       ba[i] = bs.charCodeAt(i);
+   }
+   var file = new Blob([ba], { type: request.type });
+   var url = window.webkitURL.createObjectURL(file);
+   resultCallback({'source':sourceFileUrl,  'url':url, 'filename':request.filename, isError: false, msg:'',
+     cleanFile:buffer, xmlResult: xmlReport, id:requestId, targetDir:targetFolder, original:request.content,path:request.paths })
+  
+}
+
+const getBase64 = (file: File) => {
+   let res = new Promise(resolve => {
+       var reader = new FileReader();
+       reader.onload = function (event: any) {
+           resolve(event.target.result);
+       };
+       reader.readAsDataURL(file);
+   });
+   return res;
+}
 
 export const makeRequest = (request: any, sourceFileUrl: string, requestId: string, folderId: string,
       resultCallback: Function) => {
@@ -48,6 +90,7 @@ export const makeRequest = (request: any, sourceFileUrl: string, requestId: stri
 
     payload = getPayload(request)
     var fileSize = payload.fileSize;
+   
     // Files smaller than 6MB - Normal
     payload = JSON.stringify(payload)
     if(fileSize < 6){
@@ -77,9 +120,6 @@ export const makeRequest = (request: any, sourceFileUrl: string, requestId: stri
                 }
             })
         .then((response) => {
-            // if(response.status === 200){
-            //    // console.log("Successfully uploaded.Converting now");
-            // }
             axios.post(url+'processFile', {"FileName": request.original_file_name}, {
                 headers: {
                     "Content-Type": "application/json"
@@ -87,7 +127,6 @@ export const makeRequest = (request: any, sourceFileUrl: string, requestId: stri
             })
             .then((response) => {
                 if(response.status === 200){
-                    //console.log("Successfully converted.Getting now");
                     return axios.get(url+'getFilePath', {
                         params: {
                             FileName: request.original_file_name
@@ -100,19 +139,16 @@ export const makeRequest = (request: any, sourceFileUrl: string, requestId: stri
             }
             })
         .catch(err => {
-            //console.log("4:" + JSON.stringify(err));
             resultCallback({'source':sourceFileUrl, 'url':'TBD', 'filename':request.filename, isError:true,
               msg:err.message, id:requestId, targetDir:folderId, original:request.content})
         })
         })
         .catch(err => {
-        //console.log("5:" + JSON.stringify(err));
             resultCallback({'source':sourceFileUrl, 'url':'TBD', 'filename':request.filename, isError:true,
-             msg:err.message, id:requestId, targetDir:folderId, original:request.content})
+            msg:err.message, id:requestId, targetDir:folderId, original:request.content})
         })
     }
     else{
-        //console.log("File too big. 4 bytes to 30 MB file size bracket");
         resultCallback({'source':sourceFileUrl, 'url':'TBD', 'filename':request.filename, isError:true,
          msg:'File too big. 4 bytes to 30 MB file size bracket', id:requestId, targetDir:folderId, original:request.content})
 
@@ -120,11 +156,9 @@ export const makeRequest = (request: any, sourceFileUrl: string, requestId: stri
  
 };
 
-
 export const getAnalysisResult= async (isBinaryFile: boolean, reBuildResponse: any, request: any, sourceFile: string,
      requestId: string, targetFolder: string, resultCallback: Function)=>{
    
-
     let payload: string | any;
     let url : string;
     url = Utils.REBUILD_ANALYSIS_URL;
@@ -133,9 +167,8 @@ export const getAnalysisResult= async (isBinaryFile: boolean, reBuildResponse: a
     var fileSize = payload.fileSize;
     // Files smaller than 6MB - Normal
     payload = JSON.stringify(payload)
-    //console.log("sleep starts")
     Utils.sleep(100);
-    //console.log("sleep ends")
+
     if(fileSize < 6){
         return  axios.post(url, payload, {
                 headers: {
@@ -153,9 +186,6 @@ export const getAnalysisResult= async (isBinaryFile: boolean, reBuildResponse: a
                          targetFolder, resultCallback)
                }
             }
-
-            console.log("response.status" + response.status)
-          
         })
         .catch(err => {
             console.log("11" + err.message);
@@ -171,7 +201,6 @@ export const getAnalysisResult= async (isBinaryFile: boolean, reBuildResponse: a
                 }
             })
         .then((response) => {
-           
             axios.post(url+'processFile', {"FileName": request.original_file_name}, {
                 headers: {
                     "Content-Type": "application/json"
@@ -179,14 +208,12 @@ export const getAnalysisResult= async (isBinaryFile: boolean, reBuildResponse: a
             })
             .then((response) => {
                 if(response.status === 200){
-                    //console.log("Successfully converted.Getting now");
                     return axios.get(url+'getFilePath', {
                         params: {
                             FileName: request.original_file_name
                         }
                     })
                     .then((response) => {
-                        //console.log('Retrieved file:' + response.data)
                         if(isBinaryFile){
                             writeBinaryFile(reBuildResponse, response.data, request, sourceFile, requestId,
                                  targetFolder, resultCallback)
@@ -199,85 +226,34 @@ export const getAnalysisResult= async (isBinaryFile: boolean, reBuildResponse: a
             }
             })
         .catch(err => {
-            console.log("22" + err.message);
+            //console.log("22" + err.message);
             resultCallback({'source':sourceFile, 'url':'TBD', 'filename':request.filename, isError:true,
                  msg:err.message, id:requestId, targetDir:targetFolder, original:request.content})
         })
         })
         .catch(err => {
-            console.log("33" + err.message);
+            //console.log("33" + err.message);
             resultCallback({'source':sourceFile, 'url':'TBD', 'filename':request.filename, isError:true,
                  msg:err.message, id:requestId, targetDir: targetFolder, original:request.content})
-   
         })
     }
     else{
         resultCallback({'source':sourceFile, 'url':'TBD', 'filename':request.filename, isError:true,
              msg:'File too big. 4 bytes to 30 MB file size bracket', id:requestId, targetDir:targetFolder, original:request.content})
-   
     }
-   
-}
-
-function decodeBase64Image(dataString: string) {
-    let response: any;
-    response = dataString.split(';base64,').pop();
-    return response;
-  }
-const writeDecodedBase64File = (baseBase64Response: string, xmlReport:string, request: any, sourceFileUrl: string,
-     requestId:string, targetFolder: string, resultCallback: Function) => {
-    var decodedBase64 = decodeBase64Image(baseBase64Response);
-    var bs = atob(baseBase64Response);
-    var buffer = new ArrayBuffer(bs.length);
-    var ba = new Uint8Array(buffer);
-    for (var i = 0; i < bs.length; i++) {
-        ba[i] = bs.charCodeAt(i);
-    }
-    var file = new Blob([ba], { type: request.type });
-    var url = window.webkitURL.createObjectURL(file);
-    //var file1 = new File([file], 'anish.anish', { type: data.type});
-    resultCallback({'source':sourceFileUrl, 'url':url, 'filename':request.filename, isError:false, msg:'',
-        cleanFile:decodedBase64, xmlResult: xmlReport, id:requestId, targetDir:targetFolder, original:request.content, path:request.path})
-    
-}
-
-const writeBinaryFile = (bytes: any,  xmlReport:string, request: any, sourceFileUrl: string, requestId: string,
-     targetFolder:string, resultCallback: Function) => {
-    var bs = bytes;
-    var buffer = new ArrayBuffer(bs.length);
-    var ba = new Uint8Array(buffer);
-    for (var i = 0; i < bs.length; i++) {
-        ba[i] = bs.charCodeAt(i);
-    }
-    var file = new Blob([ba], { type: request.type });
-    var url = window.webkitURL.createObjectURL(file);
-    resultCallback({'source':sourceFileUrl,  'url':url, 'filename':request.filename, isError: false, msg:'',
-    cleanFile:buffer, xmlResult: xmlReport, id:requestId, targetDir:targetFolder, original:request.content,path:request.paths })
-   
 }
 
 
- const getBase64 = (file: File) => {
-    let res = new Promise(resolve => {
-        var reader = new FileReader();
-        reader.onload = function (event: any) {
-            resolve(event.target.result);
-        };
-        reader.readAsDataURL(file);
+export const getFile = (file: any) => {
+
+    return getBase64(file).then((result: any) => {
+        var encodedImage = result;
+        var data = {type:file.type, filename:file.name, originalFileSize:file.size, content:null, path:file.path};
+        if (file.type === "image/jpeg" || file.type === "image/jpg" || file.type === "image/png")
+            data.content = encodedImage.replace(/^data:image\/\w+;base64,/, "");
+        else
+            data.content = encodedImage.replace(/^data:.*?;base64,/, "")
+        return data;
     });
-    return res;
-}
-
- export const getFile = (file: any) => {
-
-        return getBase64(file).then((result: any) => {
-            var encodedImage = result;
-            var data = {type:file.type, filename:file.name, originalFileSize:file.size, content:null, path:file.path};
-            if (file.type === "image/jpeg" || file.type === "image/jpg" || file.type === "image/png")
-                data.content = encodedImage.replace(/^data:image\/\w+;base64,/, "");
-            else
-                data.content = encodedImage.replace(/^data:.*?;base64,/, "")
-            return data;
-        });
 
 }
