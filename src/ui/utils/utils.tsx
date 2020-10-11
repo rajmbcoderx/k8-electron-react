@@ -18,6 +18,27 @@ export const _REPORT_FOLDER         = "report/"
 export const OUTPUT_DIR_FLAT        = "flat";
 export const OUTPUT_DIR_HIERARCY    = "hierarcy";
 
+export const RELEAE_NOTES           =[
+                                        {
+                                          "date":"October 8th 2020",
+                                          "desc":"Rebuild Output (tmp) directory structure need to be modified."
+                                        }, 
+                                        {
+                                          "date":"October 7th 2020",
+                                          "desc":"An option to user to select custom location for saving rebuild files."
+                                        },
+                                        {
+                                          "date":"October 6th  2020",
+                                          "desc":"Same directory format to be kept for dragged directory post re-build api."
+                                        }, 
+                                        {
+                                          "date":"October 5th  2020 ",
+                                          "desc":"Check box to be provided so that user can select to keep existing directory format or flat format."
+                                        }, {
+                                          "date":"October 4th  2020 ",
+                                          "desc":"Current website to be replicated with file drop feature"
+                                        }
+                                      ]
 
 export const sleep = (milliseconds:number) => {
     return new Promise(resolve => setTimeout(resolve, milliseconds))

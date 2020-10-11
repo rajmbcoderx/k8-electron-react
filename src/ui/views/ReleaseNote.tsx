@@ -91,68 +91,22 @@ function ReleaseNote(){
         <Grid container>   
             <a className={classes.webAnchor} href={Utils.WEBSITE_URL} title="k8-proxy-desktop">K8 Proxy Desktop</a>
             <h3 className={classes.releaseHeading}> <a className={classes.webHeading} href={Utils.RELEASE_URL}> Realease Note</a></h3>
-            <Grid className={classes.releaseNoteContainer}>                    
-                <div className={classes.releaseGrid}>
-                    <div className={classes.releaseList}>                            
-                        <div className={classes.releaseVersion}>{Utils.VERSION}</div>
-                        <h4 className={classes.releaseDate}>October 8th 2020 </h4>
+            {
+                Utils.RELEAE_NOTES.map(issue=>{
+                    return  <Grid className={classes.releaseNoteContainer}>                    
+                    <div className={classes.releaseGrid}>
+                        <div className={classes.releaseList}>                            
+                            <div className={classes.releaseVersion}>{Utils.VERSION}</div>
+                            <h4 className={classes.releaseDate}>{issue.date} </h4>
+                        </div>
+                        <div className={classes.releaseContent}>
+                            <span className={classes.releaseStatusFixed}>Fixed</span>
+                            <p className={classes.releaseText}>{issue.desc}</p>
+                        </div>
                     </div>
-                    <div className={classes.releaseContent}>
-                        <span className={classes.releaseStatusFixed}>Fixed</span>
-                        <p className={classes.releaseText}>Rebuild Output (tmp) directory structure need to be modified.</p>
-                    </div>
-                </div>
-            </Grid>
-            <Grid className={classes.releaseNoteContainer}>                    
-                <div className={classes.releaseGrid}>
-                    <div className={classes.releaseList}>                            
-                        <div className={classes.releaseVersion}>{Utils.VERSION}</div>
-                        <h4 className={classes.releaseDate}>October 7th 2020 </h4>
-                    </div>
-                    <div className={classes.releaseContent}>
-                        <span className={classes.releaseStatusFixed}>Fixed</span>
-                        <p className={classes.releaseText}>An option to user to select custom location for saving rebuild files.</p>
-                    </div>
-                </div>
-            </Grid>
-            <Grid className={classes.releaseNoteContainer}>                    
-                <div className={classes.releaseGrid}>
-                    <div className={classes.releaseList}>                            
-                        <div className={classes.releaseVersion}>{Utils.VERSION}</div>
-                        <h4 className={classes.releaseDate}>October 6th  2020 </h4>
-                    </div>
-                    <div className={classes.releaseContent}>
-                        <span className={classes.releaseStatusFixed}>Fixed</span>
-                        <p className={classes.releaseText}>  Same directory format to be kept for dragged directory post re-build api.</p>
-                    </div>
-                </div>
-            </Grid>
-            <Grid className={classes.releaseNoteContainer}>                    
-                <div className={classes.releaseGrid}>
-                    <div className={classes.releaseList}>                            
-                        <div className={classes.releaseVersion}>{Utils.VERSION}</div>
-                        <h4 className={classes.releaseDate}>October 5th  2020 </h4>
-                    </div>
-                    <div className={classes.releaseContent}>
-                        <span className={classes.releaseStatusFixed}>Fixed</span>
-                        <p className={classes.releaseText}>Check box to be provided so that user can select to keep existing directory format or flat format. </p>
-                    </div>
-                </div>
-            </Grid>
-            <Grid className={classes.releaseNoteContainer}>                    
-                <div className={classes.releaseGrid}>
-                    <div className={classes.releaseList}>                            
-                        <div className={classes.releaseVersion}>{Utils.VERSION}</div>
-                        <h4 className={classes.releaseDate}>October 4th  2020 </h4>
-                    </div>
-                    <div className={classes.releaseContent}>
-                        <span className={classes.releaseStatusFixed}>Fixed</span>
-                        <p className={classes.releaseText}>Current website to be replicated with file drop feature</p>
-                    </div>
-                </div>
-            </Grid>
-
-   
+                </Grid>
+                })
+            }
         </Grid>
         
     )
